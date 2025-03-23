@@ -2,7 +2,6 @@
   plugins.transparent = {
     enable = true;
     settings = {
-
       extra_groups = [
         "BufferLineTabClose"
         "BufferLineBufferSelected"
@@ -12,7 +11,7 @@
         "BufferLineIndicatorSelected"
 
         # "lualine"
-        "Snacks"
+        "WhichKey"
       ];
     };
   };
@@ -30,7 +29,7 @@
     ''
       require('transparent').clear_prefix('BufferLine')
       -- require('transparent').clear_prefix('lualine')
-      require('transparent').clear_prefix('Snacks')
+      require('transparent').clear_prefix('WhichKey')
     '';
 
 }
