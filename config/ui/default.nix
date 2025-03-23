@@ -6,5 +6,6 @@
     ./noice.nix
     ./nui.nix
     ./styles.nix
+    ./transparent.nix
   ];
 }

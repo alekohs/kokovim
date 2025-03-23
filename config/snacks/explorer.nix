@@ -1,7 +1,13 @@
 {
   plugins.snacks = {
     settings = {
-      explorer.enabled = true;
+      explorer = {
+        enabled = true;
+        win = {
+          winhl = "Normal:SnacksExplorerBg";
+        };
+      };
+
     };
   };
 

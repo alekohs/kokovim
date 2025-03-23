@@ -3,6 +3,7 @@
     ./editor.nix
     ./lsp.nix
     ./mini.nix
+    ./ui.nix
   ];
 
   autoCmd = [
