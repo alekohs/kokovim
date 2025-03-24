@@ -1,14 +1,42 @@
 {
   plugins.trouble = {
     enable = true;
-    lazyLoad.settings.cmd = [ "Trouble " ];
+    lazyLoad.settings.cmd = [ "Trouble" ];
     settings = {
       modes = {
-        lsp = {
-          win = { position = "right"; };
+        preview_float = {
+          mode = "diagnostics";
+          preview = {
+            type = "float";
+            relative = "editor";
+            border = "rounded";
+            title = "Preview";
+            title_pos = "center";
+            position = [
+              0
+              (-2)
+            ];
+            size = {
+              width = 0.3;
+              height = 0.3;
+            };
+            zindex = 200;
+          };
         };
+        lsp = {
+          win = {
+            position = "right";
+          };
+        };
+        symbols = {
+          win = {
+            position = "right";
+            size = 0.3;
+          };
+        };
+
       };
-   };
+    };
   };
 
   plugins.which-key.settings.spec = [
@@ -74,16 +102,16 @@
       key = "[q";
       action.__raw = # Lua
         ''
-      function()
-        if require("trouble").is_open() then
-          require("trouble").prev({ skip_groups = true, jump = true })
-        else
-          local ok, err = pcall(vim.cmd.cprev)
-          if not ok then
-            vim.notify(err, vim.log.levels.ERROR)
+          function()
+            if require("trouble").is_open() then
+              require("trouble").prev({ skip_groups = true, jump = true })
+            else
+              local ok, err = pcall(vim.cmd.cprev)
+              if not ok then
+                vim.notify(err, vim.log.levels.ERROR)
+              end
+            end
           end
-        end
-      end
         '';
       options = {
         desc = "Previous trouble/quickfix item";
@@ -94,16 +122,16 @@
       key = "]q";
       action.__raw = # Lua
         ''
-      function()
-        if require("trouble").is_open() then
-          require("trouble").next({ skip_groups = true, jump = true })
-        else
-          local ok, err = pcall(vim.cmd.cprev)
-          if not ok then
-            vim.notify(err, vim.log.levels.ERROR)
+          function()
+            if require("trouble").is_open() then
+              require("trouble").next({ skip_groups = true, jump = true })
+            else
+              local ok, err = pcall(vim.cmd.cprev)
+              if not ok then
+                vim.notify(err, vim.log.levels.ERROR)
+              end
+            end
           end
-        end
-      end
         '';
       options = {
         desc = "Next trouble/quickfix item";
