@@ -20,7 +20,7 @@
         "v"
       ];
       key = "<leader>aa";
-      action = "<cmd>CopilotChat<CR>";
+      action = "<CMD>CopilotChat<CR>";
       options.desc = "Toggle Copilot Chat";
     }
     {
@@ -45,7 +45,7 @@
         "v"
       ];
       key = "<leader>ah";
-      action = "<cmd>CopilotChatLoad<CR>";
+      action = "<CMD>CopilotChatLoad<CR>";
       options.desc = "Load Chat History";
     }
     {
@@ -54,7 +54,7 @@
         "v"
       ];
       key = "<leader>ax";
-      action = "<cmd>CopilotChatReset<CR>";
+      action = "<CMD>CopilotChatReset<CR>";
       options.desc = "Clear chat";
     }
   ];

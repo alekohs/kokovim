@@ -96,7 +96,7 @@ in
     {
       mode = "n";
       key = "<leader>ut";
-      action = "<cmd>TSContextToggle<cr>";
+      action = "<CMD>TSContextToggle<CR>";
       options = {
         desc = "Treesitter Context toggle";
       };
