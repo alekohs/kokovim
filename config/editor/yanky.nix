@@ -6,7 +6,7 @@
       keys = [
         {
           __unkeyed-1 = "<leader>fy";
-          __unkeyed-2 = "<cmd>Telescope yank_history<cr>";
+          __unkeyed-2 = "<CMD>Telescope yank_history<CR>";
           desc = "Paste from yanky";
         }
         {

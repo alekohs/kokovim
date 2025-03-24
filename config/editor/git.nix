@@ -42,7 +42,7 @@ in
     {
       mode = "n";
       key = "<leader>gb";
-      action = "<cmd>Gitsigns toggle_current_line_blame<CR>";
+      action = "<CMD>Gitsigns toggle_current_line_blame<CR>";
       options = {
         desc = "Git Blame toggle";
       };
@@ -50,7 +50,7 @@ in
     {
       mode = "n";
       key = "<leader>gd";
-      action = "<cmd>Gitsigns toggle_deleted<CR>";
+      action = "<CMD>Gitsigns toggle_deleted<CR>";
       options = {
         desc = "Deleted toggle";
       };
@@ -58,7 +58,7 @@ in
     {
       mode = "n";
       key = "<leader>gl";
-      action = "<cmd>Gitsigns toggle_linehl<CR>";
+      action = "<CMD>Gitsigns toggle_linehl<CR>";
       options = {
         desc = "Line Highlight toggle";
       };
@@ -66,7 +66,7 @@ in
     {
       mode = "n";
       key = "<leader>gn";
-      action = "<cmd>Gitsigns toggle_numhl<CR>";
+      action = "<CMD>Gitsigns toggle_numhl<CR>";
       options = {
         desc = "Number Highlight toggle";
       };
@@ -74,7 +74,7 @@ in
     {
       mode = "n";
       key = "<leader>gw";
-      action = "<cmd>Gitsigns toggle_word_diff<CR>";
+      action = "<CMD>Gitsigns toggle_word_diff<CR>";
       options = {
         desc = "Word Diff toggle";
       };
@@ -82,7 +82,7 @@ in
     {
       mode = "n";
       key = "<leader>gst";
-      action = "<cmd>Gitsigns toggle_signs<CR>";
+      action = "<CMD>Gitsigns toggle_signs<CR>";
       options = {
         desc = "Signs toggle";
       };
@@ -162,7 +162,7 @@ in
         "v"
       ];
       key = "<leader>ghs";
-      action = "<cmd>Gitsigns stage_hunk<CR>";
+      action = "<CMD>Gitsigns stage_hunk<CR>";
       options = {
         desc = "Stage hunk";
       };
@@ -170,7 +170,7 @@ in
     {
       mode = "n";
       key = "<leader>ghu";
-      action = "<cmd>Gitsigns undo_stage_hunk<CR>";
+      action = "<CMD>Gitsigns undo_stage_hunk<CR>";
       options = {
         desc = "Undo stage hunk";
       };
@@ -181,7 +181,7 @@ in
         "v"
       ];
       key = "<leader>ghr";
-      action = "<cmd>Gitsigns reset_hunk<CR>";
+      action = "<CMD>Gitsigns reset_hunk<CR>";
       options = {
         desc = "Reset hunk";
       };
@@ -189,7 +189,7 @@ in
     {
       mode = "n";
       key = "<leader>ghP";
-      action = "<cmd>Gitsigns preview_hunk<CR>";
+      action = "<CMD>Gitsigns preview_hunk<CR>";
       options = {
         desc = "Preview hunk";
       };
@@ -197,7 +197,7 @@ in
     {
       mode = "n";
       key = "<leader>ghp";
-      action = "<cmd>Gitsigns preview_hunk_inline<CR>";
+      action = "<CMD>Gitsigns preview_hunk_inline<CR>";
       options = {
         desc = "Preview hunk inline";
       };
@@ -207,7 +207,7 @@ in
     {
       mode = "n";
       key = "<leader>ghs";
-      action = "<cmd>Gitsigns stage_buffer<CR>";
+      action = "<CMD>Gitsigns stage_buffer<CR>";
       options = {
         desc = "Stage buffer";
       };
@@ -215,7 +215,7 @@ in
     {
       mode = "n";
       key = "<leader>ghr";
-      action = "<cmd>Gitsigns reset_buffer<CR>";
+      action = "<CMD>Gitsigns reset_buffer<CR>";
       options = {
         desc = "Reset buffer";
       };

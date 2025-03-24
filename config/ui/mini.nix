@@ -45,13 +45,13 @@
   keymaps = [
     {
       mode = "n";
-      action = "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0), true)<CR>";
+      action = "<CMD>lua MiniFiles.open(vim.api.nvim_buf_get_name(0), true)<CR>";
       key = "<leader>fm";
       options.desc = "Open mini.files (Directory of current file)";
     }
     {
       mode = "n";
-      action = "<cmd>lua MiniFiles.open(vim.uv.cwd())<CR>";
+      action = "<CMD>lua MiniFiles.open(vim.uv.cwd())<CR>";
       key = "<leader>fM";
       options.desc = "Open mini.files (CWD)";
     }
