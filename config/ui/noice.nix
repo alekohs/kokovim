@@ -2,13 +2,6 @@
   plugins = {
     noice = {
       enable = true;
-
-      # lazyLoad.settings.before.__raw = # Lua
-      #   ''
-      #     function()
-      #       require('lz.n').trigger_load('snacks')
-      #     end
-      #   '';
       settings = {
         # Hides the title above noice boxes
         cmdline = {
