@@ -133,10 +133,10 @@
               row = 5;
               col = "50%";
             };
-            size = {
-              width = 60;
-              height = "auto";
-            };
+            # size = {
+            #   width = 60;
+            #   height = "auto";
+            # };
             border = {
               style = "single";
             };
@@ -147,10 +147,10 @@
               row = 8;
               col = "50%";
             };
-            size = {
-              width = 60;
-              height = 10;
-            };
+            # size = {
+            #   width = 60;
+            #   height = 10;
+            # };
             border = {
               style = "rounded";
               padding = [
@@ -178,4 +178,20 @@
       };
     };
   };
+
+  keymaps = [
+    {
+      mode = "n";
+      action.__raw = # Lua
+        ''
+            function()
+              require("noice").cmd("history")
+            end
+        '';
+
+      key = "<leader>sh";
+      options.desc = "Noice history";
+    }
+
+  ];
 }
