@@ -131,9 +131,10 @@
           default = [
             # BUILT-IN SOURCES
             "lsp"
-            "path"
-            "snippets"
             "buffer"
+            "snippets"
+            "path"
+
             # Community
             "copilot"
             "dictionary"
