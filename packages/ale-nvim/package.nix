@@ -9,7 +9,7 @@ vimUtils.buildVimPlugin {
     owner = "dense-analysis";
     repo = "ale";
     rev = "master";
-    sha256 = "SOMa0Dl/OPnVIoC9raOEtxcdftyMAn8Xvv7bB4KTn9k=";
+    sha256 = "ZfZ+tFfMAxkLr+WUaCq0O3VmCyfKo40AN5HXbXR3MEk=";
   };
 
   meta.homepage = "https://github.com/dense-analysis/ale/";
