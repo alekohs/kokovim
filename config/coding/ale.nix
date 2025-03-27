@@ -12,7 +12,7 @@
   extraPackages = with pkgs; [
     deadnix
     nix
-    nixfmt
+    nixfmt-rfc-style
   ];
 
   extraConfigLua = # Lua
