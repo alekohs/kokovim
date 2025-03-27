@@ -22,6 +22,14 @@ in
       }
       {
         mode = "n";
+        action.__raw = "require('harpoon.mark').clear_all";
+        key = "<leader>hC";
+        options.desc = "Clear all marks";
+        options.silent = true;
+      }
+
+      {
+        mode = "n";
         action.__raw = "require('harpoon.ui').toggle_quick_menu";
         key = "<leader>ht";
         options.desc = "Toggle harpoon menu";
@@ -48,6 +56,12 @@ in
       action.__raw = ''function() require('harpoon.ui').nav_file(${toString (n + 1)}) end'';
       key = "<leader>h${toString (n + 1)}";
       options.desc = "Navigate to harpoon file ${toString (n + 1)}";
+    }) harpoonFiles
+    ++ lib.genList (n: {
+      mode = "n";
+      action.__raw = ''function() require('harpoon.mark').rm_file(${toString (n + 1)}) end'';
+      key = "<leader>hr${toString (n + 1)}";
+      options.desc = "Remove harpoon mark ${toString (n + 1)}";
     }) harpoonFiles
     ++ lib.genList (n: {
       mode = "n";
