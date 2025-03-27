@@ -4,6 +4,7 @@
     ];
 
 
-    plugins.mini.modules.snippets = {};
+    plugins.mini.modules.snippets = {
+  };
 }
 
