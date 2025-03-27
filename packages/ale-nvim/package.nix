@@ -8,8 +8,9 @@ vimUtils.buildVimPlugin {
   src = pkgs.fetchFromGitHub {
     owner = "dense-analysis";
     repo = "ale";
-    rev = "neovim-lsp-api"; # TODO: This is a fix to integrate it with neovim better. Change this to master after it has been merged
+    rev = "master";
     sha256 = "SOMa0Dl/OPnVIoC9raOEtxcdftyMAn8Xvv7bB4KTn9k=";
   };
+
   meta.homepage = "https://github.com/dense-analysis/ale/";
 }
