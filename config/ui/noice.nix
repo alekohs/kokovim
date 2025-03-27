@@ -2,13 +2,6 @@
   plugins = {
     noice = {
       enable = true;
-
-      # lazyLoad.settings.before.__raw = # Lua
-      #   ''
-      #     function()
-      #       require('lz.n').trigger_load('snacks')
-      #     end
-      #   '';
       settings = {
         # Hides the title above noice boxes
         cmdline = {
@@ -74,7 +67,7 @@
           override = {
             "vim.lsp.util.convert_input_to_markdown_lines" = true;
             "vim.lsp.util.stylize_markdown" = true;
-            "cmp.entry.get_documentation" = true;
+            # "cmp.entry.get_documentation" = true;
           };
 
           progress.enabled = true;
@@ -140,10 +133,10 @@
               row = 5;
               col = "50%";
             };
-            size = {
-              width = 60;
-              height = "auto";
-            };
+            # size = {
+            #   width = 60;
+            #   height = "auto";
+            # };
             border = {
               style = "single";
             };
@@ -154,10 +147,10 @@
               row = 8;
               col = "50%";
             };
-            size = {
-              width = 60;
-              height = 10;
-            };
+            # size = {
+            #   width = 60;
+            #   height = 10;
+            # };
             border = {
               style = "rounded";
               padding = [
@@ -185,4 +178,20 @@
       };
     };
   };
+
+  keymaps = [
+    {
+      mode = "n";
+      action.__raw = # Lua
+        ''
+            function()
+              require("noice").cmd("history")
+            end
+        '';
+
+      key = "<leader>sh";
+      options.desc = "Noice history";
+    }
+
+  ];
 }

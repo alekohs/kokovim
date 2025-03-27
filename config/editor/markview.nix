@@ -17,9 +17,8 @@
     lazyLoad.settings.ft = "markdown";
 
     settings = {
-      buf_ignore = [ ];
-
       preview = {
+        buf_ignore = [ ];
         modes = [
           "n"
           "x"
