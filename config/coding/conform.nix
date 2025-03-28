@@ -62,8 +62,6 @@
         nix = [ "nixfmt" ];
         fish = [ "fish_indent" ];
 
-        swift = [ "swiftformat" ];
-
         "_" = [
           "squeeze_blanks"
           "trim_whitespace"

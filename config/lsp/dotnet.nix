@@ -1,8 +1,8 @@
 {
-  pkgs,
-  config,
-  lib,
-  ...
+pkgs,
+config,
+lib,
+...
 }:
 {
   options.lsp.dotnet = {
@@ -24,6 +24,15 @@
       cfg = config.lsp.dotnet;
     in
     {
+
+      plugins.conform-nvim.settings = {
+        formatters_by_ft = {
+          cs = [ "csharpier" ];
+        };
+        formatters = {
+          csharp.command = lib.getExe pkgs.csharpier;
+        };
+      };
 
       extraPlugins = lib.optionals cfg.enable [
         pkgs.vimPlugins.roslyn-nvim
