@@ -40,6 +40,20 @@
         '';
     }
 
+    # Lint
+    {
+      desc = "Lint file";
+      event = [ "BufWritePost" "InsertLeave" ];
+      pattern = [ "*" ];
+      callback.__raw = # Lua
+        ''
+          function()
+            require("lint").try_lint()
+          end
+        '';
+    }
+
+
     # Highlight on yank
     {
       desc = "Highlight on yank";
@@ -67,6 +81,12 @@
             vim.b.autoformat = true;
           end
         '';
+    }
+
+    # Remove trailing whitespace on save
+    {
+      event = "BufWrite";
+      command = "%s/\\s\\+$//e";
     }
 
   ];

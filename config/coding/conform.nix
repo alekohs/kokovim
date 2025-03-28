@@ -99,8 +99,4 @@
       options.desc = "Format injected language";
     }
   ];
-
-  autoCmd = [
-  ];
-
 }
