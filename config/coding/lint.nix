@@ -23,8 +23,7 @@
           count.errors = count.errors + 1
         elseif msg.severity == vim.diagnostic.severity.WARN then
           count.warnings = count.warnings + 1
-        end
-      end
+        end end
 
       if count.errors > 0 then
         return " " .. count.errors
@@ -36,6 +35,10 @@
     end
   '';
 
+  extraPackages = with pkgs; [
+    ] ++ lib.optionals pkgs.stdenv.isDarwin [
+      swiftlint
+    ];
   plugins = {
     lint = {
       enable = true;
@@ -67,7 +70,6 @@
         // (
           if pkgs.stdenv.isDarwin then
             {
-
               swift = [ "swiftlint" ];
             }
           else
@@ -100,7 +102,8 @@
         // (
           if pkgs.stdenv.isDarwin then
             {
-              swiftlint.cmd = lib.getExe pkgs.swiftlint;
+            # TODO: Find why this is throwing an error
+              # swiftlint.cmd = lib.getExe pkgs.swiftlint;
             }
           else
             { }
