@@ -1,10 +1,8 @@
 {
-    imports = [
-        ./blink-cmp.nix
-    ];
+  imports = [
+    ./blink-cmp.nix
+    ./luasnip.nix
+  ];
 
-
-    plugins.mini.modules.snippets = {
-  };
+  plugins.mini.modules.snippets = {};
 }
-

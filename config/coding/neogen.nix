@@ -2,6 +2,13 @@
   plugins.neogen = {
     enable = true;
     snippetEngine = "mini";
+    languages = {
+      cs = {
+        template = {
+          annotation_convention = "xmldoc";
+        };
+      };
+    };
   };
 
   keymaps = [
