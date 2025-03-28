@@ -1,8 +1,8 @@
 {
-  pkgs,
-  config,
-  lib,
-  ...
+pkgs,
+config,
+lib,
+...
 }:
 {
   options.lsp.dotnet = {
@@ -24,6 +24,7 @@
       cfg = config.lsp.dotnet;
     in
     {
+
 
       extraPlugins = lib.optionals cfg.enable [
         pkgs.vimPlugins.roslyn-nvim

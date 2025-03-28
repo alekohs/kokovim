@@ -56,14 +56,19 @@
           "shellharden"
           "shfmt"
         ];
+        cs = [ "csharpier" ];
+        javascript = {
+          __unkeyed-1 = "prettierd";
+          __unkeyed-2 = "prettier";
+          timeout_ms = 2000;
+          stop_after_first = true;
+        };
         json = [ "jq" ];
         lua = [ "stylua" ];
         markdoewn = [ "deno_fmt" ];
         nix = [ "nixfmt" ];
         fish = [ "fish_indent" ];
-
-        swift = [ "swiftformat" ];
-
+        "*" = [ "codespell" ];
         "_" = [
           "squeeze_blanks"
           "trim_whitespace"
@@ -72,6 +77,7 @@
       };
 
       formatters = {
+        codespell.command = lib.getExe pkgs.codespell;
         jq.command = lib.getExe pkgs.jq;
         nixfmt.command = lib.getExe pkgs.nixfmt-rfc-style;
         prettierd.command = lib.getExe pkgs.prettierd;
@@ -90,11 +96,25 @@
 
   keymaps = [
     {
-      mode = [
-        "n"
-        "v"
-      ];
+      mode = "n";
       action = "<CMD>lua require('conform').format()<CR>";
+      key = "<leader>cF";
+      options.desc = "Format injected language";
+    }
+    {
+      mode = "v";
+      action.__raw = # Lua
+        ''
+          function()
+            require("conform").format({
+              lsp_fallback = true,
+              range = {
+                ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+                ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+              }
+            })
+          end
+        '';
       key = "<leader>cF";
       options.desc = "Format injected language";
     }
