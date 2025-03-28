@@ -9,13 +9,16 @@
   plugins.mini.modules.animate = {
     open.enable = false; # Do not animate pickers, presenting a black box on open and close
     close.enable = false;
+    cursor.enable = false;
 
     resize = {
       timing.__raw = ''require('mini.animate').gen_timing.linear({ duration = 50, unit = 'total' }) '';
     };
+
     scroll = {
       enable = true;
-      timing.__raw = ''require('mini.animate').gen_timing.linear({ duration = 150, unit = 'total' }) '';
+      timing.__raw = ''require('mini.animate').gen_timing.linear({ duration = 50, unit = 'total' }) '';
+      rescale.__raw = ''function(_, total_time) return total_tme > 200 and 0 or 1 end'';
       subscroll.__raw = # Lua
         ''
           require('mini.animate').gen_subscroll.equal({
@@ -41,6 +44,8 @@
       use_as_default_explorer = true;
     };
   };
+
+  plugins.mini.modules.bracketed = {};
 
   keymaps = [
     {

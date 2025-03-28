@@ -1,3 +1,15 @@
+let
+  cond.__raw = ''
+    function()
+      local buf_size_limit = 1024 * 1024 -- 1MB size limit
+      if vim.api.nvim_buf_get_offset(0, vim.api.nvim_buf_line_count(0)) > buf_size_limit then
+        return false
+      end
+
+      return true
+    end
+  '';
+in
 {
   plugins.lualine = {
     enable = true;
@@ -33,11 +45,7 @@
       };
 
       sections = {
-        lualine_a = [
-          {
-            __unkeyed-1 = "mode";
-          }
-        ];
+        lualine_a = [ "mode" ];
         lualine_b = [
           {
             __unkeyed-1 = "branch";
@@ -65,42 +73,30 @@
           }
           {
             __unkeyed-1 = "navic";
+            inherit cond;
           }
         ];
         lualine_x = [
-          {
-            __unkeyed-1 = "filetype";
-            icon_only = true;
-            separator = "";
-            padding = {
-              left = 1;
-              right = 0;
-            };
-          }
+          "filetype"
           {
             __unkeyed-1 = "filename";
             path = 1;
           }
-          {
-            __unkeyed-1.__raw = ''
-              require("noice").api.statusline.mode.get,
-              cond = require("noice").api.statusline.mode.has,
-              color = { fg = "#eb6f92" },
-            '';
-          }
         ];
-        lualine_y = [
+
+        lualine_y = [ "progress" ];
+        lualine_z = [ "location" ];
+      };
+      winbar = {
+        lualine_c = [
           {
-            __unkeyed-1 = "progress";
-          }
-        ];
-        lualine_z = [
-          {
-            __unkeyed-1 = "location";
+            __unkeyed-1 = "navic";
+            inherit cond;
           }
         ];
       };
     };
+
   };
 
   plugins.navic = {
@@ -110,9 +106,7 @@
       separator = "  ";
       highlight = true;
       depthLimit = 5;
-      lsp = {
-        autoAttach = true;
-      };
+      lsp = { autoAttach = true; };
       icons = {
         Array = "󱃵  ";
         Boolean = "  ";
