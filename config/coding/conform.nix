@@ -96,11 +96,25 @@
 
   keymaps = [
     {
-      mode = [
-        "n"
-        "v"
-      ];
+      mode = "n";
       action = "<CMD>lua require('conform').format()<CR>";
+      key = "<leader>cF";
+      options.desc = "Format injected language";
+    }
+    {
+      mode = "v";
+      action.__raw = # Lua
+        ''
+          function()
+            require("conform").format({
+              lsp_fallback = true,
+              range = {
+                ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+                ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+              }
+            })
+          end
+        '';
       key = "<leader>cF";
       options.desc = "Format injected language";
     }
