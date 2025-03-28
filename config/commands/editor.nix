@@ -89,5 +89,14 @@
       command = "%s/\\s\\+$//e";
     }
 
+    # Set tabs to 4 on c#
+    {
+      desc = "";
+      event = "FileType";
+      pattern = [ "cs" "razor" ];
+      command = "setlocal tabstop=4 shiftwidth=4";
+    }
+
+
   ];
 }
