@@ -117,12 +117,42 @@
         # Code
 
         {
-          action.__raw = ''function() Snacks.picker.lsp_code_actions() end'';
-          #action.__raw = "vim.lsp.buf.code_action";
+          action.__raw = "function() vim.lsp.buf.code_action() end";
           mode = "n";
           options.desc = "Code Action";
           key = "<leader>ca";
         }
+        {
+          action.__raw = # Lua
+            ''
+              function()
+                vim.lsp.buf.code_action({
+                  apply = true,
+                  context = {
+                    only = { "source" },
+                    diagnostics = {},
+                  }
+                })
+              end
+            '';
+          mode = "n";
+          options.desc = "Source Action";
+          key = "<leader>cA";
+        }
+
+        {
+          action.__raw = "function() vim.lsp.codelens.run() end";
+          mode = "n";
+          options.desc = "Run Codelens";
+          key = "<leader>cc";
+        }
+        {
+          action.__raw = "function() vim.lsp.codelens.refresh() end";
+          mode = "n";
+          options.desc = "Refresh Codelens";
+          key = "<leader>cC";
+        }
+
         {
           action.__raw = ''function() return vim.lsp.buf.hover() end '';
           mode = "n";
