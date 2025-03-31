@@ -24,17 +24,26 @@ in
         with pkgs.vimPlugins.nvim-treesitter.builtGrammars;
         [
           bash
+          c_sharp
+          dockerfile
+          fish
+          go
+          java
+          javascript
           json
           lua
           make
           markdown
           nix
+          nginx
           regex
+          rust
           toml
           vim
           vimdoc
           xml
           yaml
+          zig
         ]
         ++ lib.optionals pkgs.stdenv.isDarwin [
           swift
