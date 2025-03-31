@@ -102,7 +102,7 @@
             					},
             				},
             			})
-            			require("rzls").setup()
+            			-- require("rzls").setup()
             		end,
             	})
             end
