@@ -151,7 +151,7 @@
               name = "copilot";
               module = "blink-copilot";
               async = true;
-              score_offset = 100;
+              # score_offset = 100;
             };
             dictionary = {
               name = "Dict";

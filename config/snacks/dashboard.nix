@@ -66,7 +66,7 @@
                 local in_git = Snacks.git.get_root() ~= nil
                 local is_github_repo = vim.fn.systemlist("git remote get-url origin")[1]:match("github.com")
 
-                local cmds = {
+                local cmds = (is_github_repo and {
                   {
                     title = "Open Issues",
                     cmd = "gh issue list -L 3",
@@ -104,7 +104,16 @@
                     height = 3,
                     indent = 1,
                   },
-                }
+                } or {
+                  {
+                    icon = " ",
+                    title = "Git Status",
+                    cmd = "git --no-pager diff --stat -B -M -C",
+                    height = 3,
+                    indent = 1,
+                  }
+                })
+
                 return vim.tbl_map(function(cmd)
                   return vim.tbl_extend("force", {
                     pane = 2,
