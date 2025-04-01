@@ -135,7 +135,7 @@
             "snippets"
             "path"
 
-            # Community
+            "easy-dotnet"
             "copilot"
             "dictionary"
             "emoji"
@@ -152,6 +152,13 @@
               module = "blink-copilot";
               async = true;
               # score_offset = 100;
+            };
+            easy-dotnet = {
+              name = "easy-dotnet";
+              enabled = true;
+              module = "easy-dotnet.completion.blink";
+              score_offset = 1000;
+              async = true;
             };
             dictionary = {
               name = "Dict";

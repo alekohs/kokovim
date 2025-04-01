@@ -38,6 +38,7 @@ in
           nginx
           regex
           rust
+          razor
           toml
           vim
           vimdoc
