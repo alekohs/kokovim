@@ -3,7 +3,7 @@
   vimUtils,
 }:
 vimUtils.buildVimPlugin {
-  pname = "rzls-nvim";
+  pname = "rzls";
   version = "0.1";
 
   src = pkgs.fetchFromGitHub {
