@@ -28,12 +28,25 @@
       extraPlugins = lib.optionals cfg.enable [
         pkgs.vimPlugins.roslyn-nvim
         pkgs.vimPlugins.rzls-nvim
+        pkgs.vimPlugins.easy-dotnet-nvim
       ];
 
       extraConfigLua =
         lib.mkIf cfg.enable # Lua
           ''
             if not vim.g.vscode then
+
+              require("easy-dotnet").setup({
+                test_runner = {
+                  viewmode = "float"
+                },
+                picker = "snacks"
+              })
+
+              require("rzls").setup({
+                path = "${pkgs.rzls}"
+              })
+
             	require("lz.n").load({
             		"roslyn-nvim",
             		ft = { "cs", "razor" },
@@ -52,13 +65,13 @@
             					"--logLevel=Information",
             					"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
             					"--razorSourceGenerator=" .. vim.fs.joinpath(
-            						"${pkgs.roslyn-ls}",
+            						"${pkgs.roslyn-ls}" --[[@as string]],
             						"lib",
             						"roslyn-ls",
             						"Microsoft.CodeAnalysis.Razor.Compiler.dll"
             					),
             					"--razorDesignTimePath=" .. vim.fs.joinpath(
-            						"${pkgs.rzls}",
+            						"${pkgs.rzls}" --[[@as string]],
             						"lib",
             						"rzls",
             						"Targets",
@@ -102,11 +115,68 @@
             					},
             				},
             			})
-            			-- require("rzls").setup()
             		end,
             	})
             end
           '';
+      plugins.which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>dd";
+          group = "+dotnet";
+          mode = "n";
+        }
+      ];
 
+      keymaps = [
+        {
+          mode = "n";
+          key = "<leader>dda";
+          action.__raw = ''function() require("easy-dotnet").add_package() end '';
+          options = {
+            desc = "Add package";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>ddr";
+          action.__raw = ''function() require("easy-dotnet").remove_package() end '';
+          options = {
+            desc = "Remove package";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>ddc";
+          action = "Dotnet createfile";
+          options = {
+            desc = "Create file";
+          };
+        }
+
+        {
+          mode = "n";
+          key = "<leader>dds";
+          action.__raw = ''function() require("easy-dotnet").secrets() end '';
+          options = {
+            desc = "User secrets";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>ddb";
+          action.__raw = ''function() require("easy-dotnet").build() end '';
+          options = {
+            desc = "Build";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>ddt";
+          action.__raw = ''function() require("easy-dotnet").test() end '';
+          options = {
+            desc = "Test";
+          };
+        }
+      ];
     };
 }
