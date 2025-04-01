@@ -34,7 +34,12 @@
         lib.mkIf cfg.enable # Lua
           ''
             if not vim.g.vscode then
-            	require("lz.n").load({
+            	require("lz.n").load(
+            	  {
+            	    "tris203/rzls.nvim",
+            	    setup = true
+            	  },
+            	  {
             		"seblyng/roslyn.nvim",
             		ft = { "cs", "razor" },
             		before = function()
