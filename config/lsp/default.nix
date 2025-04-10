@@ -25,6 +25,7 @@
       html.enable = true;
       gopls.enable = true;
       jsonls.enable = true;
+      # kulala_ls.enable = true;
       lua_ls.enable = true;
       marksman.enable = true;
       nixd.enable = true;
