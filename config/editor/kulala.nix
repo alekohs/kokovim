@@ -2,13 +2,8 @@
   plugins.kulala = {
     enable = true;
     lazyLoad.settings.event = "DeferredUIEnter";
-    lazyLoad.settings.ft = [
-      "http"
-      "rest"
-    ];
-
     settings = {
-      ui.display_mode = "float";
+      display_mode = "float";
     };
   };
 
