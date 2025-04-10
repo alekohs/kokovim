@@ -43,9 +43,6 @@
                 picker = "snacks"
               })
 
-              require("rzls").setup({
-                path = "${pkgs.rzls}"
-              })
 
             	require("lz.n").load({
             		"roslyn-nvim",
@@ -54,6 +51,10 @@
             			vim.filetype.add({ extension = { razor = "razor", cshtml = "razor" } })
             		end,
             		after = function()
+                  require("rzls").setup({
+                    path = "${pkgs.rzls}/bin/rzls"
+                  })
+
             			require("roslyn").setup({
             				exe = vim.fs.joinpath(
             					"${pkgs.roslyn-ls}" --[[@as string]],
