@@ -3,6 +3,7 @@
     ./git.nix
     ./grug.nix
     ./harpoon.nix
+    ./kulala.nix
     ./markview.nix
     ./mini.nix
     ./oil.nix

@@ -57,6 +57,7 @@
           "shfmt"
         ];
         cs = [ "csharpier" ];
+        http = [ "kulala" ];
         javascript = {
           __unkeyed-1 = "prettierd";
           __unkeyed-2 = "prettier";
@@ -79,6 +80,7 @@
       formatters = {
         codespell.command = lib.getExe pkgs.codespell;
         jq.command = lib.getExe pkgs.jq;
+        kulala.command = lib.getExe pkgs.kulala-fmt;
         nixfmt.command = lib.getExe pkgs.nixfmt-rfc-style;
         prettierd.command = lib.getExe pkgs.prettierd;
         shellcheck.command = lib.getExe pkgs.shellcheck;
