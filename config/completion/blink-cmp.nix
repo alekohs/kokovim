@@ -36,9 +36,14 @@
 
       settings = {
         completion = {
+          accept = {
+            auto_brackets.enabled = true;
+          };
           ghost_text.enabled = true;
           documentation = {
             auto_show = true;
+            auto_show_delay_ms = 250;
+            treesitter_highlighting = true;
             window.border = "rounded";
           };
           list.selection = {
@@ -145,7 +150,20 @@
           ];
           providers = {
             # BUILT-IN SOURCES
-            lsp.score_offset = 4;
+            lsp = {
+              min_keyword_length = 2;
+              score_offset = 0;
+            };
+            path = {
+              min_keyword_length = 0;
+            };
+            snippets = {
+              min_keyword_length = 2;
+            };
+            buffer = {
+              min_keyword_length = 3;
+              max_items = 5;
+            };
             # Community sources
             copilot = {
               name = "copilot";

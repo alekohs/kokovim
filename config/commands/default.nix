@@ -1,5 +1,6 @@
 {
   imports = [
+    ./dotnet.nix
     ./editor.nix
     ./lsp.nix
     ./mini.nix
