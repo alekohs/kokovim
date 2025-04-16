@@ -128,6 +128,7 @@
         }
       ];
 
+
       keymaps = [
         {
           mode = "n";
@@ -145,15 +146,6 @@
             desc = "Remove package";
           };
         }
-        {
-          mode = "n";
-          key = "<leader>ddc";
-          action = "Dotnet createfile";
-          options = {
-            desc = "Create file";
-          };
-        }
-
         {
           mode = "n";
           key = "<leader>dds";
@@ -180,4 +172,5 @@
         }
       ];
     };
+
 }
