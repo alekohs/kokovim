@@ -21,6 +21,7 @@
       bashls.enable = true;
       clangd.enable = true;
       cmake.enable = true;
+      cssls.enable = true;
       dockerls.enable = true;
       html.enable = true;
       gopls.enable = true;

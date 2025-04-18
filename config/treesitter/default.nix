@@ -25,6 +25,8 @@ in
         [
           bash
           c_sharp
+          css
+          scss
           dockerfile
           # http
           fish
