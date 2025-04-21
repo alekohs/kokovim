@@ -10,6 +10,7 @@
     ./trouble.nix
     ./todo-comments.nix
     ./which-key.nix
+    ./wakatime.nix
     ./yanky.nix
   ];
 }
