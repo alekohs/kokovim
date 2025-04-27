@@ -1,8 +1,9 @@
 {
-    imports = [
-        ./conform.nix
-        ./lint.nix
-        ./mini.nix
-        ./neogen.nix
-    ];
+  imports = [
+    ./autotag.nix
+    ./conform.nix
+    ./lint.nix
+    ./mini.nix
+    ./neogen.nix
+  ];
 }
