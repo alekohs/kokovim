@@ -30,7 +30,7 @@ nix build
         };
     };
 }
-````
+```
 
 ### Use with overlay and reference as nvim
 ```nix
@@ -46,3 +46,4 @@ nix build
         ];
     };
 }
+```

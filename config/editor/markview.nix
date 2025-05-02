@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   plugins.markview = {
-    enable = true;
+    enable = false;
     package = pkgs.vimPlugins.markview-nvim.overrideAttrs {
       version = "2025-01-30";
       src = pkgs.fetchFromGitHub {
@@ -14,7 +14,7 @@
       doCheck = false;
     };
 
-    lazyLoad.settings.ft = "markdown";
+    # lazyLoad.settings.ft = "markdown";
 
     settings = {
       preview = {

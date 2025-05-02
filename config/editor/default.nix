@@ -5,6 +5,7 @@
     ./harpoon.nix
     ./kulala.nix
     ./markview.nix
+    ./render-markdown.nix
     ./mini.nix
     ./oil.nix
     ./trouble.nix

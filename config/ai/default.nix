@@ -1,6 +1,7 @@
 {
   imports = [
     ./copilot-chat.nix
+    ./code-companion.nix
   ];
 
   plugins.copilot-lua = {
