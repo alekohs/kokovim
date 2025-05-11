@@ -1,51 +1,58 @@
 {
-  description = "Nixvim flake with lazy";
+  description = "Kokovim - neovim flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs = {
-        # Optional inputs removed
-        nuschtosSearch.follows = "";
-        # Required inputs
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
-
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
-    blink-cmp = {
-      url = "github:saghen/blink.cmp";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    snacks-nvim = {
-      url = "github:folke/snacks.nvim";
-      flake = false;
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    # neovim-nightly-overlay = {
+    #   url = "github:nix-community/neovim-nightly-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
-    { flake-parts, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      flake-utils
+      # neovim-nightly-overlay,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        # overlays = [ neovim-nightly-overlay.overlays.default ];
+        overlays = [ ];
+        pkgs = import nixpkgs {
+          inherit system overlays;
+        };
 
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [
-        "aarch64-darwin"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "x86_64-linux"
-      ];
+        config = ./config/nvim;
 
-      imports = [ ./flake ];
-    };
+        kokovim = pkgs.wrapNeovim pkgs.neovim-unwrapped {
+          configure = {
+              plugins = with pkgs.vimPlugins; [
+                vim-nix
+                telescope-nvim
+                plenary-nvim
+            ];
+            extraWrapperArgs = ''
+              --set XDG_CONFIG_HOME ${config}
+              '';
+          };
+
+        };
+      in
+      {
+        packages.default = kokovim;
+
+        apps.default = {
+          type = "app";
+          program = "${kokovim}/bin/nvim";
+        };
+
+        devShells.default = pkgs.mkShell {
+          buildInputs = [ kokovim ];
+        };
+      }
+    );
 }

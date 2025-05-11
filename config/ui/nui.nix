@@ -1,5 +1,0 @@
-{
-  plugins.nui = {
-    enable = true;
-  };
-}
