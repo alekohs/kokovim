@@ -1,4 +1,2 @@
-print("Custom config loaded: " .. vim.fn.stdpath("config"))
--- vim.cmd('echo "hello world"')
-
+print("Hello world")
 require("config.lazy")

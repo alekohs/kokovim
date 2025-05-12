@@ -51,15 +51,16 @@ let
     ])
   );
 
-in
-{
-  package = pkgs.wrapNeovim pkgs.neovim-unwrapped {
+  kokovim = pkgs.wrapNeovim pkgs.neovim-unwrapped {
     configure = {
-      extraPackages = packages.packages;
-      packages."${name}-plugins".start = plugins;
+      # extraPackages = packages.packages;
+      packages.kokovim.start = plugins;
       wrapperArgs = extraMakeWrapperArgs;
     };
   };
 
+in
+{
+  package = kokovim;
   configPath = nvimConfig.outPath;
 }

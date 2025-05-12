@@ -31,29 +31,51 @@
         pkgs = import nixpkgs {
           inherit system overlays;
         };
-        kokovim-build = import ./nix/neovim.nix { inherit inputs system; };
-        kokovim = pkgs.writeShellApplication {
+
+        kokovim-build = import ./nix/neovim.nix {
+          inherit inputs system;
+          with-config = true;
+        };
+
+        kokovim-build-configless = import ./nix/neovim.nix {
+          inherit inputs system;
+          with-config = false;
+        };
+
+        kokovim = kokovim-build.package;
+        kokovim-app = pkgs.writeShellApplication {
           name = "nvim";
           runtimeInputs = [ kokovim-build.package ];
           text = ''
-            export XDG_CONFIG_HOME="${kokovim-build.configPath}"
             export NVIM_LOG_FILE="$HOME/.local/state/nvim.log"
+            export XDG_CONFIG_HOME="${kokovim-build.configPath}"
             exec nvim "$@"
           '';
         };
+
+        kokovim-pure = kokovim-build-configless.package;
       in
       {
-        packages.default = kokovim;
-        packages.${system}.kokovim = kokovim;
+        packages.default = kokovim-app;
+        packages.kokovim = kokovim;
+        packages.kokovim-pure = kokovim-pure;
 
         apps.default = {
           type = "app";
           program = "${kokovim}/bin/nvim";
         };
 
+        apps.kokovim = {
+          type = "app";
+          program = "${kokovim}/bin/nvim";
+        };
+
         devShells.default = pkgs.mkShell {
           name = "Kokovim - neovim shell";
-          buildInputs = [ kokovim ];
+          buildInputs = [ kokovim-app ];
+          shellHook = ''
+                        echo ${kokovim-build.configPath}
+            '';
         };
       }
     );

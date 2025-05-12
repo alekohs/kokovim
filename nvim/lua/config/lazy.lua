@@ -2,9 +2,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
-require("nvim.lua.config.lazy").setup({
+require("lazy").setup({
 	spec = {
-		{ import = "plugins" },
+		-- { import = "plugins" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.

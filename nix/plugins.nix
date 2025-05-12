@@ -29,6 +29,7 @@ with pkgs.vimPlugins;
   # Editor
   telescope-nvim
   plenary-nvim
+  oil-nvim
 
   # Treesitter
   nvim-treesitter
