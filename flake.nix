@@ -4,10 +4,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    # neovim-nightly-overlay = {
-    #   url = "github:nix-community/neovim-nightly-overlay";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # External plugins
+    vim-varnish.url = "github:varnishcache-friends/vim-varnish";
+    vim-varnish.flake = false;
+
+    mini-nvim.url = "github:echasnovski/mini.nvim";
+    mini-nvim.flake = false;
   };
 
   outputs =
@@ -15,40 +21,30 @@
       self,
       nixpkgs,
       flake-utils,
-    # neovim-nightly-overlay,
-    }:
+      treefmt-nix,
+      ...
+    }@inputs:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        # overlays = [ neovim-nightly-overlay.overlays.default ];
         overlays = [ ];
         pkgs = import nixpkgs {
           inherit system overlays;
         };
-
-        nvim-config-path = ./config;
-
-        kokovim = pkgs.wrapNeovim pkgs.neovim-unwrapped {
-          configure = {
-            plugins = with pkgs.vimPlugins; [
-              vim-nix
-              telescope-nvim
-              plenary-nvim
-              rose-pine
-            ];
-
-            # Extra arguments for the wrapper to set the XDG_CONFIG_HOME
-            extraWrapperArgs = ''
-              export XDG_CONFIG_HOME=${nvim-config-path}
-              exec ${pkgs.neovim-unwrapped}/bin/nvim "$@"
-            '';
-          };
-
+        kokovim-build = import ./nix/neovim.nix { inherit inputs system; };
+        kokovim = pkgs.writeShellApplication {
+          name = "nvim";
+          runtimeInputs = [ kokovim-build.package ];
+          text = ''
+            export XDG_CONFIG_HOME="${kokovim-build.configPath}"
+            export NVIM_LOG_FILE="$HOME/.local/state/nvim.log"
+            exec nvim "$@"
+          '';
         };
       in
       {
         packages.default = kokovim;
-        packages.x86_64-linux.kokovim = kokovim;
+        packages.${system}.kokovim = kokovim;
 
         apps.default = {
           type = "app";
@@ -56,12 +52,8 @@
         };
 
         devShells.default = pkgs.mkShell {
+          name = "Kokovim - neovim shell";
           buildInputs = [ kokovim ];
-          shellHook = ''
-            export XDG_CONFIG_HOME=${nvim-config-path}
-            echo "XDG_CONFIG_HOME is set to ${nvim-config-path}"  # Debugging: print out the config path
-            ls -al $XDG_CONFIG_HOME
-          '';
         };
       }
     );
