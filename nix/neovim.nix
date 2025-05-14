@@ -1,11 +1,11 @@
 {
   inputs,
-  system,
+  pkgs,
   with-config ? true,
   ...
 }:
 let
-  pkgs = import inputs.nixpkgs { inherit system; };
+  # pkgs = import inputs.nixpkgs { inherit system; };
   lib = pkgs.lib;
   name = "kokovim";
 
@@ -14,6 +14,7 @@ let
     withSQLite = false; # I dont use any plugin that requires sqlite.lua atm
   };
 
+  # customRC = import ./config { inherit pkgs; };
   plugins = import ./plugins.nix { inherit inputs pkgs opts; };
   packages = import ./packages.nix { inherit pkgs; };
 
@@ -29,9 +30,14 @@ let
     name = "${name}-config";
     src = ../nvim;
     installPhase = ''
-      mkdir -p "$out/nvim"
+            # mkdir -p "$out/nvim"
+            # shopt -s dotglob # Include hidden files in glob patterns
+            # cp -r * "$out/nvim/"
+
+      mkdir -p "$out/"
       shopt -s dotglob # Include hidden files in glob patterns
-      cp -r * "$out/nvim/"
+      cp -r * "$out/"
+
     '';
   };
 
@@ -53,14 +59,18 @@ let
 
   kokovim = pkgs.wrapNeovim pkgs.neovim-unwrapped {
     configure = {
+      inherit nvimConfig;
       # extraPackages = packages.packages;
       packages.kokovim.start = plugins;
       wrapperArgs = extraMakeWrapperArgs;
     };
-  };
+  } // builtins.trace "Path to config: ${nvimConfig.outPath}" {};
 
 in
-{
-  package = kokovim;
-  configPath = nvimConfig.outPath;
+pkgs.writeShellApplication {
+  name = "nvim";
+  runtimeInputs = [ externalPackages ];
+  text = ''
+    ${kokovim}/bin/nvim "$@"
+  '';
 }
