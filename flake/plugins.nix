@@ -28,9 +28,11 @@ with pkgs.vimPlugins;
 
   # Editor
   telescope-nvim
+  fzf-lua
   plenary-nvim
   oil-nvim
   neo-tree-nvim
+  nui-nvim
   which-key-nvim
   bufferline-nvim
   lualine-nvim

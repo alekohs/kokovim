@@ -1,9 +1,13 @@
 local utils = require("utils")
 
 return {
-
   utils.getPlugin("neo-tree.nvim", "nvim-neo-tree/neo-tree.nvim.", {
     cmd = "Neotree",
+    dependencies = {
+      utils.getPlugin("plenary.nvim", "nvim-lua/plenary.nvim"),
+      utils.getPlugin("mini-nvim", "echasnovski/mini.icons"),
+      utils.getPlugin("nui.nvim", "MunifTanjim/nui.nvim"),
+    },
     keys = {
       {
         "<leader>fe",
@@ -17,11 +21,6 @@ return {
       },
       { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
       { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
-      {
-        "<leader>ge",
-        function() require("neo-tree.command").execute({ source = "git_status", toggle = true }) end,
-        desc = "Git Explorer",
-      },
       {
         "<leader>be",
         function() require("neo-tree.command").execute({ source = "buffers", toggle = true }) end,

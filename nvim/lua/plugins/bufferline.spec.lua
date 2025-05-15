@@ -20,12 +20,9 @@ return {
     },
     opts = {
       options = {
-      -- stylua: ignore
-      close_command = function(n) Snacks.bufdelete(n) end,
-      -- stylua: ignore
-      right_mouse_command = function(n) Snacks.bufdelete(n) end,
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
+        separator_style = "padded_slant";
         offsets = {
           {
             filetype = "neo-tree",
