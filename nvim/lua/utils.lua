@@ -8,6 +8,8 @@ M.appName = os.getenv("NVIM_APPNAME")
 M.isNixApp = function() return nixEnv == "1" end
 
 M.getPlugin = function(localDir, github, config)
+  config = config or {}
+
   local pathConfig = { github }
   if M.isNixApp() then
     local pack_paths = vim.api.nvim_list_runtime_paths()
