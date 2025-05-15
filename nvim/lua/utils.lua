@@ -5,9 +5,11 @@ local function removeLastFolder(path) return path:match("(.+)/[^/]+/?$") end
 
 M.appName = vim.fn.getenv("NVIM_APPNAME")
 
-M.isNixApp = function() return nixEnv == "1" end
+function M.isNixApp()
+  return nixEnv == "1"
+end
 
-M.getPlugin = function(localDir, github, config)
+function M.getPlugin(localDir, github, config)
   config = config or {}
 
   local pathConfig = { github }
@@ -41,5 +43,13 @@ M.getPlugin = function(localDir, github, config)
   return combinedConfig
 end
 
+function M.root()
+  local handle = io.popen("git rev-parse --show-toplevel 2>/dev/null")
+  if handle then
+    local result = handle:read("*a")
+    handle:close()
+    return result:gsub("%s+$", "") -- remove trailing newline
+  end
+end
 
 return M

@@ -30,6 +30,7 @@ with pkgs.vimPlugins;
   telescope-nvim
   plenary-nvim
   oil-nvim
+  neo-tree-nvim
   which-key-nvim
   bufferline-nvim
   lualine-nvim
