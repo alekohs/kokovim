@@ -30,7 +30,6 @@
       flake = false;
     };
   };
-
   outputs =
     {
       self,
@@ -41,14 +40,13 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        imports = [ ./nix/pkgs-by-name.nix ];
 
         kokovim = final: prev: {
           kokovim =
             let
               pkgs = prev;
             in
-            import ./nix/neovim.nix {
+            import ./flake/neovim.nix {
               inherit inputs pkgs system;
             };
         };
@@ -59,6 +57,8 @@
         };
       in
       {
+        imports = [./flake/pkgs-by-name.nix];
+
         packages.default = pkgs.kokovim;
         packages.kokovim = pkgs.kokovim;
         # packages.kokovim-pure = kokovim-pure;
@@ -76,9 +76,6 @@
         devShells.default = pkgs.mkShell {
           name = "Kokovim - neovim shell";
           buildInputs = [ pkgs.kokovim ];
-          # shellHook = ''
-          #   echo ${kokovim-build.configPath}
-          # '';
         };
       }
     );

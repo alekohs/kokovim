@@ -20,5 +20,4 @@ vimUtils.buildVimPlugin {
     "repro_blink"
     "repro_cmp"
   ];
-
 }

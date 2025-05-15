@@ -38,12 +38,17 @@ with pkgs.vimPlugins;
 
   # LSP
   nvim-lspconfig
+  roslyn-nvim
+  rzls-nvim
+  dotnet-nvim
 
   # Colorschemes
   rose-pine
 
   # Other
   vim-nix
+
+  colorful-menu-nvim
 
   # Plugins outside of nixpkgs
   (mkVimPlugin {
