@@ -34,6 +34,10 @@ with pkgs.vimPlugins;
 
   # Treesitter
   nvim-treesitter
+  nvim-treesitter-grammars
+
+  # LSP
+  nvim-lspconfig
 
   # Colorschemes
   rose-pine

@@ -36,17 +36,32 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1746904237,
-        "narHash": "sha256-3e+AVBczosP5dCLQmMoMEogM57gmZ2qrVSrmq9aResQ=",
-        "owner": "NixOS",
+        "lastModified": 1747091784,
+        "narHash": "sha256-/2jlDI5+DfAbxdluamyRsORHueBYUiQh+aK/kshSvmE=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d89fc19e405cb2d55ce7cc114356846a0ee5e956",
+        "rev": "2e1da60850ce8159db9654a969c2c683f41c18b5",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pkgs-by-name-for-flake-parts": {
+      "locked": {
+        "lastModified": 1743779435,
+        "narHash": "sha256-5eaQ3iKcwUbLw7pOJJqV85qgf5L+ihfsISrifGM7czQ=",
+        "owner": "drupol",
+        "repo": "pkgs-by-name-for-flake-parts",
+        "rev": "477b3e8f981e3d7bac9d297e64796c918942f744",
+        "type": "github"
+      },
+      "original": {
+        "owner": "drupol",
+        "repo": "pkgs-by-name-for-flake-parts",
         "type": "github"
       }
     },
@@ -55,8 +70,7 @@
         "flake-utils": "flake-utils",
         "mini-nvim": "mini-nvim",
         "nixpkgs": "nixpkgs",
-        "treefmt-nix": "treefmt-nix",
-        "vim-varnish": "vim-varnish"
+        "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts"
       }
     },
     "systems": {
@@ -71,42 +85,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "treefmt-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1746989248,
-        "narHash": "sha256-uoQ21EWsAhyskNo8QxrTVZGjG/dV4x5NM1oSgrmNDJY=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "708ec80ca82e2bbafa93402ccb66a35ff87900c5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "vim-varnish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1707645768,
-        "narHash": "sha256-rdAkh8gqHoiv9eFuHujdf8+YhOvXwtYjtm0/PjCNaOM=",
-        "owner": "varnishcache-friends",
-        "repo": "vim-varnish",
-        "rev": "01458458f20831d43045423344bcb70a40d04b0f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "varnishcache-friends",
-        "repo": "vim-varnish",
         "type": "github"
       }
     }

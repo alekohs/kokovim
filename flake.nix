@@ -2,18 +2,33 @@
   description = "Kokovim - neovim flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
 
-    # External plugins
-    vim-varnish.url = "github:varnishcache-friends/vim-varnish";
-    vim-varnish.flake = false;
+    pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
 
-    mini-nvim.url = "github:echasnovski/mini.nvim";
-    mini-nvim.flake = false;
+    mini-nvim = {
+      url = "github:echasnovski/mini.nvim";
+      flake = false;
+    };
+
+    blink-cmp = {
+      url = "github:saghen/blink.cmp";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    snacks-nvim = {
+      url = "github:folke/snacks.nvim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -21,12 +36,13 @@
       self,
       nixpkgs,
       flake-utils,
-      treefmt-nix,
       ...
     }@inputs:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
+        imports = [ ./nix/pkgs-by-name.nix ];
+
         kokovim = final: prev: {
           kokovim =
             let

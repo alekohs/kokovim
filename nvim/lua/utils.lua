@@ -1,9 +1,9 @@
 local M = {}
 
-local nixEnv = os.getenv("NVIM_NIX")
+local nixEnv = vim.fn.getenv("NVIM_NIX")
 local function removeLastFolder(path) return path:match("(.+)/[^/]+/?$") end
 
-M.appName = os.getenv("NVIM_APPNAME")
+M.appName = vim.fn.getenv("NVIM_APPNAME")
 
 M.isNixApp = function() return nixEnv == "1" end
 
