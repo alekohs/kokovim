@@ -26,6 +26,7 @@ let
   };
 
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
+    name = appName;
     withPython3 = false;
     withNodeJs = false;
     withRuby = false;
@@ -70,19 +71,6 @@ let
       wrapperArgs = lib.escapeShellArgs neovimConfig.wrapperArgs + " " + extraMakeWrapperArgs;
     }
   );
-
-  # autowrapRuntimeDeps = true;
-  # plugins = plugins;
-  # wrapperArgs = extraMakeWrapperArgs;
-  # configure = {
-  #   wrapRc = false;
-  #   inherit nvimConfig;
-  #   # extraPackages = packages.packages;
-  #   packages.kokovim.start = plugins;
-  #   wrapperArgs = extraMakeWrapperArgs;
-  # }; )
-  # // builtins.trace "Path to config: ${kokovimHome.outPath}" { };
-
 in
 pkgs.writeShellApplication {
   name = "nvim";
