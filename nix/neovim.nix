@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   with-config ? true,
+  with-isolation ? true,
   ...
 }:
 let

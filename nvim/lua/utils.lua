@@ -1,21 +1,42 @@
 local M = {}
 
 local nixEnv = os.getenv("NVIM_NIX")
+local function removeLastFolder(path) return path:match("(.+)/[^/]+/?$") end
 
-M.getAppName = function()
-  return os.getenv("NVIM_APPNAME")
-end
+M.appName = os.getenv("NVIM_APPNAME")
 
-M.isNixApp = function()
-  return nixEnv == "1"
-end
+M.isNixApp = function() return nixEnv == "1" end
 
-M.getPlugin = function(localDir, github)
+M.getPlugin = function(localDir, github, config)
+  local pathConfig = { github }
   if M.isNixApp() then
-    return "/nix/store/ik2n7m2b3b8dfp7kpn902133pah0f1af-vim-pack-dir/pack/myNeovimPackages/start/" .. localDir
+    local pack_paths = vim.api.nvim_list_runtime_paths()
+    for _, path in ipairs(pack_paths) do
+      if path:match("pack/myNeovimPackages/start") then
+        -- print("Found pack dir: " .. path)
+        -- print("Found pack dir: " .. removeLastFolder(path))
+        localDir = removeLastFolder(path) .. "/" .. localDir
+        -- print(localDir)
+        break
+      end
+    end
+    pathConfig = { dir = localDir }
   end
 
-  return github
+  local combinedConfig = {}
+  for k in pairs(pathConfig) do
+    combinedConfig[k] = pathConfig[k]
+  end
+
+  for k in pairs(config) do
+    combinedConfig[k] = config[k]
+  end
+
+  -- for k in pairs(combinedConfig) do
+  --   print(k .. " " .. tostring(combinedConfig[k]))
+  -- end
+  --
+  return combinedConfig
 end
 
 

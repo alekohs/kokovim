@@ -10,7 +10,7 @@ nix run . -- --headless -c 'echo stdpath("config") | q'
 nix run . -- --headless -c 'echo &runtimepath | q'
 nix run . -- --headless -c 'echo &packpath | q'
 nix run . -- --headless -c 'echo $XDG_CONFIG_HOME | q'
-``
+````
 
 
 ### Inspect neovim-unwrapped
@@ -19,5 +19,5 @@ nix repl
 :lf .#nixpkgs
 pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux"
 pkgs.neovim-unwrapped
-``
+````
 
