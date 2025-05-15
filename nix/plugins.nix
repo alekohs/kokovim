@@ -30,6 +30,7 @@ with pkgs.vimPlugins;
   telescope-nvim
   plenary-nvim
   oil-nvim
+  which-key-nvim
 
   # Treesitter
   nvim-treesitter

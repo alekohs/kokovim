@@ -1,6 +1,3 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 local utils = require("utils")
 
 require("lazy").setup({
@@ -13,3 +10,9 @@ require("lazy").setup({
 	-- automatically check for plugin updates
 	checker = { enabled = false },
 })
+
+require("config.options")
+require("config.commands")
+require("config.keymaps")
+
+

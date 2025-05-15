@@ -35,7 +35,7 @@ M.getPlugin = function(localDir, github, config)
   -- for k in pairs(combinedConfig) do
   --   print(k .. " " .. tostring(combinedConfig[k]))
   -- end
-  --
+  --sdfsd
   return combinedConfig
 end
 
