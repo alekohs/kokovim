@@ -31,6 +31,19 @@ with pkgs.vimPlugins;
   plenary-nvim
   oil-nvim
   which-key-nvim
+  bufferline-nvim
+  lualine-nvim
+  lazygit-nvim
+
+  # Completion
+  blink-cmp
+  blink-cmp-dictionary
+  blink-cmp-git
+  blink-cmp-spell
+  blink-cmp-copilot
+  blink-compat
+  blink-emoji-nvim
+  blink-ripgrep-nvim
 
   # Treesitter
   nvim-treesitter
