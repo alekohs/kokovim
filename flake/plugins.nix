@@ -37,6 +37,7 @@ with pkgs.vimPlugins;
   bufferline-nvim
   lualine-nvim
   lazygit-nvim
+  grug-far-nvim
 
   # Completion
   blink-cmp
