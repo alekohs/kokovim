@@ -78,7 +78,7 @@ return {
 
         lspconfig.nixd.setup({ on_attach = on_attach, capabilities = capabilities })
 
-        lspconfig.tsserver.setup({
+        lspconfig.ts_ls.setup({
           on_attach = function(client, bufnr)
             -- Disable tsserver formatting if using prettier/eslint
             client.server_capabilities.documentFormattingProvider = false
