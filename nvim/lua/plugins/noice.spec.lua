@@ -1,10 +1,10 @@
 local utils = require("utils")
 
 return {
-  utils.getPlugin("noice.nvim", "folke/noice.nvim.", {
+  utils.get_plugin("noice.nvim", "folke/noice.nvim.", {
     event = "VeryLazy",
     dependencies = {
-      utils.getPlugin("nui.nvim", "MunifTanjim/nui.nvim.")
+      utils.get_plugin("nui.nvim", "MunifTanjim/nui.nvim.")
     },
     opts = {
       lsp = {

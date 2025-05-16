@@ -20,7 +20,7 @@ local function disable_treesitter_features(bufnr)
   return vim.tbl_contains(disabled_files, short_name) or vim.tbl_contains(disabled_filetypes, filetype)
 end
 
-local ensure_installed = utils.isNixApp() and {}
+local ensure_installed = utils.isNix and {}
   or {
     "bash",
     "c",
@@ -38,12 +38,12 @@ local ensure_installed = utils.isNixApp() and {}
   }
 
 return {
-  utils.getPlugin("nvim-treesitter", "nvim-treesitter/nvim-treesitter", {
+  utils.get_plugin("nvim-treesitter", "nvim-treesitter/nvim-treesitter", {
     event = { "BufReadPost", "BufNewFile", "VeryLazy" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     opts = {
-      auto_install = not utils.isNixApp(),
+      auto_install = not utils.isNix,
       ensure_installed = ensure_installed,
       highlight = {
         enable = true,
@@ -66,6 +66,12 @@ return {
           scope_incremental = "grc",
           node_decremental = "grm",
         },
+      },
+      playground = {
+        enable = true,
+        disable = {},
+        updatetime = 25,
+        persist_queries = false,
       },
     },
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,

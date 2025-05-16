@@ -1,9 +1,9 @@
 local utils = require("utils")
 
 return {
-  utils.getPlugin("lualine.nvim", "nvim-lualine/lualine.nvim.", {
+  utils.get_plugin("lualine.nvim", "nvim-lualine/lualine.nvim.", {
     dependencies = {
-      utils.getPlugin("mini-nvim", "echasnovski/mini.icons")
+      utils.get_plugin("mini-nvim", "echasnovski/mini.icons")
     },
     config = function()
       require('lualine').setup {

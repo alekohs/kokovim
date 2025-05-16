@@ -1,6 +1,6 @@
 local utils = require("utils")
 
-return utils.getPlugin("which-key.nvim", "folke/which-key", {
+return utils.get_plugin("which-key.nvim", "folke/which-key", {
   event = "VeryLazy",
   opts_exted = { "spec" },
   opts = {

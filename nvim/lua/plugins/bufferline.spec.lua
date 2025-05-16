@@ -1,7 +1,7 @@
 local utils = require("utils")
 
 return {
-  utils.getPlugin("bufferline.nvim", "akinsho/bufferline.nvim.", {
+  utils.get_plugin("bufferline.nvim", "akinsho/bufferline.nvim.", {
     event = "VeryLazy",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
@@ -16,7 +16,7 @@ return {
       { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
     },
     dependencies = {
-      utils.getPlugin("mini-nvim", "echasnovski/mini.icons"),
+      utils.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     },
     opts = {
       options = {

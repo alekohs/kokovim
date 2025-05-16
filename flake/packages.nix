@@ -24,6 +24,11 @@
       yaml-language-server
       rust-analyzer
       nixd
+      nodePackages.tailwindcss
+      nodePackages.typescript
+      nodePackages.typescript-language-server
+
+      sqls
       # ruff-lsp
 
       # LINT

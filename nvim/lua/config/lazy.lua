@@ -5,7 +5,7 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	install = {
-		missing = not utils.isNixApp(),
+		missing = not utils.isNix,
 	},
 	-- automatically check for plugin updates
 	checker = { enabled = false },

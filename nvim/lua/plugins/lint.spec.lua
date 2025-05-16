@@ -1,6 +1,6 @@
 local utils = require("utils")
 return {
-  utils.getPlugin("nvim-lint", "mfussenegger/nvim-lint", {
+  utils.get_plugin("nvim-lint", "mfussenegger/nvim-lint", {
     event = { "BufReadPre", "BufNewFile" },
 
     opts = {

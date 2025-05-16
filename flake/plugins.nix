@@ -58,6 +58,7 @@ let
           sql
           terraform
           typescript
+          tsx
           tmux
           toml
           vim

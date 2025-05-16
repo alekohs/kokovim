@@ -1,7 +1,7 @@
 local utils = require("utils")
 
 return {
-  utils.getPlugin("mini-nvim", "echasnovski/mini.nvim", {
+  utils.get_plugin("mini-nvim", "echasnovski/mini.nvim", {
     config = function()
       -- AI
       require("mini.ai").setup()

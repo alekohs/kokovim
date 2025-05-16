@@ -4,16 +4,13 @@ local nixEnv = vim.fn.getenv("NVIM_NIX")
 local function removeLastFolder(path) return path:match("(.+)/[^/]+/?$") end
 
 M.appName = vim.fn.getenv("NVIM_APPNAME")
+M.isNix = nixEnv == "1"
 
-function M.isNixApp()
-  return nixEnv == "1"
-end
-
-function M.getPlugin(localDir, github, config)
+function M.get_plugin(localDir, github, config)
   config = config or {}
 
   local pathConfig = { github }
-  if M.isNixApp() then
+  if M.isNix then
     local pack_paths = vim.api.nvim_list_runtime_paths()
     for _, path in ipairs(pack_paths) do
       if path:match("pack/myNeovimPackages/start") then

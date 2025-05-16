@@ -2,7 +2,7 @@ local utils = require("utils")
 local picker = require("kokovim.picker")
 
 return {
-  utils.getPlugin("harpoon2", "ThePrimeagen/harpoon", {
+  utils.get_plugin("harpoon2", "ThePrimeagen/harpoon", {
     event = "VeryLazy",
     branch = "harpoon2",
     config = function()

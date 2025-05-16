@@ -1,7 +1,7 @@
 local utils = require("utils")
 
-return utils.getPlugin("fzf-lua", "ibhagwan/fzf-lua", {
-  dependencies = { utils.getPlugin("mini-nvim", "echasnovski/mini.icons") },
+return utils.get_plugin("fzf-lua", "ibhagwan/fzf-lua", {
+  dependencies = { utils.get_plugin("mini-nvim", "echasnovski/mini.icons") },
   config = function(_, opts) require("fzf-lua").setup(opts) end,
   keys = {
     { "<leader><space>", function() require("fzf-lua").files() end, desc = "Find files" },

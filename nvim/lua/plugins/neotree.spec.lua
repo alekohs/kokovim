@@ -1,12 +1,12 @@
 local utils = require("utils")
 
 return {
-  utils.getPlugin("neo-tree.nvim", "nvim-neo-tree/neo-tree.nvim.", {
+  utils.get_plugin("neo-tree.nvim", "nvim-neo-tree/neo-tree.nvim.", {
     cmd = "Neotree",
     dependencies = {
-      utils.getPlugin("plenary.nvim", "nvim-lua/plenary.nvim"),
-      utils.getPlugin("mini-nvim", "echasnovski/mini.icons"),
-      utils.getPlugin("nui.nvim", "MunifTanjim/nui.nvim"),
+      utils.get_plugin("plenary.nvim", "nvim-lua/plenary.nvim"),
+      utils.get_plugin("mini-nvim", "echasnovski/mini.icons"),
+      utils.get_plugin("nui.nvim", "MunifTanjim/nui.nvim"),
     },
     keys = {
       {
