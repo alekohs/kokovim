@@ -40,6 +40,8 @@ with pkgs.vimPlugins;
   grug-far-nvim
   flash-nvim
   harpoon2
+  noice-nvim
+  nui-nvim
 
   # Completion
   blink-cmp

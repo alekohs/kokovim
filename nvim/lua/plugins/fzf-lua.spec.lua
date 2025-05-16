@@ -10,7 +10,7 @@ return utils.getPlugin("fzf-lua", "ibhagwan/fzf-lua", {
     { "<leader>fg", function() require("fzf-lua").git_files() end, desc = "Find git files" },
     { "<leader>fr", function() require("fzf-lua").oldfiles() end, desc = "Find recent files" },
 
-    { "<leader>s", function() require("fzf-lua").registers() end, desc = "Search registers" },
+    { "<leader>sR", function() require("fzf-lua").registers() end, desc = "Search registers" },
     { "<leader>sh", function() require("fzf-lua").helptags() end, desc = "Search buffers" },
     { "<leader>sm", function() require("fzf-lua").marks() end, desc = "Search marks" },
     { "<leader>sM", function() require("fzf-lua").man_pages() end, desc = "Search man pages" },
