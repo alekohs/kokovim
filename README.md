@@ -21,3 +21,7 @@ pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux"
 pkgs.neovim-unwrapped
 ````
 
+
+LazyFile
+event = { "BufReadPre", "BufNewFile" },
+

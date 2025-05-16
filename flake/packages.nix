@@ -8,16 +8,27 @@
       # HTML, CSS, JSON
       vscode-langservers-extracted
 
+
       # LazyVim defaults
       stylua
       shfmt
+
+
+      # Lua
+      luaPackages.luacheck
 
       # Markdown extra
       markdownlint-cli2
       marksman
 
       # JSON and YAML extras
+      nodePackages.jsonlint
       nodePackages.yaml-language-server
+      yamllint
+
+
+      # nix
+      deadnix
 
       # Custom
       editorconfig-checker
@@ -31,6 +42,7 @@
   extraLuaPackages =
     ps: with ps; [
       jsregexp # required by luasnip
+      luacheck
     ];
 
   # Extra python packages

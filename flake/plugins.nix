@@ -52,8 +52,39 @@ with pkgs.vimPlugins;
   blink-ripgrep-nvim
 
   # Treesitter
-  nvim-treesitter
-  nvim-treesitter-grammars
+  (nvim-treesitter.withPlugins
+  (
+    plugins: with plugins; [
+      bash
+      c_sharp
+      css
+      scss
+      dockerfile
+      fish
+      go
+      java
+      javascript
+      json
+      lua
+      make
+      markdown
+      nix
+      nginx
+      regex
+      rust
+      razor
+      toml
+      vim
+      vimdoc
+      xml
+      yaml
+      zig
+    ]
+  ))
+  # nvim-treesitter-grammars
+
+  # Linting
+  nvim-lint
 
   # LSP
   nvim-lspconfig

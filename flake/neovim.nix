@@ -75,7 +75,7 @@ let
 in
 pkgs.writeShellApplication {
   name = "nvim";
-  runtimeInputs = [ externalPackages ];
+  runtimeInputs = [ externalPackages kokovimHome ];
   text = ''
     ${kokovim}/bin/nvim "$@"
   '';
