@@ -79,6 +79,7 @@ with pkgs.vimPlugins;
   plenary-nvim
 
   # AI
+  codecompanion-nvim
   copilot-lua
   CopilotChat-nvim
 
