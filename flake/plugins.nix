@@ -38,6 +38,8 @@ with pkgs.vimPlugins;
   lualine-nvim
   lazygit-nvim
   grug-far-nvim
+  flash-nvim
+  harpoon2
 
   # Completion
   blink-cmp
