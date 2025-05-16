@@ -11,7 +11,7 @@ return {
 
       -- Move
       require("mini.move").setup({
-        reindent_linewise = true
+        reindent_linewise = true,
       })
 
       -- Pairs
@@ -27,8 +27,10 @@ return {
           highlight = "gsh",
           replace = "gsr",
           update_n_lines = "gsn",
-        }
+        },
       })
+      -- Snippets
+      require("mini.snippets").setup()
     end,
     lazy = false,
   }),

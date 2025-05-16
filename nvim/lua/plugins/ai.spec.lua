@@ -1,0 +1,36 @@
+local utils = require("utils")
+
+return {
+  utils.get_plugin("copilot.lua", "zbirenbaum/copilot.lua", {
+    cmd = "Copilot",
+    event = "InsertEnter",
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        hide_during_completion = true,
+        keymap = {
+          accept = false, -- handled by nvim-cmp / blink.cmp
+          next = "<M-]>",
+          prev = "<M-[>",
+        },
+      },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
+    config = function(_, opts) require("copilot").setup() end,
+  }),
+  utils.get_plugin("CopilotChat.nvim","CopilotC-Nvim/CopilotChat.nvim", {
+    dependencies = {
+      utils.get_plugin("copilot.lua", "zbirenbaum/copilot.lua"),
+      utils.get_plugin("plenary.nvim", "nvim-lua/plenary.nvim"),
+    },
+    build = "make tiktoken",
+    opts = {
+      -- See Configuration section for options
+    },
+  }),
+}

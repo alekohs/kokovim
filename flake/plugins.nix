@@ -78,6 +78,10 @@ with pkgs.vimPlugins;
   # Dependencies
   plenary-nvim
 
+  # AI
+  copilot-lua
+  CopilotChat-nvim
+
   # Editor
   fzf-lua
   oil-nvim
@@ -102,6 +106,8 @@ with pkgs.vimPlugins;
   blink-compat
   blink-emoji-nvim
   blink-ripgrep-nvim
+  blink-nerdfont-nvim
+  colorful-menu-nvim
 
   # Treesitter
   nvim-treesitter
@@ -123,8 +129,6 @@ with pkgs.vimPlugins;
 
   # Other
   vim-nix
-
-  colorful-menu-nvim
 
   # Plugins outside of nixpkgs
   (mkVimPlugin {
