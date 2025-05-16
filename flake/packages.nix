@@ -22,6 +22,8 @@
       marksman
       markdownlint-cli2
       yaml-language-server
+      rust-analyzer
+      nixd
       # ruff-lsp
 
       # LINT
