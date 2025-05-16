@@ -47,7 +47,7 @@ autocmd("TextYankPost", {
   desc = "Highlight on yank",
   pattern = "*",
   callback = function()
-    (vim.highlight or vim.hl).on_yank()
+    (vim.hl or vim.hl).on_yank()
   end,
 })
 

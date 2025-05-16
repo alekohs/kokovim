@@ -5,34 +5,32 @@
     [
       gcc # needed for nvim-treesitter
 
-      # HTML, CSS, JSON
-      vscode-langservers-extracted
-
-
-      # LazyVim defaults
+      # Formatters
+      gotools
+      nixpkgs-fmt
+      prettierd
+      ruff
       stylua
       shfmt
+      xmlformat
+      yamlfmt
 
-
-      # Lua
-      luaPackages.luacheck
-
-      # Markdown extra
-      markdownlint-cli2
+      # LSP
+      gopls
+      lua-language-server
+      vscode-langservers-extracted
       marksman
+      markdownlint-cli2
+      yaml-language-server
+      # ruff-lsp
 
-      # JSON and YAML extras
+      # LINT
       nodePackages.jsonlint
-      nodePackages.yaml-language-server
       yamllint
-
-
-      # nix
       deadnix
-
-      # Custom
       editorconfig-checker
       shellcheck
+
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347

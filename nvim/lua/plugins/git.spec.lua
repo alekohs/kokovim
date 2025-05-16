@@ -1,4 +1,3 @@
-        require("which-key").show({ global = false })
 local utils = require("utils")
 
 return {

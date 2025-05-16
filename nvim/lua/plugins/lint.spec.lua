@@ -5,7 +5,7 @@ return {
 
     opts = {
       -- Event to trigger linters
-      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+      events = { "BufEnter", "TextChanged", "BufWritePost", "BufReadPost", "InsertLeave" },
       linters_by_ft = {
         fish = { "fish" },
         bash = { "shellcheck" },
