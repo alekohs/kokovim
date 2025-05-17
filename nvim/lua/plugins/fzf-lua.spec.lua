@@ -1,6 +1,6 @@
 
 
-return kokovim.get_plugin("fzf-lua", "ibhagwan/fzf-lua", {
+return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
   dependencies = { kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons") },
   config = function(_, opts) require("fzf-lua").setup(opts) end,
   keys = {

@@ -33,6 +33,7 @@
 
       # LINT
       nodePackages.jsonlint
+      nodePackages.markdownlint-cli
       yamllint
       deadnix
       editorconfig-checker

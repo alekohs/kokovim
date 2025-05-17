@@ -99,7 +99,11 @@ with pkgs.vimPlugins;
   nui-nvim
   gitsigns-nvim
   render-markdown-nvim
+  yanky-nvim
 
+  # UI
+  nvim-navic
+  nvim-navbuddy
 
   # Completion
   blink-cmp

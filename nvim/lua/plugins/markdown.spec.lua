@@ -1,31 +1,60 @@
 return {
-  kokovim.get_plugin("lazygit.nvim", "kdheepak/lazygit.nvim", {
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
+  kokovim.get_plugin_by_repo("MeanderingProgrammer/render-markdown.nvim", {
     dependencies = {
-      kokovim.get_plugin("plneary.nvim", "nvim-lua/plenary.nim"),
+      kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter"),
+      kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     },
-    keys = {
-      { "<leader>gg", "<CMD>LazyGit<CR>", desc = "Open LazyGit" },
-    },
-  }),
-  kokovim.get_plugin("gitsigns.nvim", "lewis6991/gitsigns.nvim", {
     opts = {
-      current_line_blame = true,
-      current_line_blame_opts = {
-        delay = 500,
-        ignore_blank_lines = true,
-        ignore_whitespace = true,
-        virt_text = true,
-        virt_text_pos = "eol"
+      enabled = true,
+      bullet = {
+        icons = { "◆ ", "• ", "• " },
+        right_pad = 1,
       },
-      signcolumn = false
-    }
+      code = {
+        above = " ",
+        below = " ",
+        border = "thick",
+        language_pad = 2,
+        left_pad = 2,
+        position = "right",
+        right_pad = 2,
+        sign = false,
+        width = "block",
+      },
+      completions = {
+        blink = {
+          enabled = true,
+        },
+        lsp = {
+          enabled = true,
+        },
+      },
+      heading = {
+        border = true,
+        icons = {
+          "󰲡 ",
+          "󰲣 ",
+          "󰲥 ",
+          "󰲧 ",
+          "󰲩 ",
+          "󰲫 ",
+        },
+        position = "inline",
+        sign = false,
+        width = "full",
+      },
+      render_modes = true,
+      signs = {
+        enabled = true
+      }
+    },
+    config = function(_, opts) require("render-markdown").setup(opts) end,
+    keys = {
+      {
+        "<leader>mt",
+        function() require("render-markdown").buf_toggle() end,
+        desc = "Toggle markdown render for buffer",
+      },
+    },
   }),
 }
-

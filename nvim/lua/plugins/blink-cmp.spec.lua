@@ -1,12 +1,10 @@
-
-
 return {
-  kokovim.get_plugin("blink.cmp", "saghen/blink.cmp", {
+  kokovim.get_plugin_by_repo("saghen/blink.cmp", {
     dependencies = {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
-      kokovim.get_plugin("colorful-menu.nvim", "xzbdmw/colorful-menu.nvim"),
-      kokovim.get_plugin("blink-cmp-copilot", "giuxtaposition/blink-cmp-copilot"),
+      kokovim.get_plugin_by_repo("xzbdmw/colorful-menu.nvim"),
+      kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot"),
     },
     opts = {
       appearance = {
@@ -82,34 +80,34 @@ return {
           -- "spell",
         },
       },
-      providers = {
-        lsp = {
-          min_keyword_length = 2,
-          score_offset = 0,
-        },
-        path = {
-          min_keyword_length = 0,
-        },
-        snippets = {
-          min_keyword_length = 2,
-        },
-        buffer = {
-          min_keyword_length = 3,
-          max_items = 5,
-        },
-        -- copilot = {
-        --   name = "copilot",
-        --   module = "blink-cmp-copilot",
-        --   kind = "Copilot",
-        --   -- score_offset = 100,
-        --   async = true,
-        -- },
-        -- dictionary = {
-        --   name = "Dict",
-        --   module = "blink-cmp-dictionary",
-        --   min_keyword_length = 3,
-        -- },
-      },
+      -- providers = {
+      --   lsp = {
+      --     min_keyword_length = 2,
+      --     score_offset = 0,
+      --   },
+      --   path = {
+      --     min_keyword_length = 0,
+      --   },
+      --   snippets = {
+      --     min_keyword_length = 2,
+      --   },
+      --   buffer = {
+      --     min_keyword_length = 3,
+      --     max_items = 5,
+      --   },
+      --   -- copilot = {
+      --   --   name = "copilot",
+      --   --   module = "blink-cmp-copilot",
+      --   --   kind = "Copilot",
+      --   --   -- score_offset = 100,
+      --   --   async = true,
+      --   -- },
+      --   -- dictionary = {
+      --   --   name = "Dict",
+      --   --   module = "blink-cmp-dictionary",
+      --   --   min_keyword_length = 3,
+      --   -- },
+      -- },
     },
   }),
 }

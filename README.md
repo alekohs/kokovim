@@ -25,3 +25,6 @@ pkgs.neovim-unwrapped
 LazyFile
 event = { "BufReadPre", "BufNewFile" },
 
+DeferredUIEnter
+event = "VeryLazy"
+
