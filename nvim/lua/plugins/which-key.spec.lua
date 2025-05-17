@@ -1,6 +1,6 @@
-local utils = require("utils")
 
-return utils.get_plugin("which-key.nvim", "folke/which-key", {
+
+return kokovim.get_plugin("which-key.nvim", "folke/which-key", {
   event = "VeryLazy",
   opts_exted = { "spec" },
   opts = {

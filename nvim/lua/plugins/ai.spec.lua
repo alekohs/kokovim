@@ -1,7 +1,7 @@
-local utils = require("utils")
+
 
 return {
-  utils.get_plugin("copilot.lua", "zbirenbaum/copilot.lua", {
+  kokovim.get_plugin("copilot.lua", "zbirenbaum/copilot.lua", {
     cmd = "Copilot",
     event = "InsertEnter",
     opts = {
@@ -24,20 +24,20 @@ return {
     config = function(_, opts) require("copilot").setup(opts) end,
     -- TODO: Authentication is failing for now, can't write to the folder
   }),
-  -- utils.get_plugin("CopilotChat.nvim", "CopilotC-Nvim/CopilotChat.nvim", {
+  -- kokovim.get_plugin("CopilotChat.nvim", "CopilotC-Nvim/CopilotChat.nvim", {
   --   dependencies = {
-  --     utils.get_plugin("copilot.lua", "zbirenbaum/copilot.lua"),
-  --     utils.get_plugin("plenary.nvim", "nvim-lua/plenary.nvim"),
+  --     kokovim.get_plugin("copilot.lua", "zbirenbaum/copilot.lua"),
+  --     kokovim.get_plugin("plenary.nvim", "nvim-lua/plenary.nvim"),
   --   },
   --   build = "make tiktoken",
   --   opts = {
   --     -- See Configuration section for options
   --   },
   -- }),
-  utils.get_plugin("codecompanion.nvim", "olimorris/codecompanion.nvim", {
+  kokovim.get_plugin("codecompanion.nvim", "olimorris/codecompanion.nvim", {
     dependencies = {
-      utils.get_plugin("plenary.nvim", "nvim-lua/plenary.nvim"),
-      utils.get_plugin("nvim-treesitter", "nvim-treesitter/nvim-treesitter"),
+      kokovim.get_plugin("plenary.nvim", "nvim-lua/plenary.nvim"),
+      kokovim.get_plugin("nvim-treesitter", "nvim-treesitter/nvim-treesitter"),
     },
     opts = {
       language = "English",

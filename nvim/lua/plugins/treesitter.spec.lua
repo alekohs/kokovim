@@ -1,4 +1,3 @@
-local utils = require("utils")
 local disabled_files = {
   "Enums.hs",
   "all-packages.nix",
@@ -20,7 +19,7 @@ local function disable_treesitter_features(bufnr)
   return vim.tbl_contains(disabled_files, short_name) or vim.tbl_contains(disabled_filetypes, filetype)
 end
 
-local ensure_installed = utils.isNix and {}
+local ensure_installed = kokovim.isNix and {}
   or {
     "bash",
     "c",
@@ -38,12 +37,12 @@ local ensure_installed = utils.isNix and {}
   }
 
 return {
-  utils.get_plugin("nvim-treesitter", "nvim-treesitter/nvim-treesitter", {
+  kokovim.get_plugin("nvim-treesitter", "nvim-treesitter/nvim-treesitter", {
     event = { "BufReadPost", "BufNewFile", "VeryLazy" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     opts = {
-      auto_install = not utils.isNix,
+      auto_install = not kokovim.isNix,
       ensure_installed = ensure_installed,
       highlight = {
         enable = true,

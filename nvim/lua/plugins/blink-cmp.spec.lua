@@ -1,12 +1,12 @@
-local utils = require("utils")
+
 
 return {
-  utils.get_plugin("blink.cmp", "saghen/blink.cmp", {
+  kokovim.get_plugin("blink.cmp", "saghen/blink.cmp", {
     dependencies = {
-      utils.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
-      utils.get_plugin("mini-nvim", "echasnovski/mini.icons"),
-      utils.get_plugin("colorful-menu.nvim", "xzbdmw/colorful-menu.nvim"),
-      utils.get_plugin("blink-cmp-copilot", "giuxtaposition/blink-cmp-copilot"),
+      kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
+      kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
+      kokovim.get_plugin("colorful-menu.nvim", "xzbdmw/colorful-menu.nvim"),
+      kokovim.get_plugin("blink-cmp-copilot", "giuxtaposition/blink-cmp-copilot"),
     },
     opts = {
       appearance = {

@@ -1,5 +1,3 @@
-
-
 return {
   kokovim.get_plugin("lazygit.nvim", "kdheepak/lazygit.nvim", {
     cmd = {
@@ -30,3 +28,4 @@ return {
     }
   }),
 }
+

@@ -1,7 +1,7 @@
-local utils = require("utils")
+
 
 return {
-  utils.get_plugin("flash.nvim", "folke/flash.nvim", {
+  kokovim.get_plugin("flash.nvim", "folke/flash.nvim", {
     event = "VeryLazy",
     vscode = true,
     opts = {},

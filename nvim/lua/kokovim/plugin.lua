@@ -1,16 +1,12 @@
+local utils = require("kokovim.utils")
 local M = {}
-
-local nixEnv = vim.fn.getenv("NVIM_NIX")
 local function removeLastFolder(path) return path:match("(.+)/[^/]+/?$") end
-
-M.appName = vim.fn.getenv("NVIM_APPNAME")
-M.isNix = nixEnv == "1"
 
 function M.get_plugin(localDir, github, config)
   config = config or {}
 
   local pathConfig = { github }
-  if M.isNix then
+  if utils.isNix then
     local pack_paths = vim.api.nvim_list_runtime_paths()
     for _, path in ipairs(pack_paths) do
       if path:match("pack/myNeovimPackages/start") then
@@ -40,13 +36,5 @@ function M.get_plugin(localDir, github, config)
   return combinedConfig
 end
 
-function M.root()
-  local handle = io.popen("git rev-parse --show-toplevel 2>/dev/null")
-  if handle then
-    local result = handle:read("*a")
-    handle:close()
-    return result:gsub("%s+$", "") -- remove trailing newline
-  end
-end
-
 return M
+

@@ -1,10 +1,10 @@
-local utils = require("utils")
+
 
 return {
-  utils.get_plugin("noice.nvim", "folke/noice.nvim.", {
+  kokovim.get_plugin("noice.nvim", "folke/noice.nvim.", {
     event = "VeryLazy",
     dependencies = {
-      utils.get_plugin("nui.nvim", "MunifTanjim/nui.nvim.")
+      kokovim.get_plugin("nui.nvim", "MunifTanjim/nui.nvim.")
     },
     opts = {
       lsp = {

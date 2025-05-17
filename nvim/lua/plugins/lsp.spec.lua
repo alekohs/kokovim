@@ -1,4 +1,4 @@
-local utils = require("utils")
+
 -- vim.keymap.set(
 --   "gd",
 --   "<cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<cr>",
@@ -27,7 +27,7 @@ local function configure_mason() end
 return {
 
   {
-    utils.get_plugin("nvim-lspconfig", "neovim/nvim-lspconfig", {
+    kokovim.get_plugin("nvim-lspconfig", "neovim/nvim-lspconfig", {
       event = { "BufReadPre", "BufNewFile" },
       opts = {
         servers = {

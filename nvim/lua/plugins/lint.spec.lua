@@ -1,6 +1,6 @@
-local utils = require("utils")
+
 return {
-  utils.get_plugin("nvim-lint", "mfussenegger/nvim-lint", {
+  kokovim.get_plugin("nvim-lint", "mfussenegger/nvim-lint", {
     event = { "BufReadPre", "BufNewFile" },
 
     opts = {

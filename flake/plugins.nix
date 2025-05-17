@@ -97,6 +97,9 @@ with pkgs.vimPlugins;
   harpoon2
   noice-nvim
   nui-nvim
+  gitsigns-nvim
+  render-markdown-nvim
+
 
   # Completion
   blink-cmp

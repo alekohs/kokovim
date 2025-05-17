@@ -1,11 +1,10 @@
-local utils = require("utils")
 
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
 	install = {
-		missing = not utils.isNix,
+		missing = not kokovim.isNix,
 	},
 	-- automatically check for plugin updates
 	checker = { enabled = false },

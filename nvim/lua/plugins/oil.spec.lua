@@ -1,5 +1,5 @@
-local utils = require("utils")
-return utils.get_plugin("oil.nvim", "stevearc/oil.nvim", {
+
+return kokovim.get_plugin("oil.nvim", "stevearc/oil.nvim", {
   name = "oil.nvim",
   opts = {
     default_file_explorer = true,
@@ -23,7 +23,7 @@ return utils.get_plugin("oil.nvim", "stevearc/oil.nvim", {
     },
   },
   dependencies = {
-    utils.get_plugin("mini-nvim", "echasnovski/mini.icons", { opts = {} }),
+    kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons", { opts = {} }),
   },
   lazy = false,
 })
