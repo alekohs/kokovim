@@ -128,7 +128,6 @@ with pkgs.vimPlugins;
   nvim-lint
 
   # LSP
-  tailwind-tools-nvim
   nvim-lspconfig
   roslyn-nvim
   rzls-nvim

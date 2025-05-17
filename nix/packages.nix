@@ -1,6 +1,6 @@
 { pkgs }:
 {
-  packages =
+  extraPackages =
     with pkgs;
     [
       gcc # needed for nvim-treesitter

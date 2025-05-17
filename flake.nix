@@ -10,6 +10,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    gen-luarc.url = "github:mrcjkb/nix-gen-luarc-json";
+
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
 
     mini-nvim = {
@@ -37,46 +39,59 @@
       flake-utils,
       ...
     }@inputs:
+    let
+      appName = "kokovim";
+      systems = builtins.attrNames nixpkgs.legacyPackages;
+      neovim-overlay = import ./nix/default.nix {
+        inherit inputs;
+        appName = appName;
+      };
+    in
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-
-        kokovim = final: prev: {
-          kokovim =
-            let
-              pkgs = prev;
-            in
-            import ./flake/neovim.nix {
-              inherit inputs pkgs system;
-            };
-        };
-
-        overlays = [ kokovim ];
+        overlays = [
+          neovim-overlay
+          inputs.gen-luarc.overlays.default
+        ];
         pkgs = import nixpkgs {
           inherit system overlays;
         };
       in
       {
-        imports = [./flake/pkgs-by-name.nix];
-
-        packages.default = pkgs.kokovim;
-        packages.kokovim = pkgs.kokovim;
-        # packages.kokovim-pure = kokovim-pure;
+        packages = rec {
+          default = nvim;
+          nvim = pkgs.nvim-pkg;
+        };
 
         apps.default = {
           type = "app";
-          program = "${pkgs.kokovim}/bin/nvim";
+          program = "${pkgs.nvim-pkg}/bin/${appName}";
         };
 
         apps.kokovim = {
           type = "app";
-          program = "${pkgs.kokovim}/bin/nvim";
+          program = "${pkgs.nvim-pkg}/bin/${appName}";
         };
 
-        devShells.default = pkgs.mkShell {
-          name = "Kokovim - neovim shell";
-          buildInputs = [ pkgs.kokovim ];
+        devShells = {
+          default = pkgs.mkShell {
+            name = "Kokovim - develop shell with symlink";
+            buildInputs = [ pkgs.nvim-dev ];
+            shellHook = ''
+              export NVIM_APPNAME="${appName}-dev"
+              # symlink the .luarc.json generated in the overlay
+              ln -fs ${pkgs.nvim-luarc-json} .luarc.json
+              # allow quick iteration of lua configs
+              ln -Tfns $PWD/nvim ~/.config/${appName}-dev
+            '';
+          };
+
         };
       }
-    );
+    )
+    // {
+      # You can add this overlay to your NixOS configuration
+      overlays.default = neovim-overlay;
+    };
 }
