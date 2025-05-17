@@ -1,5 +1,4 @@
-
-return kokovim.get_plugin("oil.nvim", "stevearc/oil.nvim", {
+return kokovim.get_plugin_by_repo("stevearc/oil.nvim", {
   name = "oil.nvim",
   opts = {
     default_file_explorer = true,
@@ -24,6 +23,14 @@ return kokovim.get_plugin("oil.nvim", "stevearc/oil.nvim", {
   },
   dependencies = {
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons", { opts = {} }),
+  },
+  keys = {
+    {
+      "n",
+      "<leader>o",
+      "<CMD>Oil --float<CR>",
+      desc = "Open oil",
+    },
   },
   lazy = false,
 })

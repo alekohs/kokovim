@@ -15,60 +15,60 @@ let
   # NOTE: this is for luaPackages: https://github.com/NixOS/nixpkgs/blob/36dcdaf8f6b0e0860721ecd4aada50c0cccc3cfd/pkgs/applications/editors/neovim/build-neovim-plugin.nix#L11-L12
   # pkgs.neovimUtils.buildNeovimPlugin
 
-  # nvim-treesitter-grammars = pkgs.symlinkJoin {
-  #   name = "nvim-treesitter-grammars";
-  #   paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
-  # };
-
-  # Merge nvim-treesitter parsers together to reduce vim.api.nvim_list_runtime_paths()
   nvim-treesitter-grammars = pkgs.symlinkJoin {
     name = "nvim-treesitter-grammars";
-    paths =
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins (
-        plugins: with plugins; [
-          angular
-          arduino
-          bash
-          c_sharp
-          cmake
-          cpp
-          csv
-          css
-          scss
-          dot
-          dockerfile
-          fish
-          git_config
-          gitignore
-          go
-          graphql
-          html
-          java
-          javascript
-          json
-          kotlin
-          lua
-          make
-          markdown
-          nix
-          nginx
-          regex
-          rust
-          razor
-          sql
-          terraform
-          typescript
-          tsx
-          tmux
-          toml
-          vim
-          vimdoc
-          xml
-          yaml
-          zig
-        ]
-      )).dependencies;
+    paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
   };
+
+  # # Merge nvim-treesitter parsers together to reduce vim.api.nvim_list_runtime_paths()
+  # nvim-treesitter-grammars = pkgs.symlinkJoin {
+  #   name = "nvim-treesitter-grammars";
+  #   paths =
+  #     (pkgs.vimPlugins.nvim-treesitter.withPlugins (
+  #       plugins: with plugins; [
+  #         angular
+  #         arduino
+  #         bash
+  #         c_sharp
+  #         cmake
+  #         cpp
+  #         csv
+  #         css
+  #         scss
+  #         dot
+  #         dockerfile
+  #         fish
+  #         git_config
+  #         gitignore
+  #         go
+  #         graphql
+  #         html
+  #         java
+  #         javascript
+  #         json
+  #         kotlin
+  #         lua
+  #         make
+  #         markdown
+  #         nix
+  #         nginx
+  #         regex
+  #         rust
+  #         razor
+  #         sql
+  #         terraform
+  #         typescript
+  #         tsx
+  #         tmux
+  #         toml
+  #         vim
+  #         vimdoc
+  #         xml
+  #         yaml
+  #         zig
+  #       ]
+  #     )).dependencies;
+  # };
 in
 with pkgs.vimPlugins;
 [
@@ -122,11 +122,13 @@ with pkgs.vimPlugins;
   nvim-treesitter-grammars
   nvim-treesitter-textobjects
   nvim-treesitter-context
+  nvim-treesitter-refactor
 
   # Linting
   nvim-lint
 
   # LSP
+  tailwind-tools-nvim
   nvim-lspconfig
   roslyn-nvim
   rzls-nvim

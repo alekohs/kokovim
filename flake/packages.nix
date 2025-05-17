@@ -24,6 +24,7 @@
       yaml-language-server
       rust-analyzer
       nixd
+      tailwindcss-language-server
       nodePackages.tailwindcss
       nodePackages.typescript
       nodePackages.typescript-language-server
