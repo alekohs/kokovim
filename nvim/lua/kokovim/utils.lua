@@ -5,6 +5,7 @@ local nixEnv = vim.fn.getenv("NVIM_NIX")
 M.app_name = vim.fn.getenv("NVIM_APPNAME")
 M.is_nix = nixEnv == "1"
 M.nix_plugins = vim.fn.getenv("NVIM_PLUGINS_RP")
+M.lazy_use_ssh = vim.fn.getenv("NVIM_PLUGINS_SSH") == "1"
 
 
 function M.root()

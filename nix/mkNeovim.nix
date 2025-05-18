@@ -21,6 +21,7 @@ with lib;
   ignoreConfigRegexes ? [ ],
   wrapRc ? true,
   useNix ? true,
+  useSSH ? true,
   withSqlite ? false,
   # Add a "vi" binary to the build output as an alias?
   viAlias ? appName == null || appName == "nvim",
@@ -133,6 +134,7 @@ let
     # Add nix load status and set rp environment variable
     ++ (optional (useNix) ''--set NVIM_NIX "1"'')
     ++ (optional (useNix) ''--set NVIM_PLUGINS_RP "${nvimRtp}/plugins"'')
+    ++ (optional (useSSH) ''--set NVIM_PLUGINS_SSH "1"'')
     # Add external packages to the PATH
     ++ (optional (externalPackages != [ ]) ''--prefix PATH : "${makeBinPath externalPackages}"'')
     # Set the LIBSQLITE_CLIB_PATH if sqlite is enabled

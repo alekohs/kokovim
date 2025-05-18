@@ -74,6 +74,11 @@
           program = "${pkgs.nvim-pkg}/bin/${appName}";
         };
 
+        apps.kokovim-dev = {
+          type = "app";
+          program = "${pkgs.nvim-dev}/bin/${appName}-dev";
+        };
+
         devShells = {
           default = pkgs.mkShell {
             name = "Kokovim - develop shell with symlink";
@@ -84,6 +89,7 @@
               ln -fs ${pkgs.nvim-luarc-json} .luarc.json
               # allow quick iteration of lua configs
               ln -Tfns $PWD/nvim ~/.config/${appName}-dev
+              alias nvim="${pkgs.nvim-dev}/bin/${appName}-dev"
             '';
           };
 
