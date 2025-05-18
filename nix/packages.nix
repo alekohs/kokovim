@@ -4,6 +4,8 @@
     with pkgs;
     [
       gcc # needed for nvim-treesitter
+      gh
+      wordnet
 
       # Formatters
       gotools

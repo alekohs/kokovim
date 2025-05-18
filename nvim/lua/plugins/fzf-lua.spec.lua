@@ -1,8 +1,9 @@
-
-
 return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
   dependencies = { kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons") },
-  config = function(_, opts) require("fzf-lua").setup(opts) end,
+  config = function(_, opts)
+    require("fzf-lua").setup(opts)
+    require("fzf-lua").register_ui_select()
+  end,
   keys = {
     { "<leader><space>", function() require("fzf-lua").files() end, desc = "Find files" },
     { "<leader>/", function() require("fzf-lua").live_grep() end, desc = "Find live grep" },
@@ -15,6 +16,5 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
     { "<leader>sm", function() require("fzf-lua").marks() end, desc = "Search marks" },
     { "<leader>sM", function() require("fzf-lua").man_pages() end, desc = "Search man pages" },
     { "<leader>sq", function() require("fzf-lua").quickfix() end, desc = "Search quickfix list" },
-
-  }
+  },
 })

@@ -8,7 +8,8 @@ return kokovim.get_plugin("which-key.nvim", "folke/which-key", {
     spec = {
       {
         mode = { "n", "v" },
-        { "<leader><tab>", group = "tabs" },
+        { "<leader><tab>", group = "tabs", icon = "" },
+        { "<leader>a", group = "ai" },
         { "<leader>c", group = "code" },
         { "<leader>d", group = "debug" },
         { "<leader>dp", group = "profiler" },

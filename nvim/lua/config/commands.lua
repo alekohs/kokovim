@@ -27,6 +27,7 @@ autocmd("FileType", {
     "startuptime",
     "tsplayground",
     "oil",
+    "codecompanion",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
