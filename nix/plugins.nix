@@ -74,6 +74,7 @@ with pkgs.vimPlugins;
   # UI
   nvim-navic
   nvim-navbuddy
+  dashboard-nvim
 
   # Completion
   blink-cmp
