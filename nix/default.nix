@@ -25,8 +25,9 @@ in
   # returned by the overlay
   nvim-pkg = mkNeovim {
     plugins = plugins;
-    appName = appName;
     inherit extraPackages;
+    appName = appName;
+    wrapRc = true;
   };
 
   # This is meant to be used within a devshell.
@@ -37,7 +38,7 @@ in
     inherit extraPackages;
     appName = "${appName}-dev";
     wrapRc = false;
-    dev = true;
+    useNix = false;
   };
 
   # This can be symlinked in the devShell's shellHook

@@ -2,8 +2,9 @@ local M = {}
 
 local nixEnv = vim.fn.getenv("NVIM_NIX")
 
-M.appName = vim.fn.getenv("NVIM_APPNAME")
-M.isNix = nixEnv == "1"
+M.app_name = vim.fn.getenv("NVIM_APPNAME")
+M.is_nix = nixEnv == "1"
+M.nix_plugins = vim.fn.getenv("NVIM_PLUGINS_RP")
 
 
 function M.root()

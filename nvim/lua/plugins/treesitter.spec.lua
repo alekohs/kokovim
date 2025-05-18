@@ -19,7 +19,7 @@ local function disable_treesitter_features(bufnr)
   return vim.tbl_contains(disabled_files, short_name) or vim.tbl_contains(disabled_filetypes, filetype)
 end
 
-local ensure_installed = kokovim.isNix and {}
+local ensure_installed = kokovim.is_nix and {}
   or {
     "bash",
     "c",
@@ -45,7 +45,7 @@ return {
     },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     opts = {
-      auto_install = not kokovim.isNix,
+      auto_install = not kokovim.is_nix,
       ensure_installed = ensure_installed,
       highlight = {
         enable = true,

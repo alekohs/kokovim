@@ -4,10 +4,14 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	install = {
-		missing = not kokovim.isNix,
+		missing = not kokovim.is_nix,
 	},
-	-- automatically check for plugin updates
-	checker = { enabled = false },
+	change_detection = {
+	  enabled = not kokovim.is_nix,
+	},
+	checker = {
+	  enabled = not kokovim.is_nix
+	},
 })
 
 require("config.options")

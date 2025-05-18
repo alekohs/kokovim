@@ -1,11 +1,11 @@
 local utils = require('kokovim.utils')
 local plugin = require('kokovim.plugin')
 
--- print("Loaded app '" .. utils.appName .. "' with nix: " .. tostring(utils.isNix()))
+-- print("Loaded app '" .. utils.app_name.. "' with nix: " .. tostring(utils.is_nix()))
 
 local M = {}
 -- Check if current runtime is loaded through nix
-M.isNix = utils.isNix
+M.is_nix = utils.is_nix
 
 --- Retrieves a plugin based on the provided parameters.
 -- @param localDir (string|nil) Optional. The local directory name. Defaults to the repository name or ".".

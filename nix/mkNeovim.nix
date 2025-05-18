@@ -20,9 +20,8 @@ with lib;
   extraLuaPackages ? p: [ ],
   ignoreConfigRegexes ? [ ],
   wrapRc ? true,
-  dev ? false,
-  withSqlite ? false,
   useNix ? true,
+  withSqlite ? false,
   # Add a "vi" binary to the build output as an alias?
   viAlias ? appName == null || appName == "nvim",
   # Add a "vim" binary to the build output as an alias?
@@ -51,7 +50,7 @@ let
     in
     lib.cleanSourceWith {
       inherit src;
-      name = "nvim-rtp-src";
+      name = "${appName}-rtp-src";
       filter =
         path: tyoe:
         let
@@ -70,20 +69,19 @@ let
     name = "${appName}-rtp";
     src = nvimRtpSrc;
 
+    nativeBuildInputs = [ pkgs.rsync ];
+
     buildPhase = ''
       mkdir -p $out/nvim
       mkdir -p $out/lua
+
       rm init.lua
     '';
 
     installPhase = ''
       cp -r lua $out/lua
       rm -r lua
-      # Copy nvim/after only if it exists
-      if [ -d "after" ]; then
-          cp -r after $out/after
-          rm -r after
-      fi
+
       # Copy rest of nvim/ subdirectories only if they exist
       if [ ! -z "$(ls -A)" ]; then
           cp -r -- * $out/nvim
@@ -97,27 +95,11 @@ let
   # It also adds logic for bootstrapping dev plugins (for plugin developers)
   initLua =
     ''
-      -- prepend lua directory
+      -- prepend lua and plugins directory
       vim.opt.rtp:prepend('${nvimRtp}/lua')
     ''
     # Wrap init.lua
     + (builtins.readFile ../nvim/init.lua)
-    # Bootstrap/load dev plugins
-    # + optionalString (devPlugins != [ ]) (
-    #   ''
-    #     local dev_pack_path = vim.fn.stdpath('data') .. '/site/pack/dev'
-    #     local dev_plugins_dir = dev_pack_path .. '/opt'
-    #     local dev_plugin_path
-    #   ''
-    #   + strings.concatMapStringsSep "\n" (plugin: ''
-    #     dev_plugin_path = dev_plugins_dir .. '/${plugin.name}'
-    #     if vim.fn.empty(vim.fn.glob(dev_plugin_path)) > 0 then
-    #       vim.notify('Bootstrapping dev plugin ${plugin.name} ...', vim.log.levels.INFO)
-    #       vim.cmd('!${git}/bin/git clone ${plugin.url} ' .. dev_plugin_path)
-    #     end
-    #     vim.cmd('packadd! ${plugin.name}')
-    #   '') devPlugins
-    # )
 
     # Prepend nvim and after directories to the runtimepath
     # NOTE: This is done after init.lua,
@@ -126,7 +108,6 @@ let
     # We prepend to ensure that user ftplugins are sourced before builtin ftplugins.
     + ''
       vim.opt.rtp:prepend('${nvimRtp}/nvim')
-      vim.opt.rtp:prepend('${nvimRtp}/after')
     '';
 
   neovimConfig = neovimUtils.makeNeovimConfig {
@@ -149,8 +130,9 @@ let
     (optional (
       appName != "nvim" && appName != null && appName != ""
     ) ''--set NVIM_APPNAME "${appName}"'')
-    # Add nix load status
+    # Add nix load status and set rp environment variable
     ++ (optional (useNix) ''--set NVIM_NIX "1"'')
+    ++ (optional (useNix) ''--set NVIM_PLUGINS_RP "${nvimRtp}/plugins"'')
     # Add external packages to the PATH
     ++ (optional (externalPackages != [ ]) ''--prefix PATH : "${makeBinPath externalPackages}"'')
     # Set the LIBSQLITE_CLIB_PATH if sqlite is enabled
