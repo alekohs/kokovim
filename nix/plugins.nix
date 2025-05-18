@@ -19,6 +19,18 @@ let
     name = "nvim-treesitter-grammars";
     paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
   };
+
+  markview-pkg = pkgs.vimPlugins.markview-nvim.overrideAttrs {
+    version = "2025-01-30";
+    src = pkgs.fetchFromGitHub {
+      owner = "OXY2DEV";
+      repo = "markview.nvim";
+      rev = "f933b4597738fec4014d25f11511bcbe2d1e1a32";
+      hash = "sha256-V3imWAzPtlrC89CYigDvnye12CctM7RJioigc57Rn/8=";
+      fetchSubmodules = true;
+    };
+    doCheck = false;
+  };
 in
 with pkgs.vimPlugins;
 [
@@ -32,6 +44,11 @@ with pkgs.vimPlugins;
   codecompanion-nvim
   copilot-lua
   CopilotChat-nvim
+
+  # code
+  nvim-ts-autotag
+  neogen
+  conform-nvim
 
   # Editor
   fzf-lua
@@ -49,7 +66,9 @@ with pkgs.vimPlugins;
   nui-nvim
   gitsigns-nvim
   render-markdown-nvim
+  markview-pkg
   yanky-nvim
+  vim-wakatime
 
   # UI
   nvim-navic

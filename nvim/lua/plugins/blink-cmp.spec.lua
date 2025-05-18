@@ -73,41 +73,42 @@ return {
           "snippets",
           "path",
 
-          -- "copilot",
+          "copilot",
           -- "dictionary",
           -- "git",
           -- "nerdfont",
           -- "spell",
         },
+        providers = {
+          lsp = {
+            min_keyword_length = 2,
+            score_offset = 0,
+          },
+          path = {
+            min_keyword_length = 0,
+          },
+          snippets = {
+            min_keyword_length = 2,
+          },
+          buffer = {
+            min_keyword_length = 3,
+            max_items = 5,
+          },
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            -- kind = "Copilot",
+            -- score_offset = 100,
+            async = true,
+          },
+          -- dictionary = {
+          --   name = "Dict",
+          --   module = "blink-cmp-dictionary",
+          --   min_keyword_length = 3,
+          -- },
+        },
       },
-      -- providers = {
-      --   lsp = {
-      --     min_keyword_length = 2,
-      --     score_offset = 0,
-      --   },
-      --   path = {
-      --     min_keyword_length = 0,
-      --   },
-      --   snippets = {
-      --     min_keyword_length = 2,
-      --   },
-      --   buffer = {
-      --     min_keyword_length = 3,
-      --     max_items = 5,
-      --   },
-      --   -- copilot = {
-      --   --   name = "copilot",
-      --   --   module = "blink-cmp-copilot",
-      --   --   kind = "Copilot",
-      --   --   -- score_offset = 100,
-      --   --   async = true,
-      --   -- },
-      --   -- dictionary = {
-      --   --   name = "Dict",
-      --   --   module = "blink-cmp-dictionary",
-      --   --   min_keyword_length = 3,
-      --   -- },
-      -- },
+
     },
   }),
 }

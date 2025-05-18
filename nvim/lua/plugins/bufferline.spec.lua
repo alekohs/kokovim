@@ -1,5 +1,5 @@
 return {
-  kokovim.get_plugin("bufferline.nvim", "akinsho/bufferline.nvim.", {
+  kokovim.get_plugin("bufferline.nvim", "akinsho/bufferline.nvim", {
     event = "VeryLazy",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },

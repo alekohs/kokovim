@@ -22,11 +22,10 @@ return kokovim.get_plugin_by_repo("stevearc/oil.nvim", {
     },
   },
   dependencies = {
-    kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons", { opts = {} }),
+    kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
   },
   keys = {
     {
-      "n",
       "<leader>o",
       "<CMD>Oil --float<CR>",
       desc = "Open oil",
