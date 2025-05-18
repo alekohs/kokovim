@@ -3,8 +3,10 @@ return {
     dependencies = {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
-      kokovim.get_plugin_by_repo("xzbdmw/colorful-menu.nvim"),
-      kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot")
+      kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot"),
+      kokovim.get_plugin_by_repo("xzbdmw/colorful-menu.nvim", {
+        config = function(_, opts) require("colorful-menu").setup(opts) end,
+      }),
     },
     opts = {
       appearance = {
@@ -30,27 +32,13 @@ return {
         },
         list = { selection = { preselect = false, auto_insert = false } },
         menu = {
+          border = "rounded",
           draw = {
+            columns = { { "kind_icon" }, { "label", gap = 1 }, { "source_name" } },
             components = {
               label = {
                 text = function(ctx) return require("colorful-menu").blink_components_text(ctx) end,
                 highlight = function(ctx) return require("colorful-menu").blink_components_highlight(ctx) end,
-              },
-              kind_icon = {
-                text = function(ctx)
-                  local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                  return kind_icon
-                end,
-                highlight = function(ctx)
-                  local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-                  return hl
-                end,
-              },
-              kind = {
-                highlight = function(ctx)
-                  local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-                  return hl
-                end,
               },
             },
           },
@@ -83,38 +71,32 @@ return {
           "path",
 
           "copilot",
-          -- "dictionary",
           -- "git",
           -- "nerdfont",
           -- "spell",
         },
         providers = {
           lsp = {
-            min_keyword_length = 2,
+            min_keyword_length = 0,
             score_offset = 0,
           },
           path = {
-            min_keyword_length = 0,
+            min_keyword_length = 1,
           },
           snippets = {
             min_keyword_length = 2,
           },
           buffer = {
-            min_keyword_length = 3,
+            min_keyword_length = 2,
             max_items = 5,
           },
           copilot = {
+            min_keyword_length = 3,
             name = "copilot",
             module = "blink-cmp-copilot",
-            -- kind = "Copilot",
             -- score_offset = 100,
             async = true,
           },
-          -- dictionary = {
-          --   name = "Dict",
-          --   module = "blink-cmp-dictionary",
-          --   min_keyword_length = 3,
-          -- },
         },
       },
     },

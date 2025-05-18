@@ -69,6 +69,7 @@ with pkgs.vimPlugins;
   markview-pkg
   yanky-nvim
   vim-wakatime
+  todo-comments-nvim
 
   # UI
   nvim-navic

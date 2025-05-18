@@ -42,16 +42,7 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     dependencies = {
       kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter-refactor"),
-      kokovim.get_plugin("bufferline.nvim", "windwp/nvim-ts-autotag", {
-        opts = {
-          enable_close = true,
-          enable_rename = true,
-          enable_close_on_slash = true
-        },
-        config = function (_, opts)
-          require("nvim-ts-autotag").setup(opts)
-        end
-      })
+      kokovim.get_plugin_by_repo("windwp/nvim-ts-autotag", { lazy = false }),
     },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     opts = {
@@ -73,6 +64,9 @@ return {
 
           return false
         end,
+      },
+      autotag = {
+        enable = true,
       },
       indent = {
         enable = true,

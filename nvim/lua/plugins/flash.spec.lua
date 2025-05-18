@@ -1,7 +1,5 @@
-
-
 return {
-  kokovim.get_plugin("flash.nvim", "folke/flash.nvim", {
+  kokovim.get_plugin_by_repo("folke/flash.nvim", {
     event = "VeryLazy",
     vscode = true,
     opts = {},

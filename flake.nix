@@ -41,7 +41,6 @@
     }@inputs:
     let
       appName = "kokovim";
-      systems = builtins.attrNames nixpkgs.legacyPackages;
       neovim-overlay = import ./nix/default.nix {
         inherit inputs;
         appName = appName;
@@ -60,8 +59,9 @@
       in
       {
         packages = rec {
-          default = nvim;
-          nvim = pkgs.nvim-pkg;
+          default = pkgs.nvim-pkg;
+          kokovim = pkgs.nvim-pkg;
+          nvim = pkgs.nvim;
         };
 
         apps.default = {
@@ -72,11 +72,6 @@
         apps.kokovim = {
           type = "app";
           program = "${pkgs.nvim-pkg}/bin/${appName}";
-        };
-
-        apps.kokovim-dev = {
-          type = "app";
-          program = "${pkgs.nvim-dev}/bin/${appName}-dev";
         };
 
         devShells = {

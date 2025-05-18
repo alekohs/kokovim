@@ -5,7 +5,13 @@ return {
       require("mini.ai").setup()
 
       -- Icons
-      require("mini.icons").setup()
+      require("mini.icons").setup({
+        custom_icons = {
+          lsp = {
+            Copilot = "X", -- For use with blink.cmp
+          },
+        },
+      })
 
       -- Move
       require("mini.move").setup({
@@ -29,6 +35,7 @@ return {
       })
       -- Snippets
       require("mini.snippets").setup()
+
     end,
     lazy = false,
   }),
