@@ -1,7 +1,9 @@
 return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
+  cmd = "ConformInfo",
+  event = "VeryLazy",
   opts = {
     default_format_opts = {
-      lsp_format = "fallback"
+      lsp_format = "fallback",
     },
     formatters_by_ft = {
       bash = { "shellcheck", "shellharden", "shfmt" },
@@ -19,11 +21,9 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       fish = { "fish_indent" },
       ["*"] = { "codespell" },
       ["_"] = { "squeeze_blanks", "trim_whitespace", "trim_newlines" },
-    }
+    },
   },
-  config = function(_, opts)
-    require("conform").setup(opts)
-  end,
+  config = function(_, opts) require("conform").setup(opts) end,
   keys = {
     { "<leader>cF", function() require("conform").format() end, mode = "n", desc = "Format injected language" },
     {
@@ -34,11 +34,11 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
           range = {
             ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
             ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
-          }
+          },
         })
       end,
       mode = "v",
-      desc = "Format injected language"
-    }
-  }
+      desc = "Format injected language",
+    },
+  },
 })

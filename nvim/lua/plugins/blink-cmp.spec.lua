@@ -4,7 +4,7 @@ return {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
       kokovim.get_plugin_by_repo("xzbdmw/colorful-menu.nvim"),
-      kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot"),
+      kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot")
     },
     opts = {
       appearance = {
@@ -56,8 +56,17 @@ return {
           },
         },
       },
+      keymap = {
+        preset = "enter",
+        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
-      keymap = { preset = "default" },
+        ["<A-Tab>"] = { "snippet_forward", "fallback" },
+        ["<A-S-Tab>"] = { "snippet_backward", "fallback" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+      },
       snippets = { preset = "mini_snippets" },
       signature = {
         enabled = true,
@@ -108,7 +117,6 @@ return {
           -- },
         },
       },
-
     },
   }),
 }

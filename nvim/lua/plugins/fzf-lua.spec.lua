@@ -12,7 +12,7 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
     { "<leader>fr", function() require("fzf-lua").oldfiles() end, desc = "Find recent files" },
 
     { "<leader>sR", function() require("fzf-lua").registers() end, desc = "Search registers" },
-    { "<leader>sh", function() require("fzf-lua").helptags() end, desc = "Search buffers" },
+    { "<leader>sh", function() require("fzf-lua").helptags() end, desc = "Search help tags" },
     { "<leader>sm", function() require("fzf-lua").marks() end, desc = "Search marks" },
     { "<leader>sM", function() require("fzf-lua").man_pages() end, desc = "Search man pages" },
     { "<leader>sq", function() require("fzf-lua").quickfix() end, desc = "Search quickfix list" },
