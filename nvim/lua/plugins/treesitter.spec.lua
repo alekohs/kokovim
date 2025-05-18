@@ -56,8 +56,8 @@ return {
             return true
           end
 
-          if vim.api.nvim_buf_line_count(bufnr) > 1000 then
-            vim.notify("Treesitter disabled due to line limit passed 1000 < " .. vim.api.nvim_buf_line_count(bufnr))
+          if vim.api.nvim_buf_line_count(buf) > 1000 then
+            vim.notify("Treesitter disabled due to line limit passed 1000 < " .. vim.api.nvim_buf_line_count(buf))
             return true
           end
 
