@@ -78,6 +78,7 @@ with pkgs.vimPlugins;
   dashboard-nvim
   nvim-notify
   fidget-nvim
+  hardtime-nvim
 
   # Completion
   blink-cmp
