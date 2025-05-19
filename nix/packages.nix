@@ -41,6 +41,8 @@
       # LINT
       nodePackages.jsonlint
       nodePackages.markdownlint-cli
+      biome
+      stylelint
       yamllint
       deadnix
       editorconfig-checker

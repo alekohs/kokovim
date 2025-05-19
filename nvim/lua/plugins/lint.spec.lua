@@ -11,9 +11,15 @@ return {
         bash = { "shellcheck" },
         sh = { "shellcheck" },
 
+        css = { "stylelint" },
+        html = { "htmlhint" },
+        javascript = { "biomejs "},
+        typescript = { "biomejs "},
+
         json = { "jsonlint" },
         markdown = { "markdownlint" },
         nix = { "deadnix" },
+        sql = { "sqlfluff" },
         yaml = { "yamllint" },
 
         -- Use the "*" filetype to run linters on all filetypes.
