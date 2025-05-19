@@ -37,7 +37,7 @@ local ensure_installed = kokovim.is_nix and {}
   }
 
 return {
-  kokovim.get_plugin("nvim-treesitter", "nvim-treesitter/nvim-treesitter", {
+  kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter", {
     event = { "BufReadPost", "BufNewFile", "VeryLazy" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     dependencies = {

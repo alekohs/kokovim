@@ -1,4 +1,4 @@
-return kokovim.get_plugin("which-key.nvim", "folke/which-key", {
+return kokovim.get_plugin_by_repo("folke/which-key.nvim", {
   event = "VeryLazy",
   opts_exted = { "spec" },
   opts = {

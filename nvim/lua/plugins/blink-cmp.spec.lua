@@ -78,7 +78,7 @@ return {
         providers = {
           lsp = {
             min_keyword_length = 0,
-            score_offset = 0,
+            score_offset = 100,
           },
           path = {
             min_keyword_length = 1,
@@ -94,7 +94,6 @@ return {
             min_keyword_length = 3,
             name = "copilot",
             module = "blink-cmp-copilot",
-            score_offset = 100,
             async = true,
           },
         },

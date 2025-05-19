@@ -8,7 +8,7 @@ return {
       "LazyGitFilterCurrentFile",
     },
     dependencies = {
-      kokovim.get_plugin_by_repo("nvim-lua/plenary.nim"),
+      kokovim.get_plugin_by_repo("nvim-lua/plenary.nvim"),
     },
     keys = {
       { "<leader>gg", "<CMD>LazyGit<CR>", desc = "Open LazyGit" },

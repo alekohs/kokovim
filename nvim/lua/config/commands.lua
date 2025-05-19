@@ -6,6 +6,12 @@ local progress = vim.defaulttable()
 -- Group for general autocmds
 local general = augroup("GeneralAutocmds", { clear = true })
 
+autocmd("FileType", {
+  group = general,
+  pattern = { "tex", "latex", "markdown" },
+  command = "setlocal spell spellang=en_us"
+})
+
 -- Close filetypes with 'q'
 autocmd("FileType", {
   group = general,
@@ -67,9 +73,13 @@ autocmd("BufWrite", {
   command = [[%s/\s\+$//e]],
 })
 
+
+
 -------
 ---  LSP
 ------
+---
+---
 local lsp = augroup("LspCmds", { clear = true })
 
 -- LSP Progress bar

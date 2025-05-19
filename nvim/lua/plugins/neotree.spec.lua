@@ -4,7 +4,7 @@ return {
   kokovim.get_plugin("neo-tree.nvim", "nvim-neo-tree/neo-tree.nvim", {
     cmd = "Neotree",
     dependencies = {
-      kokovim.get_plugin("plenary.nvim", "nvim-lua/plenary.nvim"),
+      kokovim.get_plugin_by_repo("nvim-lua/plenary.nvim"),
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
       kokovim.get_plugin("nui.nvim", "MunifTanjim/nui.nvim"),
     },

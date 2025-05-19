@@ -61,7 +61,7 @@
         packages = rec {
           default = pkgs.nvim-pkg;
           kokovim = pkgs.nvim-pkg;
-          nvim = pkgs.nvim;
+          nvim = pkgs.neovim;
         };
 
         apps.default = {
@@ -72,6 +72,11 @@
         apps.kokovim = {
           type = "app";
           program = "${pkgs.nvim-pkg}/bin/${appName}";
+        };
+
+        apps.neovim = {
+          type = "app";
+          program = "${pkgs.neovim}/bin/nvim";
         };
 
         devShells = {
