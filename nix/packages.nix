@@ -31,8 +31,14 @@
       nodePackages.typescript
       nodePackages.typescript-language-server
 
+
       sqls
       # ruff-lsp
+
+      # dotnet
+      rzls
+      roslyn-ls
+
 
       # LINT
       nodePackages.jsonlint

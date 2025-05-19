@@ -77,6 +77,7 @@ with pkgs.vimPlugins;
   nvim-navbuddy
   dashboard-nvim
   nvim-notify
+  fidget-nvim
 
   # Completion
   blink-cmp
@@ -105,6 +106,7 @@ with pkgs.vimPlugins;
   roslyn-nvim
   rzls-nvim
   dotnet-nvim
+  easy-dotnet-nvim
 
   # Colorschemes
   rose-pine

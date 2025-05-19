@@ -126,6 +126,12 @@ let
     vimAlias = vimAlias;
   };
 
+  # Add specific paths here to be used inside the
+  packagesJson = builtins.toJSON {
+    roslyn = "${pkgs.roslyn-ls}";
+    rzls = "${pkgs.rzls}";
+  };
+
   extraMakeWrapperArgs = builtins.concatStringsSep " " (
     # Set the NVIM_APPNAME environment variable
     (optional (
@@ -134,6 +140,7 @@ let
     # Add nix load status and set rp environment variable
     ++ (optional (useNix) ''--set NVIM_NIX "1"'')
     ++ (optional (useNix) ''--set NVIM_PLUGINS_RP "${nvimRtp}/plugins"'')
+    ++ (optional (useNix) ''--set NVIM_PACKAGES "${packagesJson}"'')
     ++ (optional (useSSH) ''--set NVIM_PLUGINS_SSH "1"'')
     # Add external packages to the PATH
     ++ (optional (externalPackages != [ ]) ''--prefix PATH : "${makeBinPath externalPackages}"'')
