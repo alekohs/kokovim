@@ -49,6 +49,7 @@ with pkgs.vimPlugins;
   nvim-ts-autotag
   neogen
   conform-nvim
+  trouble-nvim
 
   # Editor
   fzf-lua
