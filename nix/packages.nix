@@ -20,6 +20,7 @@
 
       # LSP
       gopls
+      fish-lsp
       lua-language-server
       vscode-langservers-extracted
       marksman
@@ -31,12 +32,8 @@
       nodePackages.tailwindcss
       nodePackages.typescript
       nodePackages.typescript-language-server
-
-
       sqls
-      # ruff-lsp
-
-      # dotnet
+      # dotnet lsp
       rzls
       roslyn-ls
       pkgs-stable.roslyn-ls # v4 of roslyn ls
