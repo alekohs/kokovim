@@ -1,49 +1,30 @@
-# Ale-nvim a nixvim based flake
+Inspiration https://github.com/aorith/neovim-flake/blob/master/README.md
 
-## Run flake during development
+### Configuration
+https://github.com/NixOS/nixpkgs/blob/f71ccdc1bc17dffc83a8c49d0aa9ae92644572ab/doc/languages-frameworks/neovim.section.md?plain=1#L3
 
-```bash
-nix run
-nix build
+### Debug
+Check some of the paths
+``` bash
+nix run . -- --headless -c 'echo stdpath("config") | q'
+nix run . -- --headless -c 'echo &runtimepath | q'
+nix run . -- --headless -c 'echo &packpath | q'
+nix run . -- --headless -c 'echo $XDG_CONFIG_HOME | q'
 ```
 
-## Add flake
 
-```nix
-{
-    inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-        kokovim.url = "github:alexanderkohkoinen/nixvim-flake";
-    };
-
-    outputs = { self, nixpkgs, kokovim, ... }: {
-
-        # Add to your system packages or devShell
-        # if you want to make it available system-wide
-        packages = with nixpkgs; [
-            kokovim.packages.${system}.default
-        ];
-
-        # Or, use in a devShell:
-        devShells.default = nixpkgs.mkShell {
-            nativeBuildInputs = [ kokovim.packages.${system}.default ];
-        };
-    };
-}
+### Inspect neovim-unwrapped
+``` bash
+nix repl
+:lf .#nixpkgs
+pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux"
+pkgs.neovim-unwrapped
 ```
 
-### Use with overlay and reference as nvim
-```nix
-{
-    inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-        kokovim.url = "github:alexanderkohkoinen/nixvim-flake";
-    };
 
-    outputs = { self, nixpkgs, kokovim, ... }: {
-        nixpkgs.overlays = [
-            (final: prev: { neovim = kokovim.packages.${prev.system}.default; })
-        ];
-    };
-}
-```
+LazyFile
+event = { "BufReadPre", "BufNewFile" },
+
+DeferredUIEnter
+event = "VeryLazy"
+
