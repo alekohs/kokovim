@@ -1,33 +1,34 @@
 local utils = require("kokovim.utils")
 local paths = utils.get_packages_path({ "roslyn", "rzls" }, ":")
 
-local roslyn_nix = kokovim.is_nix
+local function remove_bin_suffix(str) return str:gsub("/bin$", "") end
+
+local cmd = kokovim.is_nix
     and {
-      cmd = {
-        "dotnet",
-        vim.fs.joinpath(paths.roslyn, "bin", "Microsoft.CodeAnalysis.LanguageServer"),
-        "--logLevel=Information",
-        "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-        "--stdio",
-        "--razorSourceGenerator="
-          .. vim.fs.joinpath(paths.roslyn, "lib", "roslyn-ls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-        "--razorDesignTimePath="
-          .. vim.fs.joinpath(paths.rzls, "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
-      },
-    }
-  or {
-    cmd = {
-      "dotnet",
-      vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.LanguageServer.dll"),
-      "--stdio",
+      vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.LanguageServer"),
       "--logLevel=Information",
       "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-      "--razorSourceGenerator=" .. vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-      "--razorDesignTimePath=" .. vim.fs.joinpath(paths.rzls, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
-    },
+      "--stdio",
+      "--razorSourceGenerator="
+        .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+      "--razorDesignTimePath=" .. vim.fs.joinpath(
+        remove_bin_suffix(paths.rzls),
+        "lib",
+        "rzls",
+        "Targets",
+        "Microsoft.NET.Sdk.Razor.DesignTime.targets"
+      ),
+    }
+  or {
+    "dotnet",
+    vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.LanguageServer.dll"),
+    "--stdio",
+    "--logLevel=Information",
+    "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+    "--razorSourceGenerator=" .. vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+    "--razorDesignTimePath=" .. vim.fs.joinpath(paths.rzls, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
   }
 
-print(paths.rzls)
 return {
   kokovim.get_plugin_by_repo("seblyng/roslyn.nvim", {
     ft = "cs",
@@ -35,7 +36,8 @@ return {
       kokovim.get_plugin_by_repo("tris203/rzls.nvim", {
         config = function()
           require("rzls").setup({
-            path = paths.rzls .. "/rzls",
+            path = vim.fs.joinpath(paths.rzls, "rzls"),
+            config = true,
           })
         end,
       }),
@@ -52,13 +54,9 @@ return {
     ---@module 'roslyn.config'
     ---@type RoslynNvimConfig
     opts = {
-      -- args = {
-      --   "--stdio",
-      --   "--logLevel=Information",
-      --   "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-      -- },
+      cmd = cmd,
       config = {
-        handlers = require("rzls.roslyn_handlers"),
+        -- handlers = require("rzls.roslyn_handlers"),
         settings = {
           ["csharp|completion"] = {
             dotnet_provide_regex_completions = true,
@@ -94,9 +92,6 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      vim.tbl_deep_extend("force", opts, roslyn_nix)
-      require("roslyn").setup(opts)
-    end,
+    config = function(_, opts) require("roslyn").setup(opts) end,
   }),
 }
