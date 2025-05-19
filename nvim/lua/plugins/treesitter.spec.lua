@@ -23,6 +23,7 @@ local ensure_installed = kokovim.is_nix and {}
   or {
     "bash",
     "c",
+    "c_sharp",
     "diff",
     "go",
     "html",

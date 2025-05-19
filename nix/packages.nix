@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, pkgs-stable }:
 {
   extraPackages =
     with pkgs;
@@ -38,7 +38,7 @@
       # dotnet
       rzls
       roslyn-ls
-
+      pkgs-stable.roslyn-ls # v4 of roslyn ls
 
       # LINT
       nodePackages.jsonlint

@@ -51,12 +51,11 @@ return {
         config = function(_, opts) require("easy-dotnet").setup(opts) end,
       }),
     },
-    ---@module 'roslyn.config'
-    ---@type RoslynNvimConfig
     opts = {
-      cmd = cmd,
+      broad_search = true,
       config = {
-        -- handlers = require("rzls.roslyn_handlers"),
+        cmd = cmd,
+        handlers = require("rzls.roslyn_handlers"),
         settings = {
           ["csharp|completion"] = {
             dotnet_provide_regex_completions = true,
@@ -92,6 +91,5 @@ return {
         },
       },
     },
-    config = function(_, opts) require("roslyn").setup(opts) end,
   }),
 }

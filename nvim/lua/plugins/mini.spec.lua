@@ -1,6 +1,6 @@
 return {
   kokovim.get_plugin("mini-nvim", "echasnovski/mini.nvim", {
-    version = "false",
+    version = false,
     config = function()
       -- AI
       require("mini.ai").setup()
