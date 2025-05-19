@@ -1,5 +1,3 @@
-
-
 return kokovim.get_plugin("which-key.nvim", "folke/which-key", {
   event = "VeryLazy",
   opts_exted = { "spec" },
@@ -15,7 +13,7 @@ return kokovim.get_plugin("which-key.nvim", "folke/which-key", {
         { "<leader>dp", group = "profiler" },
         { "<leader>f", group = "file/find" },
         { "<leader>g", group = "git" },
-        { "<leader>gh", group = "hunks" },
+        { "<leader>gh", group = "hunks", icon = " " },
         { "<leader>q", group = "quit/session" },
         { "<leader>s", group = "search" },
         { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },

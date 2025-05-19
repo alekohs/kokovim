@@ -1,10 +1,17 @@
-
-
 return {
-  kokovim.get_plugin("noice.nvim", "folke/noice.nvim.", {
+  kokovim.get_plugin("noice.nvim", "folke/noice.nvim", {
     event = "VeryLazy",
     dependencies = {
-      kokovim.get_plugin("nui.nvim", "MunifTanjim/nui.nvim.")
+      kokovim.get_plugin_by_repo("MunifTanjim/nui.nvim"),
+      kokovim.get_plugin_by_repo("rcarriga/nvim-notify", {
+        opts = {
+          render = "wrapped-compact",
+        },
+        config = function(_, opts)
+          require("notify").setup(opts)
+          -- vim.notify = notify
+        end,
+      }),
     },
     opts = {
       lsp = {
@@ -31,7 +38,12 @@ return {
         bottom_search = true,
         command_palette = true,
         long_message_to_split = true,
+        inc_rename = true,
       },
+      notify = {
+        enabled = true,
+        view = "notify",
+      }
     },
     config = function(_, opts)
       -- HACK: noice shows messages from before it was enabled,

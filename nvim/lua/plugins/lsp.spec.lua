@@ -41,8 +41,8 @@ return {
 
         -- Shared `on_attach` if you want keymaps, etc.
         local on_attach = function(client, bufnr)
-          if client.server_capabilities.documentSymbolProvider then
-            print("Load navic to the lsp")
+           if client.server_capabilities.documentSymbolProvider then
+            vim.notify("Attach navic to buffer", vim.log.levels.DEBUG)
             navic.attach(client, bufnr)
             navbuddy.attach(client, bufnr)
           end

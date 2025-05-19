@@ -94,7 +94,7 @@ return {
             min_keyword_length = 3,
             name = "copilot",
             module = "blink-cmp-copilot",
-            -- score_offset = 100,
+            score_offset = 100,
             async = true,
           },
         },

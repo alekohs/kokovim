@@ -1,7 +1,7 @@
 local utils = require("kokovim.utils")
 
 return {
-  kokovim.get_plugin("neo-tree.nvim", "nvim-neo-tree/neo-tree.nvim.", {
+  kokovim.get_plugin("neo-tree.nvim", "nvim-neo-tree/neo-tree.nvim", {
     cmd = "Neotree",
     dependencies = {
       kokovim.get_plugin("plenary.nvim", "nvim-lua/plenary.nvim"),

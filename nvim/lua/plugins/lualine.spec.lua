@@ -1,5 +1,5 @@
 return {
-  kokovim.get_plugin("lualine.nvim", "nvim-lualine/lualine.nvim.", {
+  kokovim.get_plugin("lualine.nvim", "nvim-lualine/lualine.nvim", {
     e2vent = "VeryLazy",
     dependencies = {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),

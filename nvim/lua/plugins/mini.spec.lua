@@ -1,8 +1,11 @@
 return {
   kokovim.get_plugin("mini-nvim", "echasnovski/mini.nvim", {
+    version = "false",
     config = function()
       -- AI
       require("mini.ai").setup()
+
+      require("mini.comment").setup()
 
       -- Icons
       require("mini.icons").setup({
@@ -35,7 +38,6 @@ return {
       })
       -- Snippets
       require("mini.snippets").setup()
-
     end,
     lazy = false,
   }),
