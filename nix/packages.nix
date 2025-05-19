@@ -10,6 +10,7 @@
       # Formatters
       gotools
       nixpkgs-fmt
+      nixd
       prettierd
       ruff
       stylua
