@@ -5,21 +5,21 @@ https://github.com/NixOS/nixpkgs/blob/f71ccdc1bc17dffc83a8c49d0aa9ae92644572ab/d
 
 ### Debug
 Check some of the paths
-```` bash
+``` bash
 nix run . -- --headless -c 'echo stdpath("config") | q'
 nix run . -- --headless -c 'echo &runtimepath | q'
 nix run . -- --headless -c 'echo &packpath | q'
 nix run . -- --headless -c 'echo $XDG_CONFIG_HOME | q'
-````
+```
 
 
 ### Inspect neovim-unwrapped
-```` bash
+``` bash
 nix repl
 :lf .#nixpkgs
 pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux"
 pkgs.neovim-unwrapped
-````
+```
 
 
 LazyFile

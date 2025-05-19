@@ -1,5 +1,6 @@
 return {
   kokovim.get_plugin_by_repo("MeanderingProgrammer/render-markdown.nvim", {
+    ft = { "markdown", "quarto" },
     dependencies = {
       kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter"),
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
@@ -43,12 +44,11 @@ return {
         sign = false,
         width = "full",
       },
-      render_modes = true,
+      render_modes = { "n", "c", "t" },
       signs = {
         enabled = true
       }
     },
-    config = function(_, opts) require("render-markdown").setup(opts) end,
     keys = {
       {
         "<leader>mt",
