@@ -81,6 +81,11 @@
 
         devShells = {
           default = pkgs.mkShell {
+            name = "Kokovim - develop shell";
+            buildInputs = [ pkgs.nvim-pkg ];
+          };
+
+          symlink = pkgs.mkShell {
             name = "Kokovim - develop shell with symlink";
             buildInputs = [ pkgs.nvim-dev ];
             shellHook = ''
@@ -92,6 +97,7 @@
               alias nvim="${pkgs.nvim-dev}/bin/${appName}-dev"
             '';
           };
+
 
         };
       }

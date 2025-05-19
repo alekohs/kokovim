@@ -9,7 +9,7 @@ local general = augroup("GeneralAutocmds", { clear = true })
 autocmd("FileType", {
   group = general,
   pattern = { "tex", "latex", "markdown" },
-  command = "setlocal spell spellang=en_us"
+  command = "setlocal spell spelllang=en_us"
 })
 
 -- Close filetypes with 'q'

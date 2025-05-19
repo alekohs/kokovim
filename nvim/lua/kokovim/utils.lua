@@ -15,23 +15,31 @@ M.nix_plugins = vim.fn.getenv("NVIM_PLUGINS_RP")
 -- Use ssh for lazy.nvim
 M.lazy_use_ssh = vim.fn.getenv("NVIM_PLUGINS_SSH") == "1"
 
---- Get package path from nix store
----@param package string
----@return string
-function M.get_package_path(package)
-  local lua_table_string = nix_paths:gsub("(%w+):", "%1 =")
-  local lua_code = "return " .. lua_table_string
+--- Get packages path
+---@param packages table A table with all packages name
+---@param separator string Separator to be checked, if nil it uses default for os
+---@return table Returns a table with packages paths, example { roslyn = "/abc/roslyn/bin" }
+function M.get_packages_path(packages, separator)
+  -- Get the PATH environment variable
+  local path_env = vim.fn.getenv("PATH") or ""
 
-  print(lua_code)
-  local success, result = pcall(load(lua_code))
+  -- Split the PATH into individual paths
+  separator = separator or package.config:sub(1, 1)
+  local paths = vim.split(path_env, separator, { trimempty = true })
 
-  if success and type(result) == "table" then
-    print(result[package])
-    return result[package]
+  -- Find paths containing the search terms
+  local matching_paths = {}
+  for _, path in ipairs(paths) do
+    for _, name in ipairs(packages) do
+      if string.find(path, name, 1, true) then
+        matching_paths[name] = path
+        break
+      end
+    end
   end
 
-  print("Error parsing JSON: ", result)
-  return nil
+  -- print(vim.inspect(matching_paths))
+  return matching_paths
 end
 
 --- Get root path
