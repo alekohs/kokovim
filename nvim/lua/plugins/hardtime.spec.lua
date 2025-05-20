@@ -2,5 +2,13 @@
 return kokovim.get_plugin_by_repo("m4xshen/hardtime.nvim", {
    lazy = false,
    dependencies = { kokovim.get_plugin_by_repo("MunifTanjim/nui.nvim") },
-   opts = {},
+   opts = {
+    disabled_keys = {
+      -- Allow
+      ["h"] = false,
+      ["j"] = false,
+      ["k"] = false,
+      ["l"] = false,
+    },
+  },
 })

@@ -1,5 +1,5 @@
 return {
-  kokovim.get_plugin("noice.nvim", "folke/noice.nvim", {
+  kokovim.get_plugin_by_repo("folke/noice.nvim", {
     event = "VeryLazy",
     dependencies = {
       kokovim.get_plugin_by_repo("MunifTanjim/nui.nvim"),
@@ -14,6 +14,16 @@ return {
       }),
     },
     opts = {
+      cmdline = {
+      format = {
+        search_down = {
+          view = "cmdline",
+        },
+        search_up = {
+          view = "cmdline",
+        },
+      },
+      },
       lsp = {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -22,6 +32,25 @@ return {
         },
       },
       routes = {
+        {
+          filter = {
+            event = "msg_show",
+            find = "written",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "search_count",
+          },
+          opts = { skip = true },
+        },
+
+        {
+          view = "notify",
+          filter = { event = "msg_showmode" },
+        },
         {
           filter = {
             event = "msg_show",
@@ -43,7 +72,7 @@ return {
       notify = {
         enabled = true,
         view = "notify",
-      }
+      },
     },
     config = function(_, opts)
       -- HACK: noice shows messages from before it was enabled,
