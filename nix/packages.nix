@@ -8,8 +8,11 @@
       wordnet
 
       # Formatters
+      codespell
+      deno
       gotools
       nixpkgs-fmt
+      nixfmt-rfc-style
       nixd
       prettierd
       ruff
