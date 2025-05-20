@@ -1,11 +1,23 @@
 return {
-  kokovim.get_plugin("mini-nvim", "echasnovski/mini.nvim", {
+    kokovim.get_plugin("mini-nvim", "echasnovski/mini.nvim", {
     version = false,
+    dependencies = {
+      kokovim.get_plugin_by_repo("JoosepAlviste/nvim-ts-context-commentstring", {
+        lazy = false,
+        opts = {
+          enable_autocmd = false
+        }
+      })
+    },
     config = function()
       -- AI
       require("mini.ai").setup()
 
-      require("mini.comment").setup()
+      require("mini.comment").setup({
+        options = {
+          custom_commentstring = function() return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring end,
+        },
+      })
 
       -- Icons
       require("mini.icons").setup({

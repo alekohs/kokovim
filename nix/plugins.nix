@@ -47,6 +47,7 @@ with pkgs.vimPlugins;
 
   # code
   nvim-ts-autotag
+  nvim-ts-context-commentstring
   neogen
   conform-nvim
   trouble-nvim
