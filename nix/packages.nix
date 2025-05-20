@@ -50,6 +50,7 @@
       deadnix
       editorconfig-checker
       shellcheck
+      sqlfluff
 
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
