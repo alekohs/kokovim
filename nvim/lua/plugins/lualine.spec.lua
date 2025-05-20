@@ -4,6 +4,8 @@ return {
     dependencies = {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
       kokovim.get_plugin_by_repo("SmiteshP/nvim-navic"),
+      kokovim.get_plugin_by_repo("SmiteshP/nvim-navic"),
+      kokovim.get_plugin_by_repo("folke/noice.nvim"),
     },
     config = function()
       local function navic_cond()
@@ -66,6 +68,15 @@ return {
             },
           },
           lualine_x = {
+            {
+              require("noice").api.statusline.mode.get,
+              cond = require("noice").api.statusline.mode.has,
+              color = { fg = "#f6c177" },
+            },
+            {
+              "searchcount",
+              color = { fg = "#eb6f92" },
+            },
             "filetype",
             { "filename", path = 1 },
           },
