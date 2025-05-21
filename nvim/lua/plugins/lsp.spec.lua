@@ -11,6 +11,8 @@ local lsps = {
   "sqlls",
   "rust_analyzer",
   "tailwindcss",
+  "taplo",
+  "yamlls",
   "ziggy",
   "marksman",
 }
@@ -45,18 +47,7 @@ return kokovim.get_plugin_by_repo("neovim/nvim-lspconfig", {
         navbuddy.attach(client, bufnr)
       end
 
-      vim.keymap.set(
-        "n",
-        "<leader>ck",
-        function() require("nvim-navbuddy").open() end,
-        { desc = "Lsp Navigation", buffer = bufnr }
-      )
-
-      -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition", buffer = bufnr })
-      -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation", buffer = bufnr })
-      -- vim.keymap.set({ "n", "v" }, "cf", vim.lsp.buf.format, { desc = "Format selection", silent = true, buffer = bufnr })
-      -- vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show buf hover", buffer = bufnr })
-      -- vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
+      vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end, { desc = "Lsp Navigation", buffer = bufnr })
     end
 
     -- Shared capabilities (for blink-cmp etc.)
@@ -91,8 +82,8 @@ return kokovim.get_plugin_by_repo("neovim/nvim-lspconfig", {
     { "<leader>cf", vim.lsp.buf.format, mode = { "n", "v" }, desc = "Format selection", silent = true },
     { "gd", function() require("fzf-lua").lsp_definitions() end, mode = "n", desc = "Goto definition", silent = true },
     { "gD", function() require("fzf-lua").lsp_declarations() end, mode = "n", desc = "Goto declaration" },
-    { "gi", function() require("fzf-lua").lsp_implementations() end, mode = "n", desc = "Goto Implementations", },
-    { "gy", function() require("fzf-lua").lsp_typedefs() end, mode = "n", desc = "Goto T[y]pe Definition", },
+    { "gi", function() require("fzf-lua").lsp_implementations() end, mode = "n", desc = "Goto Implementations" },
+    { "gy", function() require("fzf-lua").lsp_typedefs() end, mode = "n", desc = "Goto T[y]pe Definition" },
     { "gr", function() require("fzf-lua").lsp_references() end, mode = "n", desc = "References", silent = true },
     { "<leader>ca", function() vim.lsp.buf.code_action() end, mode = "n", desc = "Code Action" },
     {
