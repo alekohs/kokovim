@@ -7,6 +7,7 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
   keys = {
     { "<leader><space>", function() require("fzf-lua").files() end, desc = "Find files" },
     { "<leader>/", function() require("fzf-lua").live_grep() end, desc = "Find live grep" },
+    { "<leader>,", function() require("fzf-lua").buffers() end, desc = "Find buffers" },
     { "<leader>fb", function() require("fzf-lua").buffers() end, desc = "Find buffers" },
     { "<leader>fg", function() require("fzf-lua").git_files() end, desc = "Find git files" },
     { "<leader>fr", function() require("fzf-lua").oldfiles() end, desc = "Find recent files" },
