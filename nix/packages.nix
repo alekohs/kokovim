@@ -29,6 +29,7 @@
       marksman
       markdownlint-cli2
       yaml-language-server
+      taplo-cli
       rust-analyzer
       nixd
       tailwindcss-language-server
