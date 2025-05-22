@@ -53,6 +53,8 @@
       shellcheck
       sqlfluff
 
+      # DAP
+      netcoredbg
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
