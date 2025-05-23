@@ -71,7 +71,7 @@ end
 
 return {
   kokovim.get_plugin_by_repo("seblyng/roslyn.nvim", {
-    ft = "cs",
+    ft = { "cs", "razor" },
     dependencies = {
       kokovim.get_plugin_by_repo("tris203/rzls.nvim", {
         config = function()
