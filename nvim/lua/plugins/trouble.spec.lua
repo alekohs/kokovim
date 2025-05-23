@@ -36,7 +36,7 @@ return kokovim.get_plugin_by_repo("folke/trouble.nvim", {
   keys = {
     { "<leader>xx", "<CMD>Trouble diagnostics toggle<CR>", desc = "Diagnostics toggle" },
     { "<leader>xX", "<CMD>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer Diagnostics toggle" },
-    { "<leader>cs", "<CMD>Trouble symbols toggle<CR>", desc = "Symbols toggle" },
+    { "<leader>cS", "<CMD>Trouble symbols toggle<CR>", desc = "Symbols toggle" },
     { "<leader>xl", "<CMD>Trouble lsp toggle<CR>", desc = "LSP Definitions / references / ... toggle" },
     { "<leader>xL", "<CMD>Trouble loclist toggle<CR>", desc = "Location List toggle" },
     { "<leader>xQ", "<CMD>Trouble qflist toggle<CR>", desc = "Quickfix List toggle" },
