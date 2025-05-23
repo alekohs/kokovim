@@ -1,3 +1,5 @@
+local ui = require("kokovim.ui")
+
 return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
   dependencies = { kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons") },
   config = function(_, opts)
@@ -12,8 +14,28 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
     { "<leader>fg", function() require("fzf-lua").git_files() end, desc = "Find git files" },
     { "<leader>fr", function() require("fzf-lua").oldfiles() end, desc = "Find recent files" },
 
-    { "<leader>ssd", function() require("fzf-lua").lsp_document_symbols() end, desc = "Search document symbols" },
-    { "<leader>ssw", function() require("fzf-lua").lsp_workspace_symbols() end, desc = "Search workspace symbols" },
+    {
+      "<leader>cd",
+      function()
+        ui.custom_prompt("Search document symbol: ", {}, function(query)
+          if query ~= "" then
+            require("fzf-lua").lsp_document_symbols({ query = query })
+          else
+            require("fzf-lua").lsp_document_symbols()
+          end
+        end)
+      end,
+      desc = "Search document symbols",
+    },
+    {
+      "<leader>cs",
+      function()
+        local input = vim.fn.input("Search workspace symbol: ")
+        if input ~= "" then require("fzf-lua").lsp_workspace_symbols({ query = input }) end
+      end,
+      desc = "Search workspace symbols",
+    },
+
     { "<leader>sR", function() require("fzf-lua").registers() end, desc = "Search registers" },
     { "<leader>sh", function() require("fzf-lua").helptags() end, desc = "Search help tags" },
     { "<leader>sm", function() require("fzf-lua").marks() end, desc = "Search marks" },
