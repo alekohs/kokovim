@@ -3,7 +3,6 @@
 final: prev:
 with final.pkgs.lib;
 let
-  imports = [ ./pkgs-by-name.nix ];
   opts = {
     withSQLite = false; # I dont use any plugin that requires sqlite.lua atm
   };
@@ -13,20 +12,21 @@ let
   pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${pkgs.system};
 
   # This is the helper function that builds the Neovim derivation.
-  mkNeovim = pkgs.callPackage ./mkNeovim.nix {
+  mkNeovim = pkgs.callPackage ../lib/mkNeovim.nix {
     inherit (pkgs-locked) wrapNeovimUnstable neovimUtils;
   };
 
   plugins = import ./plugins.nix { inherit inputs pkgs opts; };
-  packages = import ./packages.nix { inherit pkgs pkgs-stable; };
-  extraPackages = packages.extraPackages;
+  packages = import ./packages.nix { inherit inputs pkgs pkgs-stable; };
 in
 {
   # This is the neovim derivation
   # returned by the overlay
   nvim-pkg = mkNeovim {
     plugins = plugins;
-    inherit extraPackages;
+    extraPackages = packages.extraPackages;
+    extraLuaPackages = packages.extraLuaPackages;
+    extraPythonPackages = packages.extraPython3Packages;
     appName = appName;
     wrapRc = true;
   };
@@ -36,7 +36,9 @@ in
   # the Nix store, it is loaded from $XDG_CONFIG_HOME/nvim-dev
   nvim-dev = mkNeovim {
     plugins = plugins;
-    inherit extraPackages;
+    extraPackages = packages.extraPackages;
+    extraLuaPackages = packages.extraLuaPackages;
+    extraPythonPackages = packages.extraPython3Packages;
     appName = "${appName}-dev";
     wrapRc = false;
     useNix = false;

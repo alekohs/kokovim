@@ -37,6 +37,12 @@
       url = "github:folke/snacks.nvim";
       flake = false;
     };
+
+    pymobiledevice3-flake = {
+      url = "github:doronz88/pymobiledevice3";
+      flake = false;
+    };
+
   };
   outputs =
     {

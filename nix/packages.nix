@@ -1,5 +1,22 @@
-{ pkgs, pkgs-stable }:
 {
+  inputs,
+  pkgs,
+  pkgs-stable,
+}:
+let
+  lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
+  python-packages = [
+    {
+      src = inputs.pymobiledevice3;
+      pname = "pymobiledevice3";
+    }
+  ];
+
+  flakePythons = map (p: lib.mkPythonPackage p) python-packages;
+
+in
+{
+
   extraPackages =
     with pkgs;
     [
@@ -61,7 +78,6 @@
 
     ];
 
-
   # Extra lua packages to install, where package is 'xxx' in lua51Packages.xxx
   extraLuaPackages =
     ps: with ps; [
@@ -70,7 +86,5 @@
     ];
 
   # Extra python packages
-  extraPython3Packages = pyth: with pyth; [
-    pymobiledevice
-  ];
+  extraPython3Packages = pyth: with pyth; [ ] ++ flakePythons;
 }
