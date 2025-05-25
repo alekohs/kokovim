@@ -14,6 +14,8 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       typescript = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
       typescriptreact = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
 
+      swift = { "swiftformat" },
+
       go = { "gofmt", "goimports" },
 
       json = { "jq" },

@@ -58,6 +58,7 @@ in
       rzls
       roslyn-ls
       pkgs-stable.roslyn-ls # v4 of roslyn ls
+      sourcekit-lsp
 
       # LINT
       nodePackages.jsonlint
@@ -75,7 +76,9 @@ in
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-
+      ruby
+      swiftlint
+      swiftformat
     ];
 
   # Extra lua packages to install, where package is 'xxx' in lua51Packages.xxx

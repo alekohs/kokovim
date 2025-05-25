@@ -80,6 +80,17 @@ return {
         capabilities = capabilities,
         filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
       })
+
+
+      lspconfig.sourcekit.setup({
+        cmd = { "xcrun", "sourcekit-lsp" },
+        on_attach = function(client, bufnr)
+          -- Disable ts_ls formatting if using prettier/eslint
+          client.server_capabilities.documentFormattingProvider = false
+          on_attach(client, bufnr)
+        end,
+        capabilities = capabilities
+      })
     end,
     keys = {
       { "<leader>cf", vim.lsp.buf.format, mode = { "n", "v" }, desc = "Format selection", silent = true },

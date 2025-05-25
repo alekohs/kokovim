@@ -72,6 +72,7 @@ with pkgs.vimPlugins;
   trouble-nvim
 
   # Editor
+  telescope-nvim
   fzf-lua
   oil-nvim
   neo-tree-nvim

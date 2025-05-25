@@ -20,6 +20,7 @@ return {
         markdown = { "markdownlint" },
         nix = { "deadnix" },
         sql = { "sqlfluff" },
+        swift = { "swiftlint" },
         yaml = { "yamllint" },
 
         -- Use the "*" filetype to run linters on all filetypes.
