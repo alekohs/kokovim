@@ -20,6 +20,11 @@
       flake = false;
     };
 
+    xcodebuild-nvim = {
+      url = "github:wojciech-kulik/xcodebuild.nvim";
+      flake = false;
+    };
+
     blink-cmp = {
       url = "github:saghen/blink.cmp";
       inputs = {
@@ -98,7 +103,6 @@
               alias nvim="${pkgs.nvim-dev}/bin/${appName}-dev"
             '';
           };
-
 
         };
       }

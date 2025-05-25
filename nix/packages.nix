@@ -56,7 +56,11 @@
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
+    ]
+    ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+
     ];
+
 
   # Extra lua packages to install, where package is 'xxx' in lua51Packages.xxx
   extraLuaPackages =
@@ -66,5 +70,7 @@
     ];
 
   # Extra python packages
-  extraPython3Packages = _: [ ];
+  extraPython3Packages = pyth: with pyth; [
+    pymobiledevice
+  ];
 }

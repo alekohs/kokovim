@@ -3,6 +3,7 @@
 final: prev:
 with final.pkgs.lib;
 let
+  imports = [ ./pkgs-by-name.nix ];
   opts = {
     withSQLite = false; # I dont use any plugin that requires sqlite.lua atm
   };

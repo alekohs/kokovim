@@ -6,9 +6,9 @@
 let
   # Function to create a vim plugin from a flake input
   mkVimPlugin =
-    { src, pname }:
+    { src, pname, nvimSkipModule }:
     pkgs.vimUtils.buildVimPlugin {
-      inherit pname src;
+      inherit pname src nvimSkipModule;
       version = src.lastModifiedDate;
     };
 
@@ -51,6 +51,20 @@ with pkgs.vimPlugins;
   neogen
   conform-nvim
   trouble-nvim
+  (mkVimPlugin {
+    src = inputs.xcodebuild-nvim;
+    pname = "xcodebuild.nvim";
+    nvimSkipModule = [
+      "xcodebuild.ui.pickers"
+      "xcodebuild.actions"
+      "xcodebuild.project.manager"
+      "xcodebuild.project.assets"
+      "xcodebuild.integrations.xcode-build-server"
+      "xcodebuild.integrations.dap"
+      "xcodebuild.code_coverage.report"
+      "xcodebuild.dap"
+    ];
+  })
 
   # Editor
   fzf-lua
@@ -72,6 +86,7 @@ with pkgs.vimPlugins;
   yanky-nvim
   vim-wakatime
   todo-comments-nvim
+  snacks-nvim
 
   # UI
   nvim-navic
@@ -120,6 +135,8 @@ with pkgs.vimPlugins;
   (mkVimPlugin {
     src = inputs.mini-nvim;
     pname = "mini-nvim";
+    nvimSkipModule = [];
   })
+
 ]
 ++ (pkgs.lib.optionals opts.withSQLite [ sqlite-lua ])
