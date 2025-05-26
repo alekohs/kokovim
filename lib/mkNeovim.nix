@@ -130,6 +130,7 @@ let
   packagesJson = builtins.toJSON {
     roslyn = "${pkgs.roslyn-ls}";
     rzls = "${pkgs.rzls}";
+    codelldb = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}";
   };
 
   extraMakeWrapperArgs = builtins.concatStringsSep " " (

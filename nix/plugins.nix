@@ -71,6 +71,14 @@ with pkgs.vimPlugins;
   conform-nvim
   trouble-nvim
 
+  # dap
+  nvim-dap
+  nvim-dap-ui
+  nvim-nio
+  nvim-dap-virtual-text
+  nvim-dap-go
+  nvim-dap-python
+
   # Editor
   telescope-nvim
   fzf-lua
