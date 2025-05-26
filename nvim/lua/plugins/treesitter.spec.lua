@@ -61,13 +61,14 @@ return {
         enable = true,
         additional_vim_regex_highlighting = { "sh", "bash", "dockerfile", "org" },
         disable = function(lang, buf)
+          local limit = 10000
           if disable_treesitter_features(buf) then
             vim.notify("Treesitter disabled by file/filetype.")
             return true
           end
 
-          if vim.api.nvim_buf_line_count(buf) > 1000 then
-            vim.notify("Treesitter disabled due to line limit passed 1000 < " .. vim.api.nvim_buf_line_count(buf))
+          if vim.api.nvim_buf_line_count(buf) > limit then
+            vim.notify("Treesitter disabled due to line limit passed " .. limit .. " < " .. vim.api.nvim_buf_line_count(buf))
             return true
           end
 
@@ -113,9 +114,6 @@ return {
       },
     },
     config = function(_, opts)
-
-
-
       require("nvim-treesitter.configs").setup(opts)
     end,
   }),
