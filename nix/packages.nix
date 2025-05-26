@@ -23,6 +23,7 @@ in
       gcc # needed for nvim-treesitter
       gh
       wordnet
+      vscode-extensions.vadimcn.vscode-lldb
 
       # Formatters
       codespell

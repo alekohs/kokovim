@@ -26,8 +26,10 @@ end
 --- Get packages path
 ---@param packages table A table with all packages name
 ---@param separator string Separator to be checked, if nil it uses default for os
+---@param trim_end string If path ends with given string, remove it
 ---@return table Returns a table with packages paths, example { roslyn = "/abc/roslyn/bin" }
-function M.get_packages_path(packages, separator)
+function M.get_packages_path(packages, separator, trim_end)
+  trim_end = trim_end or nil
   -- Get the PATH environment variable
   local path_env = vim.fn.getenv("PATH") or ""
 
@@ -38,6 +40,10 @@ function M.get_packages_path(packages, separator)
   -- Find paths containing the search terms
   local matching_paths = {}
   for _, path in ipairs(paths) do
+    if trim_end and path:sub(-#trim_end) == trim_end then
+      path = path:sub(1, -#trim_end - 1)
+    end
+
     for _, name in ipairs(packages) do
       if string.find(path, name, 1, true) then
         matching_paths[name] = path
