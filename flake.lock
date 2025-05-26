@@ -307,6 +307,22 @@
         "type": "github"
       }
     },
+    "pymobiledevice3-flake": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1748157888,
+        "narHash": "sha256-eMZhWoLn0Z/meNpSGCP+ZNH5dh4Z9W20TO7NrdCOmMU=",
+        "owner": "doronz88",
+        "repo": "pymobiledevice3",
+        "rev": "972c29f9f7d9ed9f7675d59235e556b68fbfafdc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doronz88",
+        "repo": "pymobiledevice3",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "blink-cmp": "blink-cmp",
@@ -317,7 +333,9 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
-        "snacks-nvim": "snacks-nvim"
+        "pymobiledevice3-flake": "pymobiledevice3-flake",
+        "snacks-nvim": "snacks-nvim",
+        "xcodebuild-nvim": "xcodebuild-nvim"
       }
     },
     "rust-analyzer-src": {
@@ -365,6 +383,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "xcodebuild-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1747788259,
+        "narHash": "sha256-9VSj5vKKUIUEHsh8MrLjqCAOtf+0a10pDikzOSNTtbs=",
+        "owner": "wojciech-kulik",
+        "repo": "xcodebuild.nvim",
+        "rev": "0e6e3058a44622866219151209943a2120be66b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wojciech-kulik",
+        "repo": "xcodebuild.nvim",
         "type": "github"
       }
     }

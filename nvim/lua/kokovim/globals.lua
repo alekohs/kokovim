@@ -6,6 +6,7 @@ local plugin = require('kokovim.plugin')
 local M = {}
 -- Check if current runtime is loaded through nix
 M.is_nix = utils.is_nix
+M.is_darwin = utils.get_uname() == "Darwin"
 
 --- Retrieves a plugin based on the provided parameters.
 -- @param localDir (string|nil) Optional. The local directory name. Defaults to the repository name or ".".

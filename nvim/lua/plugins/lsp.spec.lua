@@ -17,7 +17,6 @@ local lsps = {
   "marksman",
 }
 
-
 return {
 
   kokovim.get_plugin_by_repo("neovim/nvim-lspconfig", {
@@ -71,6 +70,9 @@ return {
         lspconfig[lsp].setup({ on_attach = on_attach, capabilities = capabilities })
       end
 
+      --
+      -- Javascript/Typescript
+      --
       lspconfig.ts_ls.setup({
         on_attach = function(client, bufnr)
           -- Disable ts_ls formatting if using prettier/eslint
@@ -79,6 +81,22 @@ return {
         end,
         capabilities = capabilities,
         filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+      })
+
+      --
+      -- Swift / Xcode
+      --
+      lspconfig.sourcekit.setup({
+        cmd = { "xcrun", "sourcekit-lsp" },
+        root = function(filename)
+          local util = require("lspconfig.util")
+          return util.root_pattern("buildServer.json")(filename)
+            or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
+            or util.find_git_ancestor(filename)
+            or util.root_pattern("Package.swift")
+        end,
+        on_attach = on_attach,
+        capabilities = capabilities,
       })
     end,
     keys = {
@@ -103,7 +121,7 @@ return {
       { "<leader>cc", function() vim.lsp.codelens.run() end, mode = "n", desc = "Run Codelens" },
       { "<leader>cC", function() vim.lsp.codelens.refresh() end, mode = "n", desc = "Refresh Codelens" },
 
-      { "K", function() return vim.lsp.buf.hover() end, mode = "n", desc = "Hover" },
+      { "K", function() return vim.lsp.buf.hover({ border = "rounded" }) end, mode = "n", desc = "Hover" },
       { "<leader>gK", function() return vim.lsp.buf.signature_help() end, mode = "n", desc = "Signature help" },
       { "<C-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature help" },
       { "<leader>cr", vim.lsp.buf.rename, mode = "n", desc = "Rename" },
@@ -117,5 +135,5 @@ return {
       },
     },
   }),
-  require("plugins.lsp.dotnet")
+  require("plugins.lsp.dotnet"),
 }

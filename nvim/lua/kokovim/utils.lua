@@ -8,12 +8,20 @@ M.app_name = vim.fn.getenv("NVIM_APPNAME")
 
 --- Check if app runs in nix mode
 M.is_nix = nix_env == "1"
-
 -- Get nix plugins path
 M.nix_plugins = vim.fn.getenv("NVIM_PLUGINS_RP")
 
 -- Use ssh for lazy.nvim
 M.lazy_use_ssh = vim.fn.getenv("NVIM_PLUGINS_SSH") == "1"
+
+--- Get uname with OS type
+---@return name string Name of the OS, like Darwin for MacOS
+function M.get_uname()
+  local handle = io.popen("uname")
+  local uname = handle:read("*a")
+  handle:close()
+  return uname:gsub("%s+", "") -- Remove any trailing newline or whitespace
+end
 
 --- Get packages path
 ---@param packages table A table with all packages name

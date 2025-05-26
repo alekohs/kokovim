@@ -5,16 +5,10 @@
 }:
 let
   # Function to create a vim plugin from a flake input
-  mkVimPlugin =
-    { src, pname }:
-    pkgs.vimUtils.buildVimPlugin {
-      inherit pname src;
-      version = src.lastModifiedDate;
-    };
-
   # NOTE: this is for luaPackages: https://github.com/NixOS/nixpkgs/blob/36dcdaf8f6b0e0860721ecd4aada50c0cccc3cfd/pkgs/applications/editors/neovim/build-neovim-plugin.nix#L11-L12
   # pkgs.neovimUtils.buildNeovimPlugin
 
+  lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
   nvim-treesitter-grammars = pkgs.symlinkJoin {
     name = "nvim-treesitter-grammars";
     paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
@@ -31,6 +25,31 @@ let
     };
     doCheck = false;
   };
+
+  plugins-spec = [
+    {
+      src = inputs.xcodebuild-nvim;
+      pname = "xcodebuild.nvim";
+      nvimSkipModule = [
+        "xcodebuild.ui.pickers"
+        "xcodebuild.actions"
+        "xcodebuild.project.manager"
+        "xcodebuild.project.assets"
+        "xcodebuild.integrations.xcode-build-server"
+        "xcodebuild.integrations.dap"
+        "xcodebuild.code_coverage.report"
+        "xcodebuild.dap"
+      ];
+    }
+    {
+      src = inputs.mini-nvim;
+      pname = "mini-nvim";
+      nvimSkipModule = [ ];
+    }
+  ];
+
+  flakePlugins = map (p: lib.mkVimPlugin p) plugins-spec;
+
 in
 with pkgs.vimPlugins;
 [
@@ -53,6 +72,7 @@ with pkgs.vimPlugins;
   trouble-nvim
 
   # Editor
+  telescope-nvim
   fzf-lua
   oil-nvim
   neo-tree-nvim
@@ -72,6 +92,7 @@ with pkgs.vimPlugins;
   yanky-nvim
   vim-wakatime
   todo-comments-nvim
+  snacks-nvim
 
   # UI
   nvim-navic
@@ -117,9 +138,7 @@ with pkgs.vimPlugins;
   vim-nix
 
   # Plugins outside of nixpkgs
-  (mkVimPlugin {
-    src = inputs.mini-nvim;
-    pname = "mini-nvim";
-  })
+
 ]
+++ flakePlugins
 ++ (pkgs.lib.optionals opts.withSQLite [ sqlite-lua ])

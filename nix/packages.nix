@@ -1,5 +1,22 @@
-{ pkgs, pkgs-stable }:
 {
+  inputs,
+  pkgs,
+  pkgs-stable,
+}:
+let
+  lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
+  python-packages = [
+    {
+      src = inputs.pymobiledevice3;
+      pname = "pymobiledevice3";
+    }
+  ];
+
+  flakePythons = map (p: lib.mkPythonPackage p) python-packages;
+
+in
+{
+
   extraPackages =
     with pkgs;
     [
@@ -41,6 +58,7 @@
       rzls
       roslyn-ls
       pkgs-stable.roslyn-ls # v4 of roslyn ls
+      sourcekit-lsp
 
       # LINT
       nodePackages.jsonlint
@@ -56,6 +74,11 @@
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
+    ]
+    ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+      ruby
+      swiftlint
+      swiftformat
     ];
 
   # Extra lua packages to install, where package is 'xxx' in lua51Packages.xxx
@@ -66,5 +89,5 @@
     ];
 
   # Extra python packages
-  extraPython3Packages = _: [ ];
+  extraPython3Packages = pyth: with pyth; [ ] ++ flakePythons;
 }
