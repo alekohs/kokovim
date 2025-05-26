@@ -64,6 +64,7 @@ in
       nodePackages.jsonlint
       nodePackages.markdownlint-cli
       biome
+      htmlhint
       stylelint
       yamllint
       deadnix
