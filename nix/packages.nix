@@ -23,7 +23,6 @@ in
       gcc # needed for nvim-treesitter
       gh
       wordnet
-      vscode-extensions.vadimcn.vscode-lldb
 
       # Formatters
       codespell
@@ -80,9 +79,10 @@ in
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-      ruby
+      (pkgs.ruby.withPackages (ps: [ ps.xcodeproj ]))
       swiftlint
       swiftformat
+      vscode-extensions.vadimcn.vscode-lldb
     ];
 
   # Extra lua packages to install, where package is 'xxx' in lua51Packages.xxx
