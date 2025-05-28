@@ -46,6 +46,16 @@ let
       pname = "mini-nvim";
       nvimSkipModule = [ ];
     }
+    {
+      src = inputs.colorful-menu-nvim;
+      pname = "colorful-menu-nvim";
+      nvimSkipModule = [
+        "repro_blink"
+        "repro_cmp"
+      ];
+
+    }
+
   ];
 
   flakePlugins = map (p: lib.mkVimPlugin p) plugins-spec;
@@ -96,6 +106,7 @@ with pkgs.vimPlugins;
   nui-nvim
   gitsigns-nvim
   render-markdown-nvim
+  peek-nvim
   markview-pkg
   yanky-nvim
   vim-wakatime
@@ -108,7 +119,6 @@ with pkgs.vimPlugins;
   dashboard-nvim
   nvim-notify
   fidget-nvim
-  hardtime-nvim
 
   # Completion
   blink-cmp

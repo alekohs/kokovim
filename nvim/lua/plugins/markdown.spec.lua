@@ -1,4 +1,27 @@
 return {
+
+  kokovim.get_plugin_by_repo("toppair/peek.nvim", {
+    event = { "VeryLazy" },
+    build = "deno task --quiet build:fast",
+    opts = {
+      auto_load = false,
+      app = 'browser',
+    },
+    keys = {
+      {
+        "<leader>mp",
+        function() require("peek").open() end,
+        desc = "Open preview",
+      },
+      {
+        "<leader>mP",
+        function() require("peek").close() end,
+        desc = "Close preview",
+      },
+
+    },
+
+  }),
   kokovim.get_plugin_by_repo("MeanderingProgrammer/render-markdown.nvim", {
     ft = { "markdown", "quarto" },
     dependencies = {
@@ -46,8 +69,8 @@ return {
       },
       render_modes = { "n", "c", "t" },
       signs = {
-        enabled = true
-      }
+        enabled = true,
+      },
     },
     keys = {
       {
