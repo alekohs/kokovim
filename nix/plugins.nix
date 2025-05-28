@@ -96,6 +96,7 @@ with pkgs.vimPlugins;
   nui-nvim
   gitsigns-nvim
   render-markdown-nvim
+  peek-nvim
   markview-pkg
   yanky-nvim
   vim-wakatime
@@ -108,7 +109,6 @@ with pkgs.vimPlugins;
   dashboard-nvim
   nvim-notify
   fidget-nvim
-  hardtime-nvim
 
   # Completion
   blink-cmp
