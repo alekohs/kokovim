@@ -46,6 +46,16 @@ let
       pname = "mini-nvim";
       nvimSkipModule = [ ];
     }
+    {
+      src = inputs.colorful-menu-nvim;
+      pname = "colorful-menu-nvim";
+      nvimSkipModule = [
+        "repro_blink"
+        "repro_cmp"
+      ];
+
+    }
+
   ];
 
   flakePlugins = map (p: lib.mkVimPlugin p) plugins-spec;
