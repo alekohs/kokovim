@@ -60,13 +60,8 @@ return {
       end
 
       function M.lint()
-        -- Use nvim-lint's logic first:
-        -- * checks if linters exist for the full filetype first
-        -- * otherwise will split filetype by "." and add all those linters
-        -- * this differs from conform.nvim which only uses the first filetype that has a formatter
         local names = lint._resolve_linter_by_ft(vim.bo.filetype)
 
-        -- Create a copy of the names table to avoid modifying the original.
         names = vim.list_extend({}, names)
 
         -- Add fallback linters.
@@ -80,8 +75,6 @@ return {
         ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
         names = vim.tbl_filter(function(name)
           local linter = lint.linters[name]
-          -- TODO Fix this to print some error
-          -- if not linter then LazyVim.warn("Linter not found: " .. name, { title = "nvim-lint" }) end
           return linter and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
         end, names)
 
