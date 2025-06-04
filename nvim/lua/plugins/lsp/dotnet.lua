@@ -90,9 +90,8 @@ return {
         },
       }),
     },
-    opts = {
-      broad_search = true,
-      config = {
+    config = function()
+      vim.lsp.config("roslyn", {
         cmd = cmd,
         capabilities = {
           textDocument = {
@@ -139,7 +138,10 @@ return {
             dotnet_enable_tests_code_lens = true,
           },
         },
-      },
-    },
+      })
+
+      vim.lsp.enable("roslyn")
+    end,
+    init = function() vim.filetype.add({ extension = { razor = "razor", cshtml = "razor" } }) end,
   }),
 }
