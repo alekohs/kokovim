@@ -9,10 +9,9 @@ local cmd = kokovim.is_nix
       "--logLevel=Information",
       "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
       "--stdio",
-      -- TODO: This code makes bin/ obj/ folders in non-project folders. Assembly info duplicates
-      -- "--razorSourceGenerator=" .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-      -- "--razorDesignTimePath="
-      --   .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+      "--razorSourceGenerator=" .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+      "--razorDesignTimePath="
+        .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
     }
   or {
     "dotnet",
@@ -23,18 +22,6 @@ local cmd = kokovim.is_nix
     "--razorSourceGenerator=" .. vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
     "--razorDesignTimePath=" .. vim.fs.joinpath(paths.rzls, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
   }
-
----@class LineRange
----@field line integer
----@field character integer
-
----@class EditRange
----@field start LineRange
----@field end LineRange
-
----@class TextEdit
----@field newText string
----@field range EditRange
 
 ---@param edit TextEdit
 local function apply_vs_text_edit(edit)
@@ -73,6 +60,13 @@ return {
   kokovim.get_plugin_by_repo("seblyng/roslyn.nvim", {
     ft = { "cs", "razor" },
     dependencies = {
+      kokovim.get_plugin_by_repo("SmiteshP/nvim-navbuddy", {
+        dependencies = {
+          kokovim.get_plugin_by_repo("SmiteshP/nvim-navic"),
+          kokovim.get_plugin_by_repo("MunifTanjim/nui.nvim"),
+        },
+        opts = { lsp = { auto_attach = true } },
+      }),
       kokovim.get_plugin_by_repo("tris203/rzls.nvim", {
         config = function()
           require("rzls").setup({
@@ -86,20 +80,47 @@ return {
           test_runner = {
             viewmode = "float",
           },
-          -- picker = "snacks"
+          picker = "fzf"
         },
       }),
     },
     config = function()
-      vim.lsp.config("roslyn", {
-        cmd = cmd,
-        capabilities = {
-          textDocument = {
-            _vs_onAutoInsert = { dynamicRegistration = false },
+      local navic = require("nvim-navic")
+      local navbuddy = require("nvim-navbuddy")
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
+      capabilities = vim.tbl_deep_extend("force", capabilities, {
+        textDocument = {
+          foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
           },
         },
+      })
+
+      -- Shared `on_attach` if you want keymaps, etc.
+      local on_attach = function(client, bufnr)
+        if client.server_capabilities.documentSymbolProvider then
+          vim.notify("Attach navic to buffer", vim.log.levels.DEBUG)
+          navic.attach(client, bufnr)
+          navbuddy.attach(client, bufnr)
+        end
+
+        vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end, { desc = "Lsp Navigation", buffer = bufnr })
+        vim.keymap.set("n", "<leader>xdc", function()
+          local cwd = vim.fn.getcwd()
+          local cmd = string.format("find %s -type d \\( -name bin -o -name obj \\) -exec rm -rf {} +", cwd)
+          vim.fn.system(cmd)
+          print("Deleted all bin/ and obj/ folders under " .. cwd)
+        end, { desc = "Dotnet - clean" })
+      end
+
+      vim.lsp.config("roslyn", {
+        cmd = cmd,
+        on_attach = on_attach,
+        capabilities = capabilities,
         handlers = {
-          -- require("rzls.roslyn_handlers"),
           ["textDocument/_vs_onAutoInsert"] = function(err, result, _)
             if err or not result then return end
             apply_vs_text_edit(result._vs_textEdit)

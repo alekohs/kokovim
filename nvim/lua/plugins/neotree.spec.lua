@@ -53,6 +53,13 @@ return {
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
       },
+      commands = {
+        ["easy"] = function(state)
+          local node = state.tree:get_node()
+          local path = node.type == "directory" and node.path or vim.fs.dirname(node.path)
+          require("easy-dotnet").create_new_item(path, function() require("neo-tree.sources.manager").refresh(state.name) end)
+        end,
+      },
       window = {
         mappings = {
           ["l"] = "open",
@@ -67,6 +74,8 @@ return {
             desc = "Copy Path to Clipboard",
           },
           ["P"] = { "toggle_preview", config = { use_float = false } },
+
+          ["R"] = "easy",
         },
       },
       default_component_configs = {

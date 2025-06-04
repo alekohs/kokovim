@@ -14,6 +14,19 @@ M.nix_plugins = vim.fn.getenv("NVIM_PLUGINS_RP")
 -- Use ssh for lazy.nvim
 M.lazy_use_ssh = vim.fn.getenv("NVIM_PLUGINS_SSH") == "1"
 
+
+--- Combine two or more tables
+--- @return table table Combine mulitple tables
+function M.combine_tables(...)
+    local combined = {}
+    for _, tbl in ipairs({...}) do
+        for _, value in ipairs(tbl) do
+            table.insert(combined, value)
+        end
+    end
+    return combined
+end
+
 --- Get uname with OS type
 ---@return name string Name of the OS, like Darwin for MacOS
 function M.get_uname()
