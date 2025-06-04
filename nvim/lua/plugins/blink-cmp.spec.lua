@@ -72,6 +72,7 @@ return {
           "path",
 
           "copilot",
+          "easy-dotnet",
           -- "git",
           -- "nerdfont",
           -- "spell",
@@ -95,6 +96,13 @@ return {
             min_keyword_length = 3,
             name = "copilot",
             module = "blink-cmp-copilot",
+            async = true,
+          },
+          ["easy-dotnet"] = {
+            name = "easy-dotnet",
+            enabled = true,
+            module = "easy-dotnet.completion.blink",
+            score_offset = 10000,
             async = true,
           },
         },
