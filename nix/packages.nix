@@ -74,6 +74,11 @@ in
 
       # DAP
       netcoredbg
+
+      # For snacks image to work
+      imagemagick # Images
+      tectonic # PDF
+      mermaid-cli # Mermaid diagarams
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
