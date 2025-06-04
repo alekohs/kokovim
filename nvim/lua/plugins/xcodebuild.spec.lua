@@ -30,7 +30,7 @@ return kokovim.get_plugin_by_repo("wojciech-kulik/xcodebuild.nvim", {
   config = function(_, opts)
     require("xcodebuild").setup(opts)
 
-    vim.keymap.set("n", "<leader>xs", "<cmd>XcodebuildPicker<cr>", { desc = "Show Xcodebuild Actions" })
+    vim.keymap.set("n", "<leader>xsA", "<cmd>XcodebuildPicker<cr>", { desc = "Show Xcodebuild Actions" })
     vim.keymap.set("n", "<leader>xsf", "<cmd>XcodebuildProjectManager<cr>", { desc = "Show Project Manager Actions" })
 
     vim.keymap.set("n", "<leader>xsb", "<cmd>XcodebuildBuild<cr>", { desc = "Build Project" })
