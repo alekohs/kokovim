@@ -1,3 +1,4 @@
+
 return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
   cmd = "ConformInfo",
   event = "VeryLazy",
@@ -9,10 +10,17 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       bash = { "shellcheck", "shellharden", "shfmt" },
 
       html = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
-      javascript = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
-      javascriptreact = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
-      typescript = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
+      javascript = { "biome", "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
+      javascriptreact = { "biome", "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
+      typescript = { "biome", "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
       typescriptreact = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
+
+      -- TODO: Update to use biome instead of prettier
+      -- html = { "biome" },
+      -- javascript = { "biome", "biome-organize-imports" },
+      -- javascriptreact  = { "biome", "biome-organize-imports" },
+      -- typescript = { "biome", "biome-organize-imports" },
+      -- typescriptreact  = { "biome", "biome-organize-imports" },
 
       swift = { "swiftformat" },
 
