@@ -1,4 +1,3 @@
-
 return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
   cmd = "ConformInfo",
   event = "VeryLazy",
@@ -9,18 +8,14 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
     formatters_by_ft = {
       bash = { "shellcheck", "shellharden", "shfmt" },
 
-      html = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
-      javascript = { "biome", "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
-      javascriptreact = { "biome", "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
-      typescript = { "biome", "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
-      typescriptreact = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
-
       -- TODO: Update to use biome instead of prettier
       -- html = { "biome" },
-      -- javascript = { "biome", "biome-organize-imports" },
-      -- javascriptreact  = { "biome", "biome-organize-imports" },
-      -- typescript = { "biome", "biome-organize-imports" },
-      -- typescriptreact  = { "biome", "biome-organize-imports" },
+      html = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
+
+      javascript = { "biome-check", "biome-organize-imports" },
+      javascriptreact = { "biome-check", "biome-organize-imports" },
+      typescript = { "biome-check", "biome-organize-imports" },
+      typescriptreact = { "biome-check", "biome-organize-imports" },
 
       swift = { "swiftformat" },
 
@@ -36,8 +31,37 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       ["_"] = { "squeeze_blanks", "trim_whitespace", "trim_newlines" },
     },
   },
-  config = function(_, opts) require("conform").setup(opts) end,
+  config = function(_, opts)
+    require("conform").setup(opts)
+
+    vim.api.nvim_create_user_command("FormatGlob", function()
+      vim.ui.input({ prompt = "Enter pattern (e.g. **/*.tsx): " }, function(glob)
+        if not glob or glob == "" then
+          print("Aborted: no pattern provided.")
+          return
+        end
+
+        local files = vim.fn.glob(glob, true, true)
+        if vim.tbl_isempty(files) then
+          print("No files matched glob: " .. glob)
+          return
+        end
+
+        local conform = require("conform")
+
+        for _, file in ipairs(files) do
+          local bufnr = vim.fn.bufadd(file)
+          vim.fn.bufload(bufnr)
+          conform.format({ bufnr = bufnr, lsp_fallback = true })
+          vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! write") end)
+        end
+
+        print("Formatted " .. #files .. " file(s).")
+      end)
+    end, {})
+  end,
   keys = {
+    { "<leader>cg", ":FormatGlob<CR>", mode = "n", silent = true, desc = "Format files by glob" },
     { "<leader>cF", function() require("conform").format() end, mode = "n", desc = "Format injected language" },
     {
       "<leader>cF",
