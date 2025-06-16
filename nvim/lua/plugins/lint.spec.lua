@@ -1,4 +1,3 @@
-
 return {
   kokovim.get_plugin("nvim-lint", "mfussenegger/nvim-lint", {
     event = { "BufReadPre", "BufNewFile" },
@@ -13,8 +12,8 @@ return {
 
         css = { "stylelint" },
         html = { "htmlhint" },
-        javascript = { "biomejs "},
-        typescript = { "biomejs "},
+        javascript = { "biomejs" },
+        typescript = { "biomejs" },
 
         json = { "jsonlint" },
         markdown = { "markdownlint" },

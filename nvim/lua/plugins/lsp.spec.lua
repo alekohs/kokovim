@@ -18,7 +18,6 @@ local lsps = {
 }
 
 return {
-
   kokovim.get_plugin_by_repo("neovim/nvim-lspconfig", {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -31,6 +30,28 @@ return {
       }),
     },
     opts = {
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+        },
+        severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "", -- Error
+            [vim.diagnostic.severity.WARN] = "", -- Warning
+            [vim.diagnostic.severity.HINT] = "", -- Hint
+            [vim.diagnostic.severity.INFO] = "", -- Info
+          },
+        },
+      },
+      inlay_hints = {
+        enabled = true,
+        exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
+      },
       servers = {
         lua_ls = {},
         ts_ls = {},
@@ -53,7 +74,6 @@ return {
       end
 
       -- Shared capabilities (for blink-cmp etc.)
-      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
       capabilities = vim.tbl_deep_extend("force", capabilities, {
@@ -98,6 +118,14 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
       })
+
+
+      -- Configure diaganostics
+      vim.diagnostic.config({
+        virtual_text = false,
+        virtual_lines = false,
+        signs = opts.diagnostics.signs
+      })
     end,
     keys = {
       { "<leader>cf", vim.lsp.buf.format, mode = { "n", "v" }, desc = "Format selection", silent = true },
@@ -120,6 +148,7 @@ return {
 
       { "<leader>cc", function() vim.lsp.codelens.run() end, mode = "n", desc = "Run Codelens" },
       { "<leader>cC", function() vim.lsp.codelens.refresh() end, mode = "n", desc = "Refresh Codelens" },
+      { "<leader>cD", function() vim.diagnostic.open_float() end, mode = "n", desc = "Open diagnostics" },
 
       { "K", function() return vim.lsp.buf.hover({ border = "rounded" }) end, mode = "n", desc = "Hover" },
       { "<leader>gK", function() return vim.lsp.buf.signature_help() end, mode = "n", desc = "Signature help" },

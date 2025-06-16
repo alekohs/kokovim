@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+
 -- Clipboard
 opt.clipboard = "unnamedplus"
 
@@ -42,7 +43,7 @@ opt.tabstop = 2
 opt.termguicolors = true
 opt.undofile = true
 opt.undolevels = 10000
-opt.updatetime = 100
+opt.updatetime = 300
 opt.virtualedit = "block"
 opt.writebackup = false
 opt.wildmode = { "longest:full", "full" }
