@@ -8,6 +8,16 @@ autocmd("FileType", {
   command = "setlocal tabstop=4 shiftwidth=4",
 })
 
+autocmd("CursorHold", {
+  group = group,
+  callback = function()
+    vim.diagnostic.open_float(nil, {
+      focus = false,
+      scope = "line",
+    })
+  end,
+})
+
 autocmd("InsertCharPre", {
   pattern = "*.cs",
   callback = function()
@@ -51,3 +61,6 @@ autocmd("LspAttach", {
     end
   end,
 })
+
+
+

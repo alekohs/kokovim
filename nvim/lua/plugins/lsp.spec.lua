@@ -123,7 +123,7 @@ return {
       -- Configure diaganostics
       vim.diagnostic.config({
         virtual_text = false,
-        virtual_lines = true,
+        virtual_lines = false,
         signs = opts.diagnostics.signs
       })
     end,
@@ -148,6 +148,7 @@ return {
 
       { "<leader>cc", function() vim.lsp.codelens.run() end, mode = "n", desc = "Run Codelens" },
       { "<leader>cC", function() vim.lsp.codelens.refresh() end, mode = "n", desc = "Refresh Codelens" },
+      { "<leader>cD", function() vim.diagnostic.open_float() end, mode = "n", desc = "Open diagnostics" },
 
       { "K", function() return vim.lsp.buf.hover({ border = "rounded" }) end, mode = "n", desc = "Hover" },
       { "<leader>gK", function() return vim.lsp.buf.signature_help() end, mode = "n", desc = "Signature help" },
