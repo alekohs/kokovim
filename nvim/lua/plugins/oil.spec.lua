@@ -5,6 +5,18 @@ return {
         name = "oil.nvim",
         opts = {
           default_file_explorer = true,
+          float = {
+            padding = 4,
+            -- max_width and max_height can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+            max_width = 0.6,
+            max_height = 0.6,
+            border = "rounded",
+            win_options = {
+              winblend = 0,
+            },
+            preview_split = "auto",
+            override = function(conf) return conf end,
+          },
           keymaps = {
             ["g?"] = { "actions.show_help", mode = "n" },
             ["<CR>"] = "actions.select",
