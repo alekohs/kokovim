@@ -61,6 +61,12 @@ let
         "Otree.oil"
       ];
     }
+    {
+      src = inputs.oil-lsp-diagnostics-nvim;
+      pname = "oil-lsp-diagnostics-nvim";
+      nvimSkipModule = [ "oil-lsp-diagnostics" ];
+    }
+
   ];
 
   flakePlugins = map (p: lib.mkVimPlugin p) plugins-spec;
@@ -98,6 +104,7 @@ with pkgs.vimPlugins;
   telescope-nvim
   fzf-lua
   oil-nvim
+  oil-git-status-nvim
   neo-tree-nvim
   nui-nvim
   which-key-nvim
