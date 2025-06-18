@@ -48,6 +48,11 @@
       flake = false;
     };
 
+    oil-lsp-diagnostics-nvim = {
+      url = "github:JezerM/oil-lsp-diagnostics.nvim";
+      flake = false;
+    };
+
     otree-nvim = {
       url = "github:Eutrius/Otree.nvim";
       flake = false;
