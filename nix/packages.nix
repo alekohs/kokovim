@@ -20,6 +20,7 @@ in
   extraPackages =
     with pkgs;
     [
+      fd
       gcc # needed for nvim-treesitter
       gh
       wordnet

@@ -48,6 +48,10 @@
       flake = false;
     };
 
+    otree-nvim = {
+      url = "github:Eutrius/Otree.nvim";
+      flake = false;
+    };
   };
   outputs =
     {

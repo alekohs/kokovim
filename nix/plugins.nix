@@ -53,9 +53,14 @@ let
         "repro_blink"
         "repro_cmp"
       ];
-
     }
-
+    {
+      src = inputs.otree-nvim;
+      pname = "otree-nvim";
+      nvimSkipModule = [
+        "Otree.oil"
+      ];
+    }
   ];
 
   flakePlugins = map (p: lib.mkVimPlugin p) plugins-spec;
