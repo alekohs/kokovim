@@ -308,6 +308,22 @@
         "type": "github"
       }
     },
+    "otree-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750064006,
+        "narHash": "sha256-JUq2kAA6SWHx5uLFVuJ5V65orUVFqQ3QUl7HpN286nI=",
+        "owner": "Eutrius",
+        "repo": "Otree.nvim",
+        "rev": "3bc765e904422580070869d1f18c0693775da2fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Eutrius",
+        "repo": "Otree.nvim",
+        "type": "github"
+      }
+    },
     "pkgs-by-name-for-flake-parts": {
       "locked": {
         "lastModified": 1743779435,
@@ -349,6 +365,7 @@
         "mini-nvim": "mini-nvim",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable_2",
+        "otree-nvim": "otree-nvim",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
         "pymobiledevice3-flake": "pymobiledevice3-flake",
         "snacks-nvim": "snacks-nvim",

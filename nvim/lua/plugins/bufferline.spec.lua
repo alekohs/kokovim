@@ -37,6 +37,9 @@ return {
             text_align = "left",
           },
           {
+            filetype = "Otree"
+          },
+          {
             filetype = "snacks_layout_box",
           },
         },
