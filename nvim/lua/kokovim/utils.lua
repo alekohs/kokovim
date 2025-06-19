@@ -28,7 +28,7 @@ function M.combine_tables(...)
 end
 
 --- Get uname with OS type
----@return name string Name of the OS, like Darwin for MacOS
+---@return string Name of the OS, like Darwin for MacOS
 function M.get_uname()
   local handle = io.popen("uname")
   local uname = handle:read("*a")

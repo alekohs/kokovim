@@ -5,7 +5,7 @@ local M = {}
 local function removeLastFolder(path) return path:match("(.+)/[^/]+/?$") end
 
 --- Get plugin folder from runtime
----@return folder string Folder path to plugins
+---@return string Folder path to plugins
 function M.get_plugin_folder()
   local folder = ""
   local pack_paths = vim.api.nvim_list_runtime_paths()
