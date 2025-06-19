@@ -23,7 +23,7 @@ local cmd = kokovim.is_nix
     "--razorDesignTimePath=" .. vim.fs.joinpath(paths.rzls, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
   }
 
----@param edit TextEdit
+---@param edit string
 local function apply_vs_text_edit(edit)
   local bufnr = vim.api.nvim_get_current_buf()
   local start_line = edit.range.start.line
