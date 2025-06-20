@@ -9,7 +9,7 @@ let
 
   pkgs = final;
   pkgs-locked = inputs.nixpkgs.legacyPackages.${pkgs.system};
-  pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${pkgs.system};
+  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 
   # This is the helper function that builds the Neovim derivation.
   mkNeovim = pkgs.callPackage ../lib/mkNeovim.nix {
@@ -17,7 +17,7 @@ let
   };
 
   plugins = import ./plugins.nix { inherit inputs pkgs opts; };
-  packages = import ./packages.nix { inherit inputs pkgs pkgs-stable; };
+  packages = import ./packages.nix { inherit inputs pkgs pkgs-unstable; };
 in
 {
   # This is the neovim derivation
