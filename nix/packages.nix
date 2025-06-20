@@ -1,7 +1,7 @@
 {
   inputs,
   pkgs,
-  pkgs-stable,
+  pkgs-unstable,
 }:
 let
   lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
@@ -57,8 +57,8 @@ in
       sqls
       # dotnet lsp
       rzls
-      roslyn-ls
-      pkgs-stable.roslyn-ls # v4 of roslyn ls
+      pkgs-unstable.roslyn-ls
+      roslyn-ls # v4 of roslyn ls
       sourcekit-lsp
 
       # LINT

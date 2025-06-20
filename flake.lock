@@ -277,13 +277,13 @@
         "type": "github"
       }
     },
-    "nixpkgs-stable_2": {
+    "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1750059366,
-        "narHash": "sha256-BrXVlKADPB7HYQLrlGRekIeg+RxUYaj5N4Cw+2fB48k=",
+        "lastModified": 1750417751,
+        "narHash": "sha256-iHupDhcHLZE/9Z6fALyFhgi2cCi78xsIEggEo5Ammt8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6085eb03d44c641ea8b3c2100f52332e5bdc3f1b",
+        "rev": "02dd6f762cf11430898d79961eb899223566283f",
         "type": "github"
       },
       "original": {
@@ -380,7 +380,7 @@
         "gen-luarc": "gen-luarc",
         "mini-nvim": "mini-nvim",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-stable": "nixpkgs-stable_2",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "oil-lsp-diagnostics-nvim": "oil-lsp-diagnostics-nvim",
         "otree-nvim": "otree-nvim",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
