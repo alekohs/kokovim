@@ -11,17 +11,18 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       -- TODO: Update to use biome instead of prettier
       -- html = { "biome" },
       html = { "prettierd", "prettier", timeout_ms = 2000, stop_after_first = true },
+      css = { "stylelint", "prettierd" },
 
-      javascript = { "biome-check", "biome-organize-imports" },
-      javascriptreact = { "biome-check", "biome-organize-imports" },
-      typescript = { "biome-check", "biome-organize-imports" },
-      typescriptreact = { "biome-check", "biome-organize-imports" },
+      javascript = { "biome-check" },
+      javascriptreact = { "biome-check" },
+      typescript = { "biome-check" },
+      typescriptreact = { "biome-check" },
 
       swift = { "swiftformat" },
 
       go = { "gofmt", "goimports" },
 
-      json = { "jq" },
+      json = { "biome-check", "jq", stop_after_first = true },
       yaml = { "yamlfmt" },
       lua = { "stylua" },
       markdown = { "deno_fmt" },
