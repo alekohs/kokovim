@@ -1,6 +1,7 @@
 local function configure_mason() end
 local lsps = {
   "dockerls",
+  "cssls",
   "fish_lsp",
   "gopls",
   "graphql",
