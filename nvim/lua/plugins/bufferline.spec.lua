@@ -5,16 +5,17 @@ return {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     },
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
-      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-      { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+      { "<leader>bd", "<Cmd>bd<CR>", desc = "Delete current buffer" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "BufferLine - Toggle Pin" },
+      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "BufferLine - Delete Non-Pinned Buffers" },
+      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "BufferLine - Delete Buffers to the Right" },
+      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "BufferLine - Delete Buffers to the Left" },
+      { "<leader>bf", "<Cmd>BufferLinePick<CR>", desc = "BufferLine - Pick buffer" },
+      { "<leader>bF", "<Cmd>BufferLinePickClose<CR>", desc = "BufferLine - Pick and close buffer" },
+      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "BufferLine - Prev buffer" },
+      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "BufferLine - Next buffer" },
+      { "[b", "<cmd>BufferLineMovePrev<cr>", desc = "BufferLine - Move buffer prev" },
+      { "]b", "<cmd>BufferLineMoveNext<cr>", desc = "BufferLine - Move buffer next" },
     },
     opts = {
       options = {
@@ -37,7 +38,7 @@ return {
             text_align = "left",
           },
           {
-            filetype = "Otree"
+            filetype = "Otree",
           },
           {
             filetype = "snacks_layout_box",
@@ -45,15 +46,5 @@ return {
         },
       },
     },
-    -- config = function(_, opts)
-    --   require("bufferline").setup(opts)
-    --
-    --   -- Fix bufferline when restoring a session
-    --   vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
-    --     callback = function()
-    --       vim.schedule(function() pcall(nvim_bufferline) end)
-    --     end,
-    --   })
-    -- end,
   }),
 }
