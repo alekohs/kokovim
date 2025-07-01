@@ -18,6 +18,7 @@ autocmd("BufWritePre", {
       lsp_fallback = true,
       async = false,
       timeout_ms = 1000,
+      formatters = { "squeeze_blanks", "trim_whitespace", "trim_newlines" },
     })
   end,
 })
