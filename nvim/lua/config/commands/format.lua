@@ -2,7 +2,6 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local group = augroup("KokovimFormat", { clear = true })
 
-
 -- Enable autoformat for specific filetypes
 autocmd("FileType", {
   group = group,
@@ -11,9 +10,14 @@ autocmd("FileType", {
   callback = function() vim.b.autoformat = true end,
 })
 
--- Remove trailing whitespace on save
-autocmd("BufWrite", {
-  group = group,
+autocmd("BufWritePre", {
   pattern = "*",
-  command = [[%s/\s\+$//e]],
+  callback = function(args)
+    require("conform").format({
+      bufnr = args.buf,
+      lsp_fallback = true,
+      async = false,
+      timeout_ms = 1000,
+    })
+  end,
 })

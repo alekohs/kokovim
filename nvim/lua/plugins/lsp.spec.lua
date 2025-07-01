@@ -120,12 +120,11 @@ return {
         capabilities = capabilities,
       })
 
-
       -- Configure diaganostics
       vim.diagnostic.config({
         virtual_text = false,
         virtual_lines = false,
-        signs = opts.diagnostics.signs
+        signs = opts.diagnostics.signs,
       })
     end,
     keys = {
