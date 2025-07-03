@@ -7,13 +7,23 @@ let
   lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
   python-packages = [
     {
-      src = inputs.pymobiledevice3;
+      src = inputs.pymobiledevice3-flake;
       pname = "pymobiledevice3";
+      # format = "pyproject";
+      pyproject = true;
+      propagatedBuildInputs = with pkgs.python3Packages; [
+        cryptography
+        construct
+        zeroconf
+        libusb1
+        packaging
+      ];
+
+      nativeBuildInputs = [ pkgs.pkg-config ];
     }
   ];
 
   flakePythons = map (p: lib.mkPythonPackage p) python-packages;
-
 in
 {
 
@@ -50,7 +60,7 @@ in
       taplo-cli
       rust-analyzer
       nixd
-      tailwindcss-language-server
+      # tailwindcss-language-server
       nodePackages.tailwindcss
       nodePackages.typescript
       nodePackages.typescript-language-server
@@ -100,5 +110,10 @@ in
     ];
 
   # Extra python packages
-  extraPython3Packages = pyth: with pyth; [ ] ++ flakePythons;
+  extraPython3Packages =
+    pyth:
+    with pyth;
+    [
+    ]
+    ++ flakePythons;
 }
