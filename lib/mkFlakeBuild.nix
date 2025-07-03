@@ -7,7 +7,7 @@
     {
       src,
       pname,
-      nvimSkipModule ? [],
+      nvimSkipModule ? [ ],
     }:
     pkgs.vimUtils.buildVimPlugin {
       inherit pname src nvimSkipModule;
@@ -18,11 +18,20 @@
     {
       src,
       pname,
-      propagatedBuildInputs ? [ ]
+      # format ? "",
+      pyproject ? false,
+      propagatedBuildInputs ? [ ],
+      nativeBuildInputs ? [ ],
     }:
 
     pkgs.python3Packages.buildPythonApplication {
-      inherit pname src propagatedBuildInputs;
+      inherit
+        pname
+        src
+        pyproject
+        propagatedBuildInputs
+        nativeBuildInputs
+        ;
       version = src.lastModifiedDate;
     };
 }
