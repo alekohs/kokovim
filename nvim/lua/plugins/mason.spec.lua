@@ -10,4 +10,19 @@ return {
     },
     config = function(_, opts) require("mason").setup(opts) end,
   }),
+  kokovim.get_plugin_by_repo("mason-org/mason-lspconfig.nvim", {
+    opts = {
+      ensure_installed = {
+        "biome",
+        "lua_ls",
+        "vimls",
+      }
+          },
+    dependencies = {
+  -- kokovim.get_plugin_by_repo("mason-org/mason.nvim")
+  -- kokovim.get_plugin_by_repo("neovim/nvim-lspconfig"")
+
+    },
+  }),
+
 }

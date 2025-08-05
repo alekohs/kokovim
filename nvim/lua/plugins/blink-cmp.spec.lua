@@ -1,5 +1,4 @@
-return {
-  kokovim.get_plugin_by_repo("saghen/blink.cmp", {
+local blink_cfg = {
     dependencies = {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
@@ -108,5 +107,12 @@ return {
         },
       },
     },
-  }),
+  }
+
+if kokovim.is_nix then
+  blink_cfg.version = "1.8"
+end
+
+return {
+  kokovim.get_plugin_by_repo("saghen/blink.cmp", blink_cfg),
 }
