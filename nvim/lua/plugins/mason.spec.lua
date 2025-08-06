@@ -44,6 +44,7 @@ return {
         -- LINT
         "jsonlint",
         "markdownlint-cli2",
+        "markdownlint",
         "biome",
         "htmlhint",
         "stylelint",
