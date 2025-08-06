@@ -1,7 +1,13 @@
 local utils = require("kokovim.utils")
 local paths = utils.get_packages_path({ "roslyn", "rzls" }, ":")
 
+-- Return empty if dotnet is not installed
+if vim.fn.executable("dotnet") == 1 then
+  return {}
+end
+
 local function remove_bin_suffix(str) return str:gsub("/bin$", "") end
+local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
 
 local cmd = kokovim.is_nix
     and {
@@ -14,13 +20,14 @@ local cmd = kokovim.is_nix
         .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
     }
   or {
-    "dotnet",
-    vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.LanguageServer.dll"),
+    "roslyn",
     "--stdio",
     "--logLevel=Information",
     "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-    "--razorSourceGenerator=" .. vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-    "--razorDesignTimePath=" .. vim.fs.joinpath(paths.rzls, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+    "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+    "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+    "--extension",
+    vim.fs.joinpath(rzls_path, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
   }
 
 ---@param edit string

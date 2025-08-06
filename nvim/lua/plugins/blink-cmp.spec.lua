@@ -44,6 +44,7 @@ local blink_cfg = {
           },
         },
       },
+fuzzy = { implementation = "prefer_rust_with_warning" },
       keymap = {
         preset = "enter",
         ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
@@ -63,6 +64,7 @@ local blink_cfg = {
           show_documentation = false,
         },
       },
+
       sources = {
         default = {
           "lsp",
@@ -109,8 +111,8 @@ local blink_cfg = {
     },
   }
 
-if kokovim.is_nix then
-  blink_cfg.version = "1.8"
+if not kokovim.is_nix then
+  blink_cfg.version = "1.*"
 end
 
 return {

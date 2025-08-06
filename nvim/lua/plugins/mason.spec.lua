@@ -10,19 +10,56 @@ return {
     },
     config = function(_, opts) require("mason").setup(opts) end,
   }),
-  kokovim.get_plugin_by_repo("mason-org/mason-lspconfig.nvim", {
+  kokovim.get_plugin_by_repo("WhoIsSethDaniel/mason-tool-installer.nvim", {
     opts = {
       ensure_installed = {
-        "biome",
-        "lua_ls",
-        "vimls",
-      }
-          },
-    dependencies = {
-  -- kokovim.get_plugin_by_repo("mason-org/mason.nvim")
-  -- kokovim.get_plugin_by_repo("neovim/nvim-lspconfig"")
+        "jq",
 
+        -- LSP
+        { "gopls", condition = function() return vim.fn.executable("go") == 1 end },
+        "fish-lsp",
+        "lua-language-server",
+        "vim-language-server",
+        "marksman",
+        "yaml-language-server",
+        "taplo",
+        "rust-analyzer",
+        "tailwindcss-language-server",
+        "typescript-language-server",
+        "python-lsp-server",
+        "sqls",
+        { "rzls", condition = function() return vim.fn.executable("dotnet") == 1 end },
+        { "roslyn", condition = function() return vim.fn.executable("dotnet") == 1 end },
+
+        -- Formatters
+        "stylua",
+        "codespell",
+        "deno",
+        "prettierd",
+        "ruff",
+        "stylua",
+        "shfmt",
+        "yamlfmt",
+
+        -- LINT
+        "jsonlint",
+        "markdownlint-cli2",
+        "biome",
+        "htmlhint",
+        "stylelint",
+        "yamllint",
+        "editorconfig-checker",
+        "shellcheck",
+        "sqlfluff",
+      },
     },
   }),
 
+  kokovim.get_plugin_by_repo("mason-org/mason-lspconfig.nvim", {
+    opts = {},
+    dependencies = {
+      kokovim.get_plugin_by_repo("mason-org/mason.nvim"),
+      -- kokovim.get_plugin_by_repo("neovim/nvim-lspconfig"")
+    },
+  }),
 }
