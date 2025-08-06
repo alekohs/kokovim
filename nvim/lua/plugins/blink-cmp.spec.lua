@@ -1,5 +1,4 @@
-return {
-  kokovim.get_plugin_by_repo("saghen/blink.cmp", {
+local blink_cfg = {
     dependencies = {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
@@ -45,6 +44,7 @@ return {
           },
         },
       },
+fuzzy = { implementation = "prefer_rust_with_warning" },
       keymap = {
         preset = "enter",
         ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
@@ -64,6 +64,7 @@ return {
           show_documentation = false,
         },
       },
+
       sources = {
         default = {
           "lsp",
@@ -108,5 +109,12 @@ return {
         },
       },
     },
-  }),
+  }
+
+if not kokovim.is_nix then
+  blink_cfg.version = "1.*"
+end
+
+return {
+  kokovim.get_plugin_by_repo("saghen/blink.cmp", blink_cfg),
 }
