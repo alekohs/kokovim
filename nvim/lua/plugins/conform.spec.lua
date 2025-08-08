@@ -23,6 +23,7 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       go = { "gofmt", "goimports" },
 
       json = { "biome-check", "jq", stop_after_first = true },
+      jsonc = { "biome-check", "jq", stop_after_first = true },
       yaml = { "yamlfmt" },
       lua = { "stylua" },
       markdown = { "deno_fmt" },
