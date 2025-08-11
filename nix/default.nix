@@ -31,6 +31,16 @@ in
     wrapRc = true;
   };
 
+  # Use it as default with nvim command
+  nvim-default = mkNeovim {
+    plugins = plugins;
+    extraPackages = packages.extraPackages;
+    extraLuaPackages = packages.extraLuaPackages;
+    extraPythonPackages = packages.extraPython3Packages;
+    appName = "nvim";
+    wrapRc = true;
+  };
+
   # This is meant to be used within a devshell.
   # Instead of loading the lua Neovim configuration from
   # the Nix store, it is loaded from $XDG_CONFIG_HOME/nvim-dev
