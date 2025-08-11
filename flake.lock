@@ -11,11 +11,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753897568,
-        "narHash": "sha256-rEQBAQV4ffrIk6aFOctBVKxtWEDMAsGL4K8JAcZdBLo=",
+        "lastModified": 1754736680,
+        "narHash": "sha256-L2VoT7qSVUYbUTSZECICBguVWhArXn1bvtYQodvCQIs=",
         "owner": "saghen",
         "repo": "blink.cmp",
-        "rev": "33f0789297cfec5279c30c8f8980c035fdc91e34",
+        "rev": "10f2ebe48849726608f79e21bc9eb89c567a22f3",
         "type": "github"
       },
       "original": {
@@ -85,11 +85,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754091436,
-        "narHash": "sha256-XKqDMN1/Qj1DKivQvscI4vmHfDfvYR2pfuFOJiCeewM=",
+        "lastModified": 1754487366,
+        "narHash": "sha256-pHYj8gUBapuUzKV/kN/tR3Zvqc7o6gdFB9XKXIp1SQ8=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "67df8c627c2c39c41dbec76a1f201929929ab0bd",
+        "rev": "af66ad14b28a127c5c0f3bbb298218fc63528a18",
         "type": "github"
       },
       "original": {
@@ -142,11 +142,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1724097937,
-        "narHash": "sha256-Q4tgm8ZHAQUdvsNft86MqIbHQAm7OF7RT/wwYWXqSdY=",
+        "lastModified": 1754898281,
+        "narHash": "sha256-A7qkqaq8fqZXCxtHfJFDds2whPkCex3ZyXt8SXr/R3U=",
         "owner": "mrcjkb",
         "repo": "nix-gen-luarc-json",
-        "rev": "b36b69c4ded9f31b079523bc452e23458734cf00",
+        "rev": "560b1103cd6f38cd7ca89022f0e5293741fadd59",
         "type": "github"
       },
       "original": {
@@ -220,11 +220,11 @@
     "mini-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1753356463,
-        "narHash": "sha256-FwEqzutSKNc8vUHhukcQZ9iho0p7Ba2EBBWoq80xks4=",
+        "lastModified": 1754557913,
+        "narHash": "sha256-VBwCwwsE+wpUUuVP0f85pVvrAEjGfnVj78i0CfukSLg=",
         "owner": "echasnovski",
         "repo": "mini.nvim",
-        "rev": "c122e852517adaf7257688e435369c050da113b1",
+        "rev": "4035ef97407a6661ae9ff913ff980e271a658502",
         "type": "github"
       },
       "original": {
@@ -279,11 +279,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1754060105,
-        "narHash": "sha256-di5L6e5Iiv+oegS07j9h23FdqEpXn0ZQqMlDOEMw1EY=",
+        "lastModified": 1754800730,
+        "narHash": "sha256-HfVZCXic9XLBgybP0318ym3cDnGwBs/+H5MgxFVYF4I=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e7eabdc701d7dbb810fd91a97ec358caa4c1fc50",
+        "rev": "641d909c4a7538f1539da9240dedb1755c907e40",
         "type": "github"
       },
       "original": {
@@ -295,11 +295,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1754115387,
-        "narHash": "sha256-Klcs7lHBygJcnzndHCBXmWqWV/l9sjxj4RoAi8e3bFc=",
+        "lastModified": 1754904465,
+        "narHash": "sha256-ejihD67EZoVbNNEX9CYCN8tBtCdlMFZwE9/pWyS4Aks=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "61c572b0fccaae1fd01bb4ce3aeebfdb2cda88d9",
+        "rev": "6296268ba289729a436c31cd17e5f2f433a3b59b",
         "type": "github"
       },
       "original": {
@@ -358,11 +358,11 @@
     "pymobiledevice3-flake": {
       "flake": false,
       "locked": {
-        "lastModified": 1753566868,
-        "narHash": "sha256-2thZLqKBN+NhayzUjrpIjHrKoiq00/7Yc8Zonfn4crs=",
+        "lastModified": 1754855883,
+        "narHash": "sha256-sxpfkNEwEZ2Sqhxq6lITDCBA8nbY4++clhyesxbE+2c=",
         "owner": "doronz88",
         "repo": "pymobiledevice3",
-        "rev": "05cb20b31a093bd7025e522bc0ee3f0c73143d67",
+        "rev": "ae65a4388d635f5b1a03220eb77852eea0315e5d",
         "type": "github"
       },
       "original": {
@@ -440,11 +440,11 @@
     "xcodebuild-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1753215954,
-        "narHash": "sha256-onsDwHvXSYBC2v0dS8KAgbagQELVvrJY9zu/kV+qhDk=",
+        "lastModified": 1754691285,
+        "narHash": "sha256-54Ba14yhno7MVENzXj4yxzAY/thUBfd/C/gUqsvws64=",
         "owner": "wojciech-kulik",
         "repo": "xcodebuild.nvim",
-        "rev": "4e013d5f24567380a51efee8ab9fac9c24d429cd",
+        "rev": "395a21316bb3314e4f4419fe2b6932fbeb8479bc",
         "type": "github"
       },
       "original": {

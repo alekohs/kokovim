@@ -87,7 +87,7 @@
         packages = rec {
           default = pkgs.nvim-pkg;
           kokovim = pkgs.nvim-pkg;
-          nvim = pkgs.neovim;
+          nvim = pkgs.nvim-default;
         };
 
         apps.default = {
