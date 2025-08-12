@@ -21,28 +21,54 @@ end
 
 local ensure_installed = kokovim.is_nix and {}
   or {
+    "arduino",
+    "angular",
     "bash",
     "c",
     "c_sharp",
+    "css",
     "diff",
+    "fish",
+    "git_config",
+    "git_rebase",
+    "gitcommit",
+    "gitattributes",
+    "gitignore",
     "go",
     "html",
+    "http",
+    "javascript",
+    "jsdoc",
+    "json",
     "lua",
     "luadoc",
+    "make",
     "markdown",
     "markdown_inline",
+    "nix",
+    "powershell",
+    "proto",
     "python",
     "query",
+    "razor",
+    "regex",
+    "rust",
+    "scss",
+    "sql",
+    "terraform",
+    "tmux",
+    "tsx",
+    "typescript",
     "vim",
     "vimdoc",
+    "xml",
+    "zig",
   }
-
 
 -- Set treesitter grammars to runtimepath if running with nix
 if kokovim.is_nix then
   local plugins_folder = require("kokovim.plugin").get_plugin_folder()
   vim.opt.runtimepath:append(plugins_folder .. "nvim-treesitter-grammars")
-
 end
 
 return {
@@ -113,9 +139,7 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
+    config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
   }),
   kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter-context", {
     event = { "BufReadPre", "BufNewFile" },
