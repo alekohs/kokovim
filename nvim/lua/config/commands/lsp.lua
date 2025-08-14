@@ -8,6 +8,13 @@ autocmd("FileType", {
   command = "setlocal tabstop=4 shiftwidth=4",
 })
 
+autocmd({"CursorMoved", "CursorMovedI"}, {
+  group = group,
+  callback = function()
+    vim.diagnostic.hide()
+  end,
+})
+
 autocmd("CursorHold", {
   group = group,
   callback = function()
@@ -61,6 +68,3 @@ autocmd("LspAttach", {
     end
   end,
 })
-
-
-
