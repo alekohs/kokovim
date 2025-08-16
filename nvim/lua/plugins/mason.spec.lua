@@ -28,6 +28,7 @@ return {
         "typescript-language-server",
         "python-lsp-server",
         "sqls",
+        "qmlls",
         { "rzls", condition = function() return vim.fn.executable("dotnet") == 1 end },
         { "roslyn", condition = function() return vim.fn.executable("dotnet") == 1 end },
 
