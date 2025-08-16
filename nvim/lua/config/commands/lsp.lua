@@ -2,26 +2,44 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local group = augroup("KokovimLsp", { clear = true })
 
+local diagnostic_floats = {}
+
+-- Open a diagnostic float and track its window
+local function open_diagnostic_float()
+  local win = vim.diagnostic.open_float(nil, { focus = false, scope = "line" })
+  if win then
+    diagnostic_floats[win] = true
+  end
+end
+
+-- Close all tracked diagnostic floats
+local function close_diagnostic_floats()
+  for win, _ in pairs(diagnostic_floats) do
+    if vim.api.nvim_win_is_valid(win) then
+      pcall(vim.api.nvim_win_close, win, true)
+    end
+    diagnostic_floats[win] = nil
+  end
+end
+
 autocmd("FileType", {
   group = group,
   pattern = { "cs", "razor" },
   command = "setlocal tabstop=4 shiftwidth=4",
 })
 
-autocmd({"CursorMoved", "CursorMovedI"}, {
+autocmd({ "CursorMoved", "CursorMovedI" }, {
+  pattern = "*",
   group = group,
   callback = function()
-    vim.diagnostic.hide()
+    close_diagnostic_floats()
   end,
 })
 
 autocmd("CursorHold", {
   group = group,
   callback = function()
-    vim.diagnostic.open_float(nil, {
-      focus = false,
-      scope = "line",
-    })
+    open_diagnostic_float()
   end,
 })
 
@@ -58,13 +76,16 @@ autocmd("LspAttach", {
       local xcodebuild = require("xcodebuild.integrations.dap")
       local opts = { buffer = args.buf, desc = "", noremap = true, silent = true }
 
-      vim.keymap.set("n", "<leader>dd", xcodebuild.build_and_debug, vim.tbl_extend("force", opts, { desc = "Build & Debug" }))
-      vim.keymap.set("n", "<leader>dr", xcodebuild.debug_without_build, vim.tbl_extend("force", opts, { desc = "Debug Without Building" }))
+      vim.keymap.set("n", "<leader>dd", xcodebuild.build_and_debug,
+        vim.tbl_extend("force", opts, { desc = "Build & Debug" }))
+      vim.keymap.set("n", "<leader>dr", xcodebuild.debug_without_build,
+        vim.tbl_extend("force", opts, { desc = "Debug Without Building" }))
       -- vim.keymap.set("n", "<leader>dt", xcodebuild.debug_tests, vim.tbl_extend("force", opts, { desc = "Debug Tests" }))
       -- vim.keymap.set("n", "<leader>dT", xcodebuild.debug_class_tests, vim.tbl_extend("force", opts, { desc = "Debug Class Tests" }))
       -- vim.keymap.set("n", "<leader>b", xcodebuild.toggle_breakpoint, vim.tbl_extend("force", opts, { desc = "Toggle Breakpoint" }))
       -- vim.keymap.set("n", "<leader>B", xcodebuild.toggle_message_breakpoint, vim.tbl_extend("force", opts, { desc = "Toggle Message Breakpoint" }))
-      vim.keymap.set("n", "<leader>dx", xcodebuild.terminate_session, vim.tbl_extend("force", opts, { desc = "Terminate Debugger" }))
+      vim.keymap.set("n", "<leader>dx", xcodebuild.terminate_session,
+        vim.tbl_extend("force", opts, { desc = "Terminate Debugger" }))
     end
   end,
 })
