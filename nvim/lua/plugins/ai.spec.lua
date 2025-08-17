@@ -27,13 +27,18 @@ return {
       kokovim.get_plugin_by_repo("nvim-lua/plenary.nvim"),
       kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter"),
     },
-    opts = { },
-    config = function(_, opts)
-      require("codecompanion").setup(opts)
-    end,
-
+    opts = {
+      strategies = {
+        chat = {
+          adapter = {
+            name = "copilot",
+            model = "claude-3.7-sonnet"
+          }
+        },
+      }
+    },
     keys = {
-      { "<leader>ac", "<CMD>CodeCompanionChat<CR>", desc = "Code companion chat" },
+      { "<leader>ac", "<CMD>CodeCompanionChat<CR>",    desc = "Code companion chat" },
       { "<leader>aa", "<CMD>CodeCompanionActions<CR>", desc = "Code companion actions" },
     }
   }),
