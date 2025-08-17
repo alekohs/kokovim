@@ -17,16 +17,10 @@ return {
 
         json = { "jsonlint" },
         markdown = { "markdownlint" },
-        nix = { "deadnix" },
+        (kokovim.is_nix and { nix = { "deadnix" } }),
         sql = { "sqlfluff" },
         swift = { "swiftlint" },
         yaml = { "yamllint" },
-
-        -- Use the "*" filetype to run linters on all filetypes.
-        -- ['*'] = { 'global linter' },
-        -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
-        -- ['_'] = { 'fallback linter' },
-        -- ["*"] = { "typos" },
       },
       linters = {},
     },
