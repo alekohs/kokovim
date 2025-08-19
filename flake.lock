@@ -11,11 +11,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754736680,
-        "narHash": "sha256-L2VoT7qSVUYbUTSZECICBguVWhArXn1bvtYQodvCQIs=",
+        "lastModified": 1755177592,
+        "narHash": "sha256-g57GuirQ0jDuCGum3Ly6Troll8tt0SmUjOGXce/Y9Gk=",
         "owner": "saghen",
         "repo": "blink.cmp",
-        "rev": "10f2ebe48849726608f79e21bc9eb89c567a22f3",
+        "rev": "4e9edba1b1cef1585cc65e54287229e5d34e4df8",
         "type": "github"
       },
       "original": {
@@ -142,11 +142,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1754898281,
-        "narHash": "sha256-A7qkqaq8fqZXCxtHfJFDds2whPkCex3ZyXt8SXr/R3U=",
+        "lastModified": 1755304025,
+        "narHash": "sha256-xVKfjFwc0zMbLMjLTiHz+0llggkjs93SmHkhaa9S3M4=",
         "owner": "mrcjkb",
         "repo": "nix-gen-luarc-json",
-        "rev": "560b1103cd6f38cd7ca89022f0e5293741fadd59",
+        "rev": "1865b0ebb753ae5324d7381b1fa8c98c04ec7509",
         "type": "github"
       },
       "original": {
@@ -220,11 +220,11 @@
     "mini-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1754557913,
-        "narHash": "sha256-VBwCwwsE+wpUUuVP0f85pVvrAEjGfnVj78i0CfukSLg=",
+        "lastModified": 1755592879,
+        "narHash": "sha256-VR/Mdz56IrfOvnZTzejs0QVkkgK5NFP6JgPUaTnXPBc=",
         "owner": "echasnovski",
         "repo": "mini.nvim",
-        "rev": "4035ef97407a6661ae9ff913ff980e271a658502",
+        "rev": "c5f2b25bfffbfb793602fa091fca0074871d30fe",
         "type": "github"
       },
       "original": {
@@ -279,11 +279,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1754800730,
-        "narHash": "sha256-HfVZCXic9XLBgybP0318ym3cDnGwBs/+H5MgxFVYF4I=",
+        "lastModified": 1755268003,
+        "narHash": "sha256-nNaeJjo861wFR0tjHDyCnHs1rbRtrMgxAKMoig9Sj/w=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "641d909c4a7538f1539da9240dedb1755c907e40",
+        "rev": "32f313e49e42f715491e1ea7b306a87c16fe0388",
         "type": "github"
       },
       "original": {
@@ -295,11 +295,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1754904465,
-        "narHash": "sha256-ejihD67EZoVbNNEX9CYCN8tBtCdlMFZwE9/pWyS4Aks=",
+        "lastModified": 1755593212,
+        "narHash": "sha256-AEk6KJ68h7nJZ0y79RZaooTdndWgq5qpY7VUNcnWpOU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6296268ba289729a436c31cd17e5f2f433a3b59b",
+        "rev": "1a58528f0d71c0f7acd3dbd36d6ef03f775f80fa",
         "type": "github"
       },
       "original": {
@@ -358,11 +358,11 @@
     "pymobiledevice3-flake": {
       "flake": false,
       "locked": {
-        "lastModified": 1754855883,
-        "narHash": "sha256-sxpfkNEwEZ2Sqhxq6lITDCBA8nbY4++clhyesxbE+2c=",
+        "lastModified": 1755586660,
+        "narHash": "sha256-V52FPGZedbx2aQ3WnCZG9rQPvWbSTSR7UEbXF0TwBwg=",
         "owner": "doronz88",
         "repo": "pymobiledevice3",
-        "rev": "ae65a4388d635f5b1a03220eb77852eea0315e5d",
+        "rev": "f2e2de501c136b1ed69f1448dbf71c4bcecc6665",
         "type": "github"
       },
       "original": {
@@ -440,11 +440,11 @@
     "xcodebuild-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1754691285,
-        "narHash": "sha256-54Ba14yhno7MVENzXj4yxzAY/thUBfd/C/gUqsvws64=",
+        "lastModified": 1755467596,
+        "narHash": "sha256-AY/EFDXMg0vDqD4LMr/TOn1H/KaaIvEWBg6sKgWjL4k=",
         "owner": "wojciech-kulik",
         "repo": "xcodebuild.nvim",
-        "rev": "395a21316bb3314e4f4419fe2b6932fbeb8479bc",
+        "rev": "b76a2a3ad0cb61ea33ed615844a8a1a658279d32",
         "type": "github"
       },
       "original": {
