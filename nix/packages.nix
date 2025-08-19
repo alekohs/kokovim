@@ -66,10 +66,10 @@ in
       nodePackages.typescript-language-server
       python313Packages.python-lsp-server
       sqls
-      # dotnet lsp
-      rzls
-      pkgs-unstable.roslyn-ls
-      roslyn-ls # v4 of roslyn ls
+      # dotnet lsp TODO: Check why this issn't building any more
+      # rzls
+      # pkgs-unstable.roslyn-ls
+      # roslyn-ls # v4 of roslyn ls
       sourcekit-lsp
 
       # LINT
