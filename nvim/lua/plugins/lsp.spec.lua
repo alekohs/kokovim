@@ -149,6 +149,7 @@ return {
 
       { "<leader>cc", function() vim.lsp.codelens.run() end,                           mode = "n", desc = "Run Codelens" },
       { "<leader>cC", function() vim.lsp.codelens.refresh() end,                       mode = "n", desc = "Refresh Codelens" },
+      { "<leader>cF", function() vim.lsp.buf.format() end,                             mode = "n", desc = "Format code with LSP" },
 
       { "K",          function() return vim.lsp.buf.hover({ border = "rounded" }) end, mode = "n", desc = "Hover" },
       { "<leader>gK", function() return vim.lsp.buf.signature_help() end,              mode = "n", desc = "Signature help" },
