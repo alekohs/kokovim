@@ -1,6 +1,6 @@
 return kokovim.get_plugin_by_repo("folke/todo-comments.nvim", {
-  cmd = { "TodoTrouble", "TodoTelescope" },
-  event = "VeryLazy";
+  cmd = { "TodoFzfLua" },
+  event = "VeryLazy",
   dependencies = { kokovim.get_plugin_by_repo("nvim-lua/plenary.nvim") },
   opts = {
     -- your configuration comes here

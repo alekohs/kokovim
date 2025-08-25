@@ -20,7 +20,7 @@ return {
         desc = "Explorer NeoTree (cwd)",
       },
       { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
-      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)",      remap = true },
     },
     deactivate = function() vim.cmd([[Neotree close]]) end,
     init = function()
@@ -52,7 +52,8 @@ return {
         ["easy"] = function(state)
           local node = state.tree:get_node()
           local path = node.type == "directory" and node.path or vim.fs.dirname(node.path)
-          require("easy-dotnet").create_new_item(path, function() require("neo-tree.sources.manager").refresh(state.name) end)
+          require("easy-dotnet").create_new_item(path,
+            function() require("neo-tree.sources.manager").refresh(state.name) end)
         end,
       },
       window = {
@@ -78,7 +79,7 @@ return {
           provider = function(icon, node) -- setup a custom icon provider
             local text, hl
             local mini_icons = require("mini.icons")
-            if node.type == "file" then -- if it's a file, set the text/hl
+            if node.type == "file" then          -- if it's a file, set the text/hl
               text, hl = mini_icons.get("file", node.name)
             elseif node.type == "directory" then -- get directory icons
               text, hl = mini_icons.get("directory", node.name)
@@ -118,7 +119,7 @@ return {
       local events = require("neo-tree.events")
       opts.event_handlers = opts.event_handlers or {}
       vim.list_extend(opts.event_handlers, {
-        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_MOVED,   handler = on_move },
         { event = events.FILE_RENAMED, handler = on_move },
       })
       require("neo-tree").setup(opts)

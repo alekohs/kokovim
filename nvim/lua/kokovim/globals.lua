@@ -25,6 +25,5 @@ function M.get_plugin_by_repo(github, config)
   return plugin.get_plugin(localDir, github, config)
 end
 
-
 -- Define the globals under kokovim
 _G.kokovim = M

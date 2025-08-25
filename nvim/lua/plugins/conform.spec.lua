@@ -64,7 +64,17 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
   end,
   keys = {
     { "<leader>cg", ":FormatGlob<CR>", mode = "n", silent = true, desc = "Format files by glob" },
-    { "<leader>cF", function() require("conform").format() end, mode = "n", desc = "Format injected language" },
+    {
+      "<leader>cf",
+      function()
+        require("conform").format({
+          lsp_fallback = true
+
+        })
+      end,
+      mode = "n",
+      desc = "Format injected language"
+    },
     {
       "<leader>cF",
       function()

@@ -220,11 +220,11 @@
     "mini-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1755592879,
-        "narHash": "sha256-VR/Mdz56IrfOvnZTzejs0QVkkgK5NFP6JgPUaTnXPBc=",
+        "lastModified": 1755794675,
+        "narHash": "sha256-wEXmfUcZSqvMEJauTWaQSwT2UY3f/nMwq8JCC2mKhLU=",
         "owner": "echasnovski",
         "repo": "mini.nvim",
-        "rev": "c5f2b25bfffbfb793602fa091fca0074871d30fe",
+        "rev": "e38547768b2e12bdd48b16b8cfdca2e3b7543e22",
         "type": "github"
       },
       "original": {
@@ -279,11 +279,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1755268003,
-        "narHash": "sha256-nNaeJjo861wFR0tjHDyCnHs1rbRtrMgxAKMoig9Sj/w=",
+        "lastModified": 1756035328,
+        "narHash": "sha256-vC7SslUBCtdT3T37ZH3PLIWYmTkSeppL5BJJByUjYCM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "32f313e49e42f715491e1ea7b306a87c16fe0388",
+        "rev": "6b0b1559e918d4f7d1df398ee1d33aeac586d4d6",
         "type": "github"
       },
       "original": {
@@ -295,11 +295,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1755593212,
-        "narHash": "sha256-AEk6KJ68h7nJZ0y79RZaooTdndWgq5qpY7VUNcnWpOU=",
+        "lastModified": 1756120308,
+        "narHash": "sha256-BoNHD9qLy+rsPzFXyXu+smnvFUG+T7o6Pl1oKJS/0oE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1a58528f0d71c0f7acd3dbd36d6ef03f775f80fa",
+        "rev": "aa0f1764fe7fc1ed22bfe15bc2233d691fa1ec49",
         "type": "github"
       },
       "original": {
@@ -358,11 +358,11 @@
     "pymobiledevice3-flake": {
       "flake": false,
       "locked": {
-        "lastModified": 1755586660,
-        "narHash": "sha256-V52FPGZedbx2aQ3WnCZG9rQPvWbSTSR7UEbXF0TwBwg=",
+        "lastModified": 1756106512,
+        "narHash": "sha256-fJz8bZ4OPDJUmHNLzGS7di4lgauS4wlfcRAQtEawgJk=",
         "owner": "doronz88",
         "repo": "pymobiledevice3",
-        "rev": "f2e2de501c136b1ed69f1448dbf71c4bcecc6665",
+        "rev": "2d43f1c210fb42b622c7b98719fd504cc5ba205d",
         "type": "github"
       },
       "original": {
@@ -440,11 +440,11 @@
     "xcodebuild-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1755467596,
-        "narHash": "sha256-AY/EFDXMg0vDqD4LMr/TOn1H/KaaIvEWBg6sKgWjL4k=",
+        "lastModified": 1756080495,
+        "narHash": "sha256-Jir/JfNsjuvgroy+r7nPkGBlABC0lsutW1C3gkzdL+s=",
         "owner": "wojciech-kulik",
         "repo": "xcodebuild.nvim",
-        "rev": "b76a2a3ad0cb61ea33ed615844a8a1a658279d32",
+        "rev": "6fe6c0818d26d67207251700d838bb307c95f88d",
         "type": "github"
       },
       "original": {

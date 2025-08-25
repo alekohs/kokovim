@@ -66,8 +66,9 @@ in
       nodePackages.typescript-language-server
       python313Packages.python-lsp-server
       sqls
-      # dotnet lsp TODO: Check why this issn't building any more
-      # rzls
+      # dotnet lsp
+      # TODO: Verify that this can be built. https://github.com/NixOS/nixpkgs/pull/436593 think this might be the error
+      # pkgs-unstable.rzls
       # pkgs-unstable.roslyn-ls
       # roslyn-ls # v4 of roslyn ls
       sourcekit-lsp
@@ -89,7 +90,7 @@ in
 
       # For snacks image to work
       imagemagick # Images
-      tectonic # PDF
+      # tectonic # PDF
       mermaid-cli # Mermaid diagarams
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [

@@ -8,7 +8,7 @@ return {
           enable = true,
         },
         project = {
-          action = function(path) require("fzf-lua").files({ cwd = path }) end
+          action = function(path) require("fzf-lua").files({ cwd = path }) end,
         },
         shortcut = {
           {

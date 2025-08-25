@@ -1,5 +1,5 @@
 local utils = require("kokovim.utils")
-local paths = utils.get_packages_path({ "roslyn", "rzls" }, ":")
+local paths = utils.get_packages_path({ "roslyn", "rzls" }, ":", nil)
 
 -- Return empty if dotnet is not installed
 if vim.fn.executable("dotnet") == 1 then
@@ -15,20 +15,22 @@ local cmd = kokovim.is_nix
       "--logLevel=Information",
       "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
       "--stdio",
-      "--razorSourceGenerator=" .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+      "--razorSourceGenerator=" ..
+      vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
       "--razorDesignTimePath="
-        .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+      .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Targets",
+        "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
     }
-  or {
-    "roslyn",
-    "--stdio",
-    "--logLevel=Information",
-    "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-    "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-    "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
-    "--extension",
-    vim.fs.joinpath(rzls_path, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
-  }
+    or {
+      "roslyn",
+      "--stdio",
+      "--logLevel=Information",
+      "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+      "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+      "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+      "--extension",
+      vim.fs.joinpath(rzls_path, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
+    }
 
 ---@param edit string
 local function apply_vs_text_edit(edit)
@@ -114,7 +116,8 @@ return {
           navbuddy.attach(client, bufnr)
         end
 
-        vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end, { desc = "Lsp Navigation", buffer = bufnr })
+        vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end,
+          { desc = "Lsp Navigation", buffer = bufnr })
         vim.keymap.set("n", "<leader>xdc", function()
           local cwd = vim.fn.getcwd()
           local cmd = string.format("find %s -type d \\( -name bin -o -name obj \\) -exec rm -rf {} +", cwd)
