@@ -15,14 +15,14 @@ return {
     },
     opts = {
       cmdline = {
-      format = {
-        search_down = {
-          view = "cmdline",
+        format = {
+          search_down = {
+            view = "cmdline",
+          },
+          search_up = {
+            view = "cmdline",
+          },
         },
-        search_up = {
-          view = "cmdline",
-        },
-      },
       },
       lsp = {
         override = {

@@ -37,6 +37,9 @@ let
         "xcodebuild.project.assets"
         "xcodebuild.integrations.xcode-build-server"
         "xcodebuild.integrations.dap"
+        "xcodebuild.integrations.fzf-lua"
+        "xcodebuild.integrations.telescope-nvim"
+        "xcodebuild.integrations.snacks-picker"
         "xcodebuild.code_coverage.report"
         "xcodebuild.dap"
       ];

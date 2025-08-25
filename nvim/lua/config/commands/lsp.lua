@@ -1,49 +1,42 @@
 local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
+local aucmd = vim.api.nvim_create_autocmd
 local group = augroup("KokovimLsp", { clear = true })
 
-local diagnostic_floats = {}
-
--- Open a diagnostic float and track its window
-local function open_diagnostic_float()
-  local win = vim.diagnostic.open_float(nil, { focus = false, scope = "line" })
-  if win then
-    diagnostic_floats[win] = true
-  end
-end
-
--- Close all tracked diagnostic floats
-local function close_diagnostic_floats()
-  for win, _ in pairs(diagnostic_floats) do
-    if vim.api.nvim_win_is_valid(win) then
-      pcall(vim.api.nvim_win_close, win, true)
-    end
-    diagnostic_floats[win] = nil
-  end
-end
-
-autocmd("FileType", {
+aucmd("FileType", {
   group = group,
   pattern = { "cs", "razor" },
   command = "setlocal tabstop=4 shiftwidth=4",
 })
 
-autocmd({ "CursorMoved", "CursorMovedI" }, {
+aucmd({ "InsertEnter" }, {
   pattern = "*",
   group = group,
   callback = function()
-    close_diagnostic_floats()
+    vim.diagnostic.enable(false)
   end,
 })
 
-autocmd("CursorHold", {
+aucmd({ "InsertLeave" }, {
+  pattern = "*",
   group = group,
   callback = function()
-    open_diagnostic_float()
+    vim.diagnostic.enable(true)
   end,
 })
 
-autocmd("InsertCharPre", {
+aucmd({ "CursorHold", "InsertLeave" }, {
+  group = group,
+  callback = function()
+    local opts = {
+      focusable = false,
+      scope = 'cursor',
+      close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter' },
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end,
+})
+
+aucmd("InsertCharPre", {
   pattern = "*.cs",
   callback = function()
     local char = vim.v.char
@@ -68,7 +61,7 @@ autocmd("InsertCharPre", {
 })
 
 -- Attach only when Swift LSP is active
-autocmd("LspAttach", {
+aucmd("LspAttach", {
   group = augroup("XcodeBuild", { clear = true }),
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
