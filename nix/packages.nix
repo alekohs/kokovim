@@ -68,9 +68,9 @@ in
       sqls
       # dotnet lsp
       # TODO: Verify that this can be built. https://github.com/NixOS/nixpkgs/pull/436593 think this might be the error
-      # pkgs-unstable.rzls
+      pkgs-unstable.rzls
       # pkgs-unstable.roslyn-ls
-      # roslyn-ls # v4 of roslyn ls
+      roslyn-ls # v4 of roslyn ls
       sourcekit-lsp
 
       # LINT
