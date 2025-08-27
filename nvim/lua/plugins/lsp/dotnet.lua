@@ -5,28 +5,31 @@ local paths = utils.get_packages_path({ "roslyn", "rzls" }, ":", nil)
 if vim.fn.executable("dotnet") == 0 then return {} end
 
 local function remove_bin_suffix(str) return str:gsub("/bin$", "") end
-paths.rzls = (paths.rzls == nil or paths.rzls == "") and vim.fn.expand("$MASON/packages/rzls/libexec") or paths.rzls
+local function get_rzls_path() return (paths.rzls == nil or paths.rzls == "") and vim.fn.expand("$MASON/packages/rzls/libexec") or paths.rzls end
+local function get_cmd()
+  paths.rzls = get_rzls_path()
 
-local cmd = kokovim.is_nix
-    and {
-      vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.LanguageServer"),
+  local cmd = kokovim.is_nix
+      and {
+        vim.fs.joinpath(paths.roslyn, "Microsoft.CodeAnalysis.LanguageServer"),
+        "--logLevel=Information",
+        "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+        "--stdio",
+        "--razorSourceGenerator=" .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+        "--razorDesignTimePath="
+          .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+      }
+    or {
+      "roslyn",
+      "--stdio",
       "--logLevel=Information",
       "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-      "--stdio",
-      "--razorSourceGenerator=" .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-      "--razorDesignTimePath="
-        .. vim.fs.joinpath(remove_bin_suffix(paths.rzls), "lib", "rzls", "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+      "--razorSourceGenerator=" .. vim.fs.joinpath(paths.rzls, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+      "--razorDesignTimePath=" .. vim.fs.joinpath(paths.rzls, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+      "--extension",
+      vim.fs.joinpath(paths.rzls, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
     }
-  or {
-    "roslyn",
-    "--stdio",
-    "--logLevel=Information",
-    "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-    "--razorSourceGenerator=" .. vim.fs.joinpath(paths.rzls, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-    "--razorDesignTimePath=" .. vim.fs.joinpath(paths.rzls, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
-    "--extension",
-    vim.fs.joinpath(paths.rzls, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
-  }
+end
 
 ---@param edit string
 local function apply_vs_text_edit(edit)
@@ -74,8 +77,9 @@ return {
       }),
       kokovim.get_plugin_by_repo("tris203/rzls.nvim", {
         config = function()
+          rzls_path = get_rzls_path()
           require("rzls").setup({
-            path = vim.fs.joinpath(paths.rzls, "rzls"),
+            path = vim.fs.joinpath(rzls_path, "rzls"),
             config = true,
           })
         end,
@@ -122,7 +126,7 @@ return {
       end
 
       vim.lsp.config("roslyn", {
-        cmd = cmd,
+        cmd = get_cmd(),
         on_attach = on_attach,
         capabilities = capabilities,
         handlers = {
