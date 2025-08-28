@@ -3,11 +3,17 @@ local mappings = {
   { mode = "n", keys = { "y", "Y", "p", "P" } },
   { mode = "v", keys = { "y", "p" } },
 }
+local descriptions = {
+  ["y"] = "Yank to system clipboard",
+  ["Y"] = "Yank line to system clipboard",
+  ["p"] = "Paste from system clipboard",
+  ["P"] = "Paste before from system clipboard",
+}
 
 for _, map in ipairs(mappings) do
   for _, key in ipairs(map.keys) do
     local rhs = '"+' .. key
-    vim.keymap.set(map.mode, "<A-" .. key .. ">", rhs, { noremap = true, silent = true })
+    vim.keymap.set(map.mode, "<leader>" .. key, rhs, { noremap = true, silent = true, desc = rhs .. " " .. descriptions[key] })
   end
 end
 
