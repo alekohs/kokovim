@@ -8,16 +8,31 @@ let
   };
 
   pkgs = final;
-  pkgs-locked = inputs.nixpkgs.legacyPackages.${pkgs.system};
   pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
-
-  # This is the helper function that builds the Neovim derivation.
-  mkNeovim = pkgs.callPackage ../lib/mkNeovim.nix {
-    inherit (pkgs-locked) wrapNeovimUnstable neovimUtils;
-  };
+  # pkgs-roslyn = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system};
 
   plugins = import ./plugins.nix { inherit inputs pkgs opts; };
-  packages = import ./packages.nix { inherit inputs pkgs pkgs-unstable; };
+  packages = import ./packages.nix {
+    inherit inputs pkgs-unstable;
+    pkgs = pkgs // {
+      roslyn-ls = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system}.roslyn-ls;
+      rzls = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system}.rzls;
+    };
+  };
+
+  # This is the helper function that builds the Neovim derivation.
+  mkNeovim =
+    (pkgs.callPackage ../lib/mkNeovim.nix {
+      inherit (pkgs) wrapNeovimUnstable neovimUtils;
+    }).override
+      {
+        pkgs = pkgs // {
+          roslyn-ls = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system}.roslyn-ls;
+          rzls = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system}.rzls;
+        };
+
+      };
+
 in
 {
   # This is the neovim derivation
