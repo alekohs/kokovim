@@ -1,8 +1,7 @@
 local opt = vim.opt
 
-
 -- Clipboard
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = "unnamedplus"  -- Copy to the clipboard register
 
 -- General
 opt.autowrite = true
@@ -48,4 +47,3 @@ opt.virtualedit = "block"
 opt.writebackup = false
 opt.wildmode = { "longest:full", "full" }
 opt.wrap = false
-

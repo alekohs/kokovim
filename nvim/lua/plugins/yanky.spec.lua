@@ -3,7 +3,7 @@ return {
     event = { "BufReadPre", "BufNewFile", "BufReadPost" },
     dependencies = { kokovim.get_plugin_by_repo("ibhagwan/fzf-lua") },
     keys = {
-      { "<leader>fy", function() require("fzf-lua").yanky_history() end, desc = "Paste from yanky" },
+      { "<leader>y", function() vim.cmd([[YankyRingHistory]]) end, mode = { "n", "x" }, desc = "Yanky history" },
 
       { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
       { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
