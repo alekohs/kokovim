@@ -22,7 +22,7 @@ return {
     priority = 1000,
     opts = {
       options = {
-        set_arrow_to_diag_color = true
+        set_arrow_to_diag_color = true,
       },
     },
   }),
