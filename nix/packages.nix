@@ -60,17 +60,15 @@ in
       taplo-cli
       rust-analyzer
       nixd
-      # tailwindcss-language-server
+      tailwindcss-language-server
       nodePackages.tailwindcss
       nodePackages.typescript
       nodePackages.typescript-language-server
       python313Packages.python-lsp-server
       sqls
       # dotnet lsp
-      # TODO: Verify that this can be built. https://github.com/NixOS/nixpkgs/pull/436593 think this might be the error
-      # pkgs-unstable.rzls
-      # pkgs-unstable.roslyn-ls
-      # roslyn-ls # v4 of roslyn ls
+      rzls
+      roslyn-ls
       sourcekit-lsp
 
       # LINT

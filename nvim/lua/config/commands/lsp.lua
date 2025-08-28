@@ -8,34 +8,6 @@ aucmd("FileType", {
   command = "setlocal tabstop=4 shiftwidth=4",
 })
 
-aucmd({ "InsertEnter" }, {
-  pattern = "*",
-  group = group,
-  callback = function()
-    vim.diagnostic.enable(false)
-  end,
-})
-
-aucmd({ "InsertLeave" }, {
-  pattern = "*",
-  group = group,
-  callback = function()
-    vim.diagnostic.enable(true)
-  end,
-})
-
-aucmd({ "CursorHold", "InsertLeave" }, {
-  group = group,
-  callback = function()
-    local opts = {
-      focusable = false,
-      scope = 'cursor',
-      close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter' },
-    }
-    vim.diagnostic.open_float(nil, opts)
-  end,
-})
-
 aucmd("InsertCharPre", {
   pattern = "*.cs",
   callback = function()

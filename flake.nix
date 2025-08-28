@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
+    # TODO Update to lastest when a fix is in place
+    # Pointed to rev before breaking roslyn
+    nixpkgs-roslyn.url = "github:nixos/nixpkgs/1f482c9fa69b5279300a4aef64158a11b59c4c17";
+
     flake-utils.url = "github:numtide/flake-utils";
 
     flake-parts = {

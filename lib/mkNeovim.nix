@@ -128,8 +128,8 @@ let
 
   # Add specific paths here to be used inside the
   packagesJson = builtins.toJSON {
-    # roslyn = "${pkgs.roslyn-ls}";
-    # rzls = "${pkgs.rzls}";
+    roslyn = "${pkgs.roslyn-ls}";
+    rzls = "${pkgs.rzls}";
     codelldb = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}";
   };
 

@@ -1,5 +1,3 @@
-local function configure_mason() end
-
 local lsps = {
   "dockerls",
   "cssls",
@@ -19,6 +17,15 @@ local lsps = {
 }
 
 return {
+  kokovim.get_plugin_by_repo("rachartier/tiny-inline-diagnostic.nvim", {
+    event = "VeryLazy",
+    priority = 1000,
+    opts = {
+      options = {
+        set_arrow_to_diag_color = true
+      },
+    },
+  }),
   kokovim.get_plugin_by_repo("neovim/nvim-lspconfig", {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {

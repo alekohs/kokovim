@@ -133,7 +133,8 @@ with pkgs.vimPlugins;
   nvim-navbuddy
   dashboard-nvim
   nvim-notify
-  fidget-nvim
+  tiny-inline-diagnostic-nvim
+  transparent-nvim
 
   # Completion
   blink-cmp
