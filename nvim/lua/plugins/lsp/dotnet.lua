@@ -1,5 +1,5 @@
 local utils = require("kokovim.utils")
-local paths = utils.get_packages_path({ "roslyn", "rzls" }, ":", nil)
+local paths = utils.get_packages_path({ "roslyn", "rzls" }, ":")
 
 -- Return empty if dotnet is not installed
 if vim.fn.executable("dotnet") == 0 then return {} end
@@ -29,6 +29,8 @@ local function get_cmd()
       "--extension",
       vim.fs.joinpath(paths.rzls, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
     }
+
+  return cmd
 end
 
 ---@param edit string

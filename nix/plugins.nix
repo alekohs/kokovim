@@ -70,6 +70,17 @@ let
       nvimSkipModule = [ "oil-lsp-diagnostics" ];
     }
 
+    {
+      src = inputs.rzls-nvim;
+      pname = "rzls.nvim";
+      nvimSkipModule = [ ];
+    }
+    {
+      src = inputs.roslyn-nvim;
+      pname = "roslyn.nvim";
+      nvimSkipModule = [ ];
+    }
+
   ];
 
   flakePlugins = map (p: lib.mkVimPlugin p) plugins-spec;
@@ -160,8 +171,6 @@ with pkgs.vimPlugins;
 
   # LSP
   nvim-lspconfig
-  roslyn-nvim
-  rzls-nvim
   dotnet-nvim
   easy-dotnet-nvim
 

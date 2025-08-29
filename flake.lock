@@ -263,17 +263,17 @@
     },
     "nixpkgs-roslyn": {
       "locked": {
-        "lastModified": 1751768854,
-        "narHash": "sha256-fearCt0LmIu7jw6jpiRg6Trl1lyrsm45xbVWU0cBxVw=",
+        "lastModified": 1750448434,
+        "narHash": "sha256-7BFe8hLRv0MX4k7AFDHu6PmWYqU981dabKQzhCDH+WQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1f482c9fa69b5279300a4aef64158a11b59c4c17",
+        "rev": "a5425d5c2dcdcb0305e8c2658c03068763133c80",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1f482c9fa69b5279300a4aef64158a11b59c4c17",
+        "rev": "a5425d5c2dcdcb0305e8c2658c03068763133c80",
         "type": "github"
       }
     },
@@ -402,8 +402,26 @@
         "otree-nvim": "otree-nvim",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
         "pymobiledevice3-flake": "pymobiledevice3-flake",
+        "roslyn-nvim": "roslyn-nvim",
+        "rzls-nvim": "rzls-nvim",
         "snacks-nvim": "snacks-nvim",
         "xcodebuild-nvim": "xcodebuild-nvim"
+      }
+    },
+    "roslyn-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755794948,
+        "narHash": "sha256-tZDH6VDRKaRaoSuz3zyeN/omoAwOf5So8PGUXHt2TLk=",
+        "owner": "seblyng",
+        "repo": "roslyn.nvim",
+        "rev": "0c4a6f5b64122b51a64e0c8f7aae140ec979690e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seblyng",
+        "repo": "roslyn.nvim",
+        "type": "github"
       }
     },
     "rust-analyzer-src": {
@@ -420,6 +438,22 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "rzls-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753038141,
+        "narHash": "sha256-yPqnlDwLmcCgST5AIqjSrLQXBCRB4vdwLcu0bhyT1f4=",
+        "owner": "tris203",
+        "repo": "rzls.nvim",
+        "rev": "1798c64830547d711b14dc2f3f47da15584d8aab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tris203",
+        "repo": "rzls.nvim",
         "type": "github"
       }
     },
