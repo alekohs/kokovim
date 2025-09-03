@@ -17,6 +17,10 @@ for _, map in ipairs(mappings) do
   end
 end
 
+-- Movement
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true, desc = "Half-page down with center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true, desc = "Half-page up with center"})
+
 -- Tabs
 vim.keymap.set("n", "<leader><tab>o", "<CMD>tabonly<CR>", { desc = "Close Other tabs" })
 vim.keymap.set("n", "<leader><tab>l", "<CMD>tablast<CR>", { desc = "Last tab" })
