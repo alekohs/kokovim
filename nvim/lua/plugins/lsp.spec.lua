@@ -4,7 +4,6 @@ local lsps = {
   "fish_lsp",
   "gopls",
   "graphql",
-  "html",
   "lua_ls",
   "nixd",
   "sqlls",
@@ -104,6 +103,19 @@ return {
         end
       end
 
+      ---
+      --- HTML
+      ---
+      lspconfig.html.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "html" },
+        init_options = {
+          configurationSection = { "html", "css", "javascript" },
+          embeddedLanguages = { css = true, javascript = true },
+          provideFormatter = true,
+        },
+      })
       ---
       --- Python
       ---

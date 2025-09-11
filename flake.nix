@@ -7,7 +7,7 @@
 
     # TODO Update to lastest when a fix is in place
     # Pointed to rev before breaking roslyn
-    nixpkgs-roslyn.url = "github:nixos/nixpkgs/1f482c9fa69b5279300a4aef64158a11b59c4c17";
+    nixpkgs-roslyn.url = "github:nixos/nixpkgs/a5425d5c2dcdcb0305e8c2658c03068763133c80";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -62,6 +62,17 @@
       url = "github:Eutrius/Otree.nvim";
       flake = false;
     };
+
+    roslyn-nvim = {
+      url = "github:seblyng/roslyn.nvim";
+      flake = false;
+    };
+
+    rzls-nvim = {
+      url = "github:tris203/rzls.nvim";
+      flake = false;
+    };
+
   };
   outputs =
     {
