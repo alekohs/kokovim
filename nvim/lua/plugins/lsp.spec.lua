@@ -104,7 +104,7 @@ return {
       ---
       --- HTML
       ---
-      lspconfig.html.setup({
+      vim.lsp.config("html", {
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = { "html" },
