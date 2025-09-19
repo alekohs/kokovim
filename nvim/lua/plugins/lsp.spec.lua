@@ -65,7 +65,6 @@ return {
       },
     },
     config = function(_, opts)
-      local lspconfig = require("lspconfig")
       local navic = require("nvim-navic")
       local navbuddy = require("nvim-navbuddy")
 
@@ -77,7 +76,8 @@ return {
           navbuddy.attach(client, bufnr)
         end
 
-        vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end, { desc = "Lsp Navigation", buffer = bufnr })
+        vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end,
+          { desc = "Lsp Navigation", buffer = bufnr })
       end
 
       -- Shared capabilities (for blink-cmp etc.)
@@ -94,13 +94,11 @@ return {
 
       -- Loop all simple lsps
       for _, lsp in ipairs(lsps) do
-        local cfg = lspconfig[lsp]
-        if cfg and type(cfg.setup) == "function" then
-          cfg.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-          })
-        end
+        vim.lsp.config(lsp, {
+          on_attach = on_attach,
+          capabilities = capabilities,
+
+        })
       end
 
       ---
@@ -119,7 +117,7 @@ return {
       ---
       --- Python
       ---
-      lspconfig.pylsp.setup({
+      vim.lsp.config("pylsp", {
         filetypes = { "python" },
         cmd = { "pylsp" },
       })
@@ -127,7 +125,7 @@ return {
       --
       -- Javascript/Typescript
       --
-      lspconfig.ts_ls.setup({
+      vim.lsp.config("ts_ls", {
         on_attach = function(client, bufnr)
           -- Disable ts_ls formatting if using prettier/eslint
           client.server_capabilities.documentFormattingProvider = false
@@ -140,14 +138,14 @@ return {
       --
       -- Swift / Xcode
       --
-      lspconfig.sourcekit.setup({
+      vim.lsp.config("sourcekit", {
         cmd = { "xcrun", "sourcekit-lsp" },
         root = function(filename)
           local util = require("lspconfig.util")
           return util.root_pattern("buildServer.json")(filename)
-            or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
-            or util.find_git_ancestor(filename)
-            or util.root_pattern("Package.swift")
+              or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
+              or util.find_git_ancestor(filename)
+              or util.root_pattern("Package.swift")
         end,
         on_attach = on_attach,
         capabilities = capabilities,
@@ -161,12 +159,12 @@ return {
       })
     end,
     keys = {
-      { "gd", function() require("fzf-lua").lsp_definitions() end, mode = "n", desc = "Goto definition", silent = true },
-      { "gD", function() require("fzf-lua").lsp_declarations() end, mode = "n", desc = "Goto declaration" },
-      { "gi", function() require("fzf-lua").lsp_implementations() end, mode = "n", desc = "Goto Implementations" },
-      { "gy", function() require("fzf-lua").lsp_typedefs() end, mode = "n", desc = "Goto T[y]pe Definition" },
-      { "gr", function() require("fzf-lua").lsp_references() end, mode = "n", desc = "References", silent = true },
-      { "<leader>ca", function() vim.lsp.buf.code_action() end, mode = "n", desc = "Code Action" },
+      { "gd",         function() require("fzf-lua").lsp_definitions() end,     mode = "n", desc = "Goto definition",       silent = true },
+      { "gD",         function() require("fzf-lua").lsp_declarations() end,    mode = "n", desc = "Goto declaration" },
+      { "gi",         function() require("fzf-lua").lsp_implementations() end, mode = "n", desc = "Goto Implementations" },
+      { "gy",         function() require("fzf-lua").lsp_typedefs() end,        mode = "n", desc = "Goto T[y]pe Definition" },
+      { "gr",         function() require("fzf-lua").lsp_references() end,      mode = "n", desc = "References",            silent = true },
+      { "<leader>ca", function() vim.lsp.buf.code_action() end,                mode = "n", desc = "Code Action" },
       {
         "<leader>cA",
         function()
@@ -178,14 +176,14 @@ return {
         desc = "Source Action",
       },
 
-      { "<leader>cc", function() vim.lsp.codelens.run() end, mode = "n", desc = "Run Codelens" },
-      { "<leader>cC", function() vim.lsp.codelens.refresh() end, mode = "n", desc = "Refresh Codelens" },
-      { "<leader>cF", function() vim.lsp.buf.format() end, mode = "n", desc = "Format code with LSP" },
+      { "<leader>cc", function() vim.lsp.codelens.run() end,                           mode = "n", desc = "Run Codelens" },
+      { "<leader>cC", function() vim.lsp.codelens.refresh() end,                       mode = "n", desc = "Refresh Codelens" },
+      { "<leader>cF", function() vim.lsp.buf.format() end,                             mode = "n", desc = "Format code with LSP" },
 
-      { "K", function() return vim.lsp.buf.hover({ border = "rounded" }) end, mode = "n", desc = "Hover" },
-      { "<leader>gK", function() return vim.lsp.buf.signature_help() end, mode = "n", desc = "Signature help" },
-      { "<C-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature help" },
-      { "<leader>cr", vim.lsp.buf.rename, mode = "n", desc = "Rename" },
+      { "K",          function() return vim.lsp.buf.hover({ border = "rounded" }) end, mode = "n", desc = "Hover" },
+      { "<leader>gK", function() return vim.lsp.buf.signature_help() end,              mode = "n", desc = "Signature help" },
+      { "<C-k>",      function() return vim.lsp.buf.signature_help() end,              mode = "i", desc = "Signature help" },
+      { "<leader>cr", vim.lsp.buf.rename,                                              mode = "n", desc = "Rename" },
       -- Note: fzf-lua does not have rename_file by default, so this is left as a no-op or custom function:
       -- Replace with your own file rename function or plugin if needed:
       {
