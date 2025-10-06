@@ -19,7 +19,7 @@ end
 
 -- Movement
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true, desc = "Half-page down with center" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true, desc = "Half-page up with center"})
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true, desc = "Half-page up with center" })
 
 -- Tabs
 vim.keymap.set("n", "<leader><tab>o", "<CMD>tabonly<CR>", { desc = "Close Other tabs" })
@@ -36,3 +36,6 @@ vim.keymap.set("n", "<tab>[", "<CMD>tabprevious<CR>", { desc = "Previous Tab" })
 vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+
+-- Extra keymaps
+vim.keymap.set("n", "<leader>se", ":Endpoint <CR>", { desc = "Search Endpoints" })
