@@ -22,4 +22,10 @@ return {
       vim.cmd("colorscheme rose-pine")
     end,
   }),
+  kokovim.get_plugin_by_repo("zerochae/endpoint.nvim", {
+    cmd = { "Endpoint", "EndpointRefresh" },
+    config = function()
+      require("endpoint").setup()
+    end,
+  }),
 }

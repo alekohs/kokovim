@@ -45,6 +45,11 @@ let
       ];
     }
     {
+      src = inputs.endpoint-nvim;
+      pname = "endpoint.nvim";
+      nvimSkipModule = [];
+    }
+    {
       src = inputs.mini-nvim;
       pname = "mini-nvim";
       nvimSkipModule = [ ];
