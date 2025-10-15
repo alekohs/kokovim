@@ -79,7 +79,7 @@ return {
       }),
       kokovim.get_plugin_by_repo("tris203/rzls.nvim", {
         config = function()
-          rzls_path = get_rzls_path()
+          local rzls_path = get_rzls_path()
           require("rzls").setup({
             path = vim.fs.joinpath(rzls_path, "rzls"),
             config = true,

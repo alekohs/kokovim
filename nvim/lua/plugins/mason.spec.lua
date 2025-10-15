@@ -8,7 +8,6 @@ return {
         "github:Crashdummyy/mason-registry",
       },
     },
-    config = function(_, opts) require("mason").setup(opts) end,
   }),
   kokovim.get_plugin_by_repo("WhoIsSethDaniel/mason-tool-installer.nvim", {
     opts = {

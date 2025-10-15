@@ -36,6 +36,3 @@ vim.keymap.set("n", "<tab>[", "<CMD>tabprevious<CR>", { desc = "Previous Tab" })
 vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
-
--- Extra keymaps
-vim.keymap.set("n", "<leader>se", ":Endpoint <CR>", { desc = "Search Endpoints" })
