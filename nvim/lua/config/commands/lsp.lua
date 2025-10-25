@@ -32,6 +32,21 @@ aucmd("InsertCharPre", {
   end,
 })
 
+-- Easy dotnet keymaps
+aucmd("LspAttach", {
+  group = augroup("DotnetLsp", { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and (client.name == "roslyn" or client.name == "easy_dotnet") then
+      local dotnet = require("easy-dotnet")
+      local diagnostics = require("easy-dotnet.actions.diagnostics")
+      local opts = { buffer = args.buf, desc = "", noremap = true, silent = true }
+
+      vim.keymap.set("n", "<leader>x", "<cmd>Dotnet<CR>", vim.tbl_extend("force", opts, { desc = "Easy dotnet picker" }))
+    end
+  end,
+})
+
 -- Attach only when Swift LSP is active
 aucmd("LspAttach", {
   group = augroup("XcodeBuild", { clear = true }),
