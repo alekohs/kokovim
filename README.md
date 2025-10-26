@@ -1,7 +1,4 @@
 # Neovim flake - kokovim
-
-Inspiration [Context: https://github.com/aorith/neovim-flake/blob/master/README.md]
-
 ## Configuration
 
 Neovim for nix [Context: https://github.com/NixOS/nixpkgs/blob/f71ccdc1bc17dffc83a8c49d0aa9ae92644572ab/doc/languages-frameworks/neovim.section.md?plain=1#L3]
