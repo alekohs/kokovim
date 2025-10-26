@@ -50,6 +50,11 @@ let
       nvimSkipModule = [ ];
     }
     {
+      src = inputs.monoglow;
+      pname = "monoglow.nvim";
+      nvimSkipModule = [ ];
+    }
+    {
       src = inputs.colorful-menu-nvim;
       pname = "colorful-menu-nvim";
       nvimSkipModule = [

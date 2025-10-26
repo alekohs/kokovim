@@ -19,7 +19,7 @@ return {
         options = {
           icons_enabled = true,
           globalstatus = true,
-          theme = "rose-pine",
+          theme = kokovim.get_colorscheme(),
           disabled_filetypes = {
             statusline = {
               "startify",
