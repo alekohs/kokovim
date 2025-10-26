@@ -233,6 +233,22 @@
         "type": "github"
       }
     },
+    "monoglow": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736178514,
+        "narHash": "sha256-GqrD+DnzIOHeBRRWR2qszOcPt2BMfelJLrCVu+2g0Ww=",
+        "owner": "wnkz",
+        "repo": "monoglow.nvim",
+        "rev": "95a2595f5ea3b8ee94d7030f7970746b363ad47f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wnkz",
+        "repo": "monoglow.nvim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1718714799,
@@ -395,6 +411,7 @@
         "flake-utils": "flake-utils",
         "gen-luarc": "gen-luarc",
         "mini-nvim": "mini-nvim",
+        "monoglow": "monoglow",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-roslyn": "nixpkgs-roslyn",
         "nixpkgs-unstable": "nixpkgs-unstable",

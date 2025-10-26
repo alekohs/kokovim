@@ -25,6 +25,11 @@
       flake = false;
     };
 
+    monoglow = {
+      url = "github:wnkz/monoglow.nvim";
+      flake = false;
+    };
+
     xcodebuild-nvim = {
       url = "github:wojciech-kulik/xcodebuild.nvim";
       flake = false;

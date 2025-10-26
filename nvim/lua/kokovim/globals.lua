@@ -25,5 +25,11 @@ function M.get_plugin_by_repo(github, config)
   return plugin.get_plugin(localDir, github, config)
 end
 
+--- Get color scheme
+---@return colorscheme (string)
+function M.get_colorscheme()
+  return "rose-pine" -- monoglow
+end
+
 -- Define the globals under kokovim
 _G.kokovim = M

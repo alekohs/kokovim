@@ -1,3 +1,4 @@
+-- Only configure this if it's Darwin (macos)
 return kokovim.get_plugin_by_repo("wojciech-kulik/xcodebuild.nvim", {
   cond = kokovim.is_darwin,
   dependencies = {
