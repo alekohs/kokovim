@@ -12,24 +12,27 @@ echo "3) pick your own"
 read -p "Enter selection (1-3): " selection
 
 case $selection in
-    1) APPNAME="nvim" ;;
-    2) APPNAME="kokovim-dev" ;;
-    3)
-      read -p "Custom name: " APPNAME
-      ;;
-    *) echo "Invalid selection. Exiting."; exit 1 ;;
+1) APPNAME="nvim" ;;
+2) APPNAME="kokovim-dev" ;;
+3)
+  read -p "Custom name: " APPNAME
+  ;;
+*)
+  echo "Invalid selection. Exiting."
+  exit 1
+  ;;
 esac
 
 KOKOVIM_DEBUG=false
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    -d)
-      KOKOVIM_DEBUG=true
-      shift
-      ;;
-    *)
-      shift
-      ;;
+  -d)
+    KOKOVIM_DEBUG=true
+    shift
+    ;;
+  *)
+    shift
+    ;;
   esac
 done
 

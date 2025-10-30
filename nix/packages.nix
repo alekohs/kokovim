@@ -64,6 +64,7 @@ in
       nodePackages.tailwindcss
       nodePackages.typescript
       nodePackages.typescript-language-server
+      nodePackages.bash-language-server
       python313Packages.python-lsp-server
       sqls
       # dotnet lsp

@@ -1,6 +1,6 @@
 local lsps = {
-  "dockerls",
   "cssls",
+  "dockerls",
   "fish_lsp",
   "gopls",
   "graphql",
@@ -100,6 +100,14 @@ return {
       end
 
       ---
+      --- Bash
+      ---
+      vim.lsp.config("bashls", {
+        filetypes = { "sh", "bash" },
+        cmd = { "bash-language-server", "start" },
+      })
+
+      ---
       --- HTML
       ---
       vim.lsp.config("html", {
@@ -112,6 +120,7 @@ return {
           provideFormatter = true,
         },
       })
+
       ---
       --- Python
       ---

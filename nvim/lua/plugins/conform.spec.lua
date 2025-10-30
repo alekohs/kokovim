@@ -7,6 +7,7 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
     },
     formatters_by_ft = {
       bash = { "shellcheck", "shellharden", "shfmt" },
+      sh = { "shellcheck", "shellharden", "shfmt" },
 
       -- TODO: Update to use biome instead of prettier
       -- html = { "biome" },
@@ -68,12 +69,11 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       "<leader>cf",
       function()
         require("conform").format({
-          lsp_fallback = true
-
+          lsp_fallback = true,
         })
       end,
       mode = "n",
-      desc = "Format injected language"
+      desc = "Format injected language",
     },
     {
       "<leader>cF",
