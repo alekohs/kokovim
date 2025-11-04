@@ -3,4 +3,5 @@ require("kokovim.globals")
 require("config.globals")
 require("config.lazy")
 
-vim.cmd("colorscheme rose-pine")
+vim.cmd("set background=dark")
+vim.cmd("colorscheme rosebones")

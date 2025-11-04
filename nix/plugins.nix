@@ -181,6 +181,8 @@ with pkgs.vimPlugins;
 
   # Colorschemes
   rose-pine
+  zenbones-nvim
+  lush-nvim
 
   # Other
   vim-nix

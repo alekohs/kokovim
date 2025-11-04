@@ -1,4 +1,9 @@
 return {
+  kokovim.get_plugin_by_repo("zenbones-theme/zenbones.nvim", {
+    dependencies = { kokovim.get_plugin_by_repo("rktjmp/lush.nvim") },
+    lazy = false,
+    priority = 1000,
+  }),
   kokovim.get_plugin("rose-pine", "rose-pine/neovim", {
     name = "rose-pine",
     lazy = false,
