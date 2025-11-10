@@ -70,6 +70,13 @@ return {
 
       -- Shared `on_attach` if you want keymaps, etc.
       local on_attach = function(client, bufnr)
+        -- Stop if buftype is empty
+        local bt = vim.api.nvim_buf_get_option(bufnr, "buftype")
+        if bt ~= "" then
+          client.stop()
+          return
+        end
+
         if client.server_capabilities.documentSymbolProvider then
           vim.notify("Attach navic to buffer", vim.log.levels.DEBUG)
           navic.attach(client, bufnr)
@@ -105,6 +112,8 @@ return {
       vim.lsp.config("bashls", {
         filetypes = { "sh", "bash" },
         cmd = { "bash-language-server", "start" },
+        on_attach = on_attach,
+        capabilities = capabilities,
       })
 
       ---
@@ -127,6 +136,8 @@ return {
       vim.lsp.config("pylsp", {
         filetypes = { "python" },
         cmd = { "pylsp" },
+        on_attach = on_attach,
+        capabilities = capabilities,
       })
 
       --

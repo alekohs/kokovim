@@ -96,6 +96,14 @@ return {
       }),
     },
     config = function()
+      require("roslyn").setup({
+        cmd = get_cmd(),
+        config = {
+          silent = true,
+          handlers = require("rzls.roslyn_handlers"),
+        },
+      })
+
       local navic = require("nvim-navic")
       local navbuddy = require("nvim-navbuddy")
 
@@ -128,15 +136,15 @@ return {
       end
 
       vim.lsp.config("roslyn", {
-        cmd = get_cmd(),
+        --cmd = get_cmd(),
         on_attach = on_attach,
         capabilities = capabilities,
-        handlers = {
-          ["textDocument/_vs_onAutoInsert"] = function(err, result, _)
-            if err or not result then return end
-            apply_vs_text_edit(result._vs_textEdit)
-          end,
-        },
+        -- handlers = {
+        --   ["textDocument/_vs_onAutoInsert"] = function(err, result, _)
+        --     if err or not result then return end
+        --     apply_vs_text_edit(result._vs_textEdit)
+        --   end,
+        -- },
         settings = {
           ["csharp|completion"] = {
             dotnet_provide_regex_completions = true,
