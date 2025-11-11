@@ -124,6 +124,7 @@ with pkgs.vimPlugins;
   fzf-lua
   oil-nvim
   oil-git-status-nvim
+  fyler-nvim
   neo-tree-nvim
   nui-nvim
   which-key-nvim
