@@ -83,16 +83,12 @@ return {
     dependencies = { kokovim.get_plugin_by_repo("stevearc/oil.nvim") },
     opts = {},
   }),
-  kokovim.get_plugin("otree-nvim", "Eutrius/Otree.nvim", {
-    dependencies = { kokovim.get_plugin_by_repo("stevearc/oil.nvim") },
-    lazy = false,
-    config = function() require("Otree").setup() end,
-    keys = {
-      {
-        "<leader>fo",
-        ":Otree<CR>",
-        desc = "Open OTree",
-      },
-    },
+  kokovim.get_plugin_by_repo("A7Lavinraj/fyler.nvim", {
+    dependencies = { kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons") },
+    opts = {
+      views = {
+        delete_to_trash = true
+      }
+    }
   }),
 }
