@@ -57,7 +57,7 @@ in
       marksman
       markdownlint-cli2
       yaml-language-server
-      taplo-cli
+      taplo
       rust-analyzer
       nixd
       tailwindcss-language-server
@@ -73,7 +73,7 @@ in
       sourcekit-lsp
 
       # LINT
-      nodePackages.jsonlint
+      #nodePackages.jsonlint
       nodePackages.markdownlint-cli
       biome
       htmlhint
