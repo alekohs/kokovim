@@ -70,7 +70,6 @@ in
       # dotnet lsp
       rzls
       roslyn-ls
-      sourcekit-lsp
 
       # LINT
       #nodePackages.jsonlint
@@ -97,6 +96,7 @@ in
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
       (pkgs.ruby.withPackages (ps: [ ps.xcodeproj ]))
+      sourcekit-lsp
       swiftlint
       swiftformat
       vscode-extensions.vadimcn.vscode-lldb
