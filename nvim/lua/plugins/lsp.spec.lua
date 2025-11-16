@@ -13,7 +13,7 @@ local lsps = {
   "yamlls",
   "ziggy",
   "marksman",
-}
+  "powershell_es", }
 
 return {
   kokovim.get_plugin_by_repo("rachartier/tiny-inline-diagnostic.nvim", {
