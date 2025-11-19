@@ -138,10 +138,13 @@ let
     (optional (
       appName != "nvim" && appName != null && appName != ""
     ) ''--set NVIM_APPNAME "${appName}"'')
-    # Add nix load status and set rp environment variable
+
+      # Add nix load status and set rp environment variable
     ++ (optional (useNix) ''--set NVIM_NIX "1"'')
     ++ (optional (useNix) ''--set NVIM_PLUGINS_RP "${nvimRtp}/plugins"'')
     ++ (optional (useNix) ''--set NVIM_PACKAGES "${packagesJson}"'')
+    ++ (optional (useNix) ''--set LD_LIBRARY_PATH "${pkgs.openssl}/lib"'')
+    ++ (optional (useNix) ''--set DYLD_LIBRARY_PATH "${pkgs.openssl}/lib"'')
     ++ (optional (useSSH) ''--set NVIM_PLUGINS_SSH "1"'')
     # Add external packages to the PATH
     ++ (optional (externalPackages != [ ]) ''--prefix PATH : "${makeBinPath externalPackages}"'')

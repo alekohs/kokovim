@@ -1,7 +1,7 @@
 -- Key mappings for system clipboard
 local mappings = {
   { mode = "n", keys = { "y", "Y", "p", "P" } },
-  { mode = "v", keys = { "y", "p" } },
+  { mode = "v", keys = { "y", "p", "P" } },
 }
 local descriptions = {
   ["y"] = "Yank to system clipboard",

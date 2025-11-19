@@ -14,8 +14,8 @@ let
   packages = import ./packages.nix {
     inherit inputs pkgs-unstable;
     pkgs = pkgs // {
-      #roslyn-ls = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system}.roslyn-ls;
-      #rzls = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system}.rzls;
+      #roslyn-ls = pkgs-unstable.roslyn-ls;
+      #rzls = pkgs-unstable.rzls;
     };
   };
 
@@ -26,8 +26,8 @@ let
     }).override
       {
         pkgs = pkgs // {
-        #roslyn-ls = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system}.roslyn-ls;
-        #rzls = inputs.nixpkgs-roslyn.legacyPackages.${pkgs.system}.rzls;
+        #roslyn-ls = pkgs-unstable.roslyn-ls;
+        #rzls = pkgs-unstable.rzls;
         };
 
       };
