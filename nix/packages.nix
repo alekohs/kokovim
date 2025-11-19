@@ -34,6 +34,7 @@ in
       gcc # needed for nvim-treesitter
       gh
       wordnet
+      openssl
 
       # Formatters
       codespell
