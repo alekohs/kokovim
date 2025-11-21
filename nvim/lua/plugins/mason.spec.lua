@@ -19,6 +19,7 @@ return {
         { "docker-language-server", condition = function() return vim.fn.executable("docker") == 1 or vim.fn.executable("podman") == 1 end },
         { "gopls", condition = function() return vim.fn.executable("go") == 1 end },
         "fish-lsp",
+        "html-lsp",
         "lua-language-server",
         "vim-language-server",
         "marksman",
