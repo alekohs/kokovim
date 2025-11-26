@@ -1,5 +1,5 @@
-local utils = require('kokovim.utils')
-local plugin = require('kokovim.plugin')
+local utils = require("kokovim.utils")
+local plugin = require("kokovim.plugin")
 
 -- print("Loaded app '" .. utils.app_name.. "' with nix: " .. tostring(utils.is_nix()))
 
@@ -26,9 +26,14 @@ function M.get_plugin_by_repo(github, config)
 end
 
 --- Get color scheme
----@return colorscheme (string)
+---@return string (colorscheme)
 function M.get_colorscheme()
-  return "rose-pine" -- monoglow
+  local color = os.getenv("KOKOVIM_COLOR")
+  if color == nil or color == "" then
+    color = "transparent"
+  end
+
+  return color
 end
 
 -- Define the globals under kokovim

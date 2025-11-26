@@ -1,23 +1,19 @@
 local M = {}
 
----@brief Open a harpoon in fzf-lua picker
---- @param list table
-function M.harpoon_fzf(list)
+--- Get colorscheme picker
+---@return string Colorscheme
+M.theme_picker = function()
+  local themes = vim.fn.getcompletion("", "color") -- list all colorschemes
+
+  -- Use FZF to pick one
   local fzf = require("fzf-lua")
+  local preview = function(theme) return "hi Normal guifg=white guibg=black | colorscheme " .. theme end
 
-  local items = {}
-  for _, item in ipairs(list.items) do
-    table.insert(items, item.value)
-  end
-
-  fzf.fzf_exec(items, {
-    prompt = "Harpoon Files> ",
-    previewer = "builtin",
+  fzf(themes, {
+    prompt = "Colorscheme> ",
+    preview = preview,
     actions = {
-      ["default"] = function(selected)
-        local file = selected[1]
-        vim.cmd("edit " .. file)
-      end
+      ["default"] = function(selected) vim.cmd("colorscheme " .. selected[1]) end,
     },
   })
 end
