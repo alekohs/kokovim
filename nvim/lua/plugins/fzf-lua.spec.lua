@@ -8,9 +8,6 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
   config = function(_, opts)
     require("fzf-lua").setup(opts)
     require("fzf-lua").register_ui_select()
-
-    local picker = require("kokovim.picker")
-    vim.keymap.set("n", "<leader>ct", picker.theme_picker, { desc = "Pick a colorscheme" })
   end,
   keys = {
     { "<leader><space>", function() require("fzf-lua").files() end, desc = "Find files" },
@@ -53,5 +50,7 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
     { "<leader>sm", function() require("fzf-lua").marks() end, desc = "Search marks" },
     { "<leader>sM", function() require("fzf-lua").man_pages() end, desc = "Search man pages" },
     { "<leader>sq", function() require("fzf-lua").quickfix() end, desc = "Search quickfix list" },
+
+    { "<leader>uc", function() require("kokovim.picker").theme_picker() end, desc = "Find colorschemes" },
   },
 })
