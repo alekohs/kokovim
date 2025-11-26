@@ -4,6 +4,17 @@ return {
     lazy = false,
     priority = 1000,
   }),
+
+  kokovim.get_plugin_by_repo("gbprod/nord.nvim", {
+    lazy = false,
+    priority = 1000,
+  }),
+  kokovim.get_plugin("catppuccin-nvim", "catppuccin/nvim", {
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+  }),
+
   kokovim.get_plugin("rose-pine", "rose-pine/neovim", {
     name = "rose-pine",
     lazy = false,

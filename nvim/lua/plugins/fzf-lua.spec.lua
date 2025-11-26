@@ -8,6 +8,9 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
   config = function(_, opts)
     require("fzf-lua").setup(opts)
     require("fzf-lua").register_ui_select()
+
+    local picker = require("kokovim.picker")
+    vim.keymap.set("n", "<leader>ct", picker.theme_picker, { desc = "Pick a colorscheme" })
   end,
   keys = {
     { "<leader><space>", function() require("fzf-lua").files() end, desc = "Find files" },
