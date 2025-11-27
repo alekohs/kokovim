@@ -51,6 +51,7 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
     { "<leader>sM", function() require("fzf-lua").man_pages() end, desc = "Search man pages" },
     { "<leader>sq", function() require("fzf-lua").quickfix() end, desc = "Search quickfix list" },
 
-    { "<leader>uc", function() require("kokovim.picker").theme_picker() end, desc = "Find colorschemes" },
+    { "<leader>uc", function() require("fzf-lua").colorschemes() end, desc = "Find colorschemes" },
+    { "<leader>uC", function() require("fzf-lua").awesome_colorschemes() end, desc = "Find awesome colorschemes" },
   },
 })

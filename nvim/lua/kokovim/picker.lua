@@ -18,47 +18,10 @@ M.fzf_picker = function(prompt, options, callback)
   })
 end
 
---- Get colorscheme picker
-M.theme_picker = function()
-  local themes = vim.fn.getcompletion("", "color") -- list all colorschemes
-  local fzf = require("fzf-lua")
-
-  fzf.fzf_exec(themes, {
-    prompt = "Colorschemes> ",
-    previewer = function(entry)
-      if entry == nil then return "" end
-
-      local theme = selected[1]
-      if not theme then return "" end
-
-      -- apply the colorscheme temporarily to a buffer preview
-      -- create a small snippet showing some highlights
-      local lines = {
-        "Normal text",
-        "Comment text",
-        "String text",
-        "Function text",
-      }
-
-      -- apply colorscheme temporarily (without affecting user buffer)
-      vim.cmd("silent colorscheme " .. theme)
-
-      -- format the lines to show highlight groups
-      local result = {}
-      for _, line in ipairs(lines) do
-        table.insert(result, line)
-      end
-      return table.concat(result, "\n")
-    end,
-    actions = {
-      ["default"] = function(selected) vim.cmd("colorscheme " .. selected[1]) end,
-    },
-    on_move = function(selected) print("Movement" .. selected) end,
-  })
-end
-
 --- Get harpoon picker
 M.harpoon_fzf = function(files, cb)
+  local fzf = require("fzf-lua")
+  local builtin = require("fzf-lua.previewer.builtin")
   local file_paths = {}
   local index_map = {}
 
@@ -69,11 +32,7 @@ M.harpoon_fzf = function(files, cb)
     index_map[display] = full_path
   end
 
-  local fzf = require("fzf-lua")
-
-  local builtin = require("fzf-lua.previewer.builtin")
   local HarpoonPreviewer = builtin.buffer_or_file:extend()
-
   function HarpoonPreviewer:new(o, opts, fzf_win)
     HarpoonPreviewer.super.new(self, o, opts, fzf_win)
     setmetatable(self, HarpoonPreviewer)
