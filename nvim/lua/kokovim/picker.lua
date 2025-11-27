@@ -72,6 +72,12 @@ M.harpoon_fzf = function(files, cb)
           end
         end
       end,
+      ["ctrl-x"] = function(selected)
+        local harpoon = require("harpoon")
+        local line = vim.trim(selected[1])
+        local idx, path = line:match("^(%d+):%s*(.+)$")
+        harpoon:list():remove_at(idx)
+      end,
     },
   })
 end
