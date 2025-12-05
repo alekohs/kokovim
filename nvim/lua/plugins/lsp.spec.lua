@@ -86,6 +86,14 @@ return {
         end
 
         vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end, { desc = "Lsp Navigation", buffer = bufnr })
+        vim.keymap.set("n", "<leader>cP", function()
+          for _, client in ipairs(vim.lsp.get_active_clients()) do
+            print("Client:", client.name)
+            for _, bufnr in ipairs(client.buffers) do
+              print(" - Buffer:", bufnr, "File:", vim.api.nvim_buf_get_name(bufnr))
+            end
+          end
+        end, { desc = "Lsp Navigation", buffer = bufnr })
       end
 
       -- Shared capabilities (for blink-cmp etc.)
@@ -174,6 +182,7 @@ return {
       vim.lsp.config("roslyn", {
         on_attach = on_attach,
         capabilities = capabilities,
+        -- filetypes = { "cs", "razor", "blazor", "cshtml" },
         settings = {
           ["csharp|completion"] = {
             dotnet_provide_regex_completions = true,
