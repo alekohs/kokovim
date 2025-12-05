@@ -17,6 +17,7 @@ local lsps = {
 }
 
 return {
+  require("plugins.lsp.dotnet"),
   kokovim.get_plugin_by_repo("rachartier/tiny-inline-diagnostic.nvim", {
     event = "VeryLazy",
     priority = 1000,
@@ -170,6 +171,44 @@ return {
         capabilities = capabilities,
       })
 
+      vim.lsp.config("roslyn", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          ["csharp|completion"] = {
+            dotnet_provide_regex_completions = true,
+            dotnet_show_completion_items_from_unimported_namespaces = true,
+            dotnet_show_name_completion_suggestions = true,
+          },
+          ["csharp|formatting"] = {
+            dotnet_organize_imports_on_format = true,
+          },
+          ["csharp|symbol_search"] = {
+            dotnet_search_reference_assemblies = true,
+          },
+
+          ["csharp|inlay_hints"] = {
+            csharp_enable_inlay_hints_for_implicit_object_creation = true,
+            csharp_enable_inlay_hints_for_implicit_variable_types = true,
+
+            csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+            csharp_enable_inlay_hints_for_types = true,
+            dotnet_enable_inlay_hints_for_indexer_parameters = true,
+            dotnet_enable_inlay_hints_for_literal_parameters = true,
+            dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+            dotnet_enable_inlay_hints_for_other_parameters = true,
+            dotnet_enable_inlay_hints_for_parameters = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+          },
+          ["csharp|code_lens"] = {
+            dotnet_enable_references_code_lens = true,
+            dotnet_enable_tests_code_lens = true,
+          },
+        },
+      })
+
       -- Configure diaganostics
       vim.diagnostic.config({
         virtual_text = false,
@@ -213,7 +252,6 @@ return {
       },
     },
   }),
-  require("plugins.lsp.dotnet"),
   kokovim.get_plugin_by_repo("danymat/neogen", {
     opts = {
       snippet_engine = "mini",

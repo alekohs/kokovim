@@ -31,7 +31,6 @@ return {
         "python-lsp-server",
         "sqls",
         "qmlls",
-        { "rzls", condition = function() return vim.fn.executable("dotnet") == 1 end },
         { "roslyn", condition = function() return vim.fn.executable("dotnet") == 1 end },
         { "powershell_es", condition = function() return vim.fn.executable("pwsh") == 1 end },
 
