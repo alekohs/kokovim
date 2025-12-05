@@ -15,7 +15,6 @@ let
     inherit inputs pkgs-unstable;
     pkgs = pkgs // {
       #roslyn-ls = pkgs-unstable.roslyn-ls;
-      #rzls = pkgs-unstable.rzls;
     };
   };
 
@@ -26,12 +25,9 @@ let
     }).override
       {
         pkgs = pkgs // {
-        #roslyn-ls = pkgs-unstable.roslyn-ls;
-        #rzls = pkgs-unstable.rzls;
+          #roslyn-ls = pkgs-unstable.roslyn-ls;
         };
-
       };
-
 in
 {
   # This is the neovim derivation

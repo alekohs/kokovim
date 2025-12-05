@@ -76,11 +76,6 @@ let
     }
 
     {
-      src = inputs.rzls-nvim;
-      pname = "rzls.nvim";
-      nvimSkipModule = [ ];
-    }
-    {
       src = inputs.roslyn-nvim;
       pname = "roslyn.nvim";
       nvimSkipModule = [ ];
