@@ -9,7 +9,8 @@ return {
       harpoon:setup()
 
       vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon - Add" })
-      vim.keymap.set("n", "<leader>hl", function() pickers.harpoon_fzf(harpoon:list()) end, { desc = "Harpoon - List" })
+      -- vim.keymap.set("n", "<leader>hl", function() pickers.harpoon_fzf(harpoon:list()) end, { desc = "Harpoon - List" })
+      vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon - List" })
       vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, { desc = "Harpoon - Buf 1" })
       vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, { desc = "Harpoon - Buf 2" })
       vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end, { desc = "Harpoon - Buf 3" })
