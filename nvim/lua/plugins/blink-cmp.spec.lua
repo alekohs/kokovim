@@ -132,7 +132,6 @@ local blink_cfg = {
       },
       providers = {
         lsp = {
-          min_keyword_length = 1,
           max_items = 10,
           score_offset = 100,
         },
