@@ -2,7 +2,7 @@
 set -e
 set -u
 
-VERSION="1.2.5"
+VERSION="1.2.6"
 APPNAME="nvim"
 
 echo "Select name for the nvim instance:"
