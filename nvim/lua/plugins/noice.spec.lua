@@ -15,6 +15,7 @@ return {
     },
     opts = {
       cmdline = {
+        view = "cmdline",
         format = {
           search_down = {
             view = "cmdline",
@@ -38,8 +39,17 @@ return {
         {
           filter = {
             event = "msg_show",
+            kind = { "shell_out", "shell_err" },
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
             find = "written",
           },
+          view = "mini",
           opts = { skip = true },
         },
         {
@@ -68,7 +78,7 @@ return {
       },
       presets = {
         bottom_search = true,
-        command_palette = true,
+        command_palette = false,
         long_message_to_split = true,
         inc_rename = true,
       },
