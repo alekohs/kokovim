@@ -46,20 +46,10 @@ return {
         {
           filter = {
             event = "msg_show",
-            kind = "",
-            find = "written",
-          },
-          view = "mini",
-          opts = { skip = true },
-        },
-        {
-          filter = {
-            event = "msg_show",
             kind = "search_count",
           },
           opts = { skip = true },
         },
-
         {
           view = "notify",
           filter = { event = "msg_showmode" },
@@ -71,6 +61,9 @@ return {
               { find = "%d+L, %d+B" },
               { find = "; after #%d+" },
               { find = "; before #%d+" },
+              { find = "%d+ more lines" },
+              { find = "%d+ fewer lines" },
+              { find = "yanked" },
             },
           },
           view = "mini",
