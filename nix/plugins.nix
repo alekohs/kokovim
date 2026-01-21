@@ -163,9 +163,8 @@ with pkgs.vimPlugins;
   # Treesitter
   nvim-treesitter
   nvim-treesitter-grammars
-  nvim-treesitter-textobjects
   nvim-treesitter-context
-  nvim-treesitter-refactor
+  nvim-treesitter-textobjects
 
   # Linting
   nvim-lint

@@ -73,6 +73,7 @@
       flake = false;
     };
 
+
     rzls-nvim = {
       url = "github:tris203/rzls.nvim";
       flake = false;

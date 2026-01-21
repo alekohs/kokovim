@@ -23,7 +23,35 @@ aucmd("LspAttach", {
         vim.fn.system(cmd)
         print("Deleted all bin/ and obj/ folders under " .. cwd)
       end, { desc = "Dotnet - clean bin/ obj/" })
+
+      -- Enable inlay hints initially in normal mode
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
+  end,
+})
+
+-- Toggle inlay hints off in insert mode for C#/Razor (performance)
+local inlay_hint_group = augroup("RoslynInlayHintToggle", { clear = true })
+
+aucmd("InsertEnter", {
+  group = inlay_hint_group,
+  pattern = { "*.cs", "*.razor" },
+  callback = function(args)
+    vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+  end,
+})
+
+aucmd("InsertLeave", {
+  group = inlay_hint_group,
+  pattern = { "*.cs", "*.razor" },
+  callback = function(args)
+    local bufnr = args.buf
+    vim.defer_fn(function()
+      -- Check buffer still exists and is valid
+      if vim.api.nvim_buf_is_valid(bufnr) then
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end
+    end, 100)
   end,
 })
 
