@@ -41,7 +41,6 @@ in
       deno
       gotools
       nixpkgs-fmt
-      nixfmt-rfc-style
       nixd
       prettierd
       ruff
@@ -90,7 +89,7 @@ in
       # For snacks image to work
       imagemagick # Images
       # tectonic # PDF
-      mermaid-cli # Mermaid diagarams
+      #mermaid-cli # Mermaid diagarams
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
