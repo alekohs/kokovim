@@ -79,6 +79,11 @@
       flake = false;
     };
 
+    nvim-treesitter = {
+      url = "github:nvim-treesitter/nvim-treesitter/master";
+      flake = false;
+    };
+
   };
   outputs =
     {
