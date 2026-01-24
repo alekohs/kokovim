@@ -81,6 +81,12 @@ let
       nvimSkipModule = [ ];
     }
 
+    {
+      src = inputs.nvim-treesitter;
+      pname = "nvim-treesitter";
+      nvimSkipModule = [ ];
+    }
+
   ];
 
   flakePlugins = map (p: lib.mkVimPlugin p) plugins-spec;
@@ -161,7 +167,7 @@ with pkgs.vimPlugins;
   colorful-menu-nvim
 
   # Treesitter
-  nvim-treesitter
+  # nvim-treesitter is built from master via flakePlugins
   nvim-treesitter-grammars
   nvim-treesitter-context
   nvim-treesitter-textobjects
