@@ -84,6 +84,12 @@ let
     {
       src = inputs.nvim-treesitter;
       pname = "nvim-treesitter";
+      nvimSkipModule = [ "nvim-treesitter._meta.parsers" ];
+    }
+
+    {
+      src = inputs.nvim-treesitter-textobjects;
+      pname = "nvim-treesitter-textobjects";
       nvimSkipModule = [ ];
     }
 
@@ -167,10 +173,10 @@ with pkgs.vimPlugins;
   colorful-menu-nvim
 
   # Treesitter
-  # nvim-treesitter is built from master via flakePlugins
+  # nvim-treesitter is built from main via flakePlugins
+  # nvim-treesitter-textobjects is built from main via flakePlugins
   nvim-treesitter-grammars
   nvim-treesitter-context
-  nvim-treesitter-textobjects
 
   # Linting
   nvim-lint

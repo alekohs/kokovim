@@ -9,7 +9,7 @@ local disabled_filetypes = {
   "tmux",
 }
 
-local function disable_treesitter_features(_, bufnr)
+local function should_disable_treesitter(bufnr)
   local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
   local fname = vim.api.nvim_buf_get_name(bufnr)
   local short_name = vim.fn.fnamemodify(fname, ":t")
@@ -68,10 +68,26 @@ if kokovim.is_nix then
   vim.opt.runtimepath:append(plugins_folder .. "nvim-treesitter-grammars")
 end
 
+-- Enable treesitter highlighting automatically for all filetypes (except disabled ones)
+-- The main branch requires manual activation via vim.treesitter.start()
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function(args)
+    if not should_disable_treesitter(args.buf) then
+      local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
+      -- Check if a parser exists for this filetype before trying to start treesitter
+      local lang = vim.treesitter.language.get_lang(filetype)
+      if lang and pcall(vim.treesitter.language.add, lang) then
+        pcall(vim.treesitter.start, args.buf)
+      end
+    end
+  end,
+})
+
 return {
-  -- Main treesitter plugin (master branch for compatibility)
+  -- Main treesitter plugin
   kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter", {
-    branch = "master",
+    branch = "main",
     event = { "BufReadPost", "BufNewFile" },
     build = not kokovim.is_nix and ":TSUpdate" or nil,
     dependencies = {
@@ -83,19 +99,16 @@ return {
         },
       }),
     },
-    opts = {
-      ensure_installed = not kokovim.is_nix and parsers or {},
-      highlight = {
-        enable = true,
-        disable = disable_treesitter_features,
-      },
-      indent = {
-        enable = true,
-        disable = disable_treesitter_features,
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+    config = function()
+      -- Setup nvim-treesitter with the new API
+      require("nvim-treesitter").setup({
+        install_dir = vim.fn.stdpath("data") .. "/site",
+      })
+
+      -- Install parsers (only when not running with nix)
+      if not kokovim.is_nix then
+        require("nvim-treesitter").install(parsers)
+      end
     end,
   }),
 
@@ -115,51 +128,84 @@ return {
     end,
   }),
 
-  -- Treesitter textobjects (master branch for compatibility)
+  -- Treesitter textobjects
   kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter-textobjects", {
-    branch = "master",
+    branch = "main",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter"),
     },
-    opts = {
-      textobjects = {
+    config = function()
+      -- Setup textobjects with the new API
+      require("nvim-treesitter-textobjects").setup({
         select = {
-          enable = true,
           lookahead = true,
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-          },
         },
         move = {
-          enable = true,
           set_jumps = true,
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]]"] = "@class.outer",
-            ["]d"] = "@conditional.outer",
-          },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]["] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[f"] = "@function.outer",
-            ["[["] = "@class.outer",
-            ["[d"] = "@conditional.outer",
-          },
-          goto_previous_end = {
-            ["[F"] = "@function.outer",
-            ["[]"] = "@class.outer",
-          },
         },
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      })
+
+      -- Select keymaps
+      vim.keymap.set({ "x", "o" }, "af", function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+      end, { desc = "Select outer function" })
+
+      vim.keymap.set({ "x", "o" }, "if", function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+      end, { desc = "Select inner function" })
+
+      vim.keymap.set({ "x", "o" }, "ac", function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+      end, { desc = "Select outer class" })
+
+      vim.keymap.set({ "x", "o" }, "ic", function()
+        require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+      end, { desc = "Select inner class" })
+
+      -- Move keymaps - next start
+      vim.keymap.set({ "n", "x", "o" }, "]m", function()
+        require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+      end, { desc = "Next function start" })
+
+      vim.keymap.set({ "n", "x", "o" }, "]]", function()
+        require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+      end, { desc = "Next class start" })
+
+      vim.keymap.set({ "n", "x", "o" }, "]d", function()
+        require("nvim-treesitter-textobjects.move").goto_next_start("@conditional.outer", "textobjects")
+      end, { desc = "Next conditional start" })
+
+      -- Move keymaps - next end
+      vim.keymap.set({ "n", "x", "o" }, "]M", function()
+        require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+      end, { desc = "Next function end" })
+
+      vim.keymap.set({ "n", "x", "o" }, "][", function()
+        require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+      end, { desc = "Next class end" })
+
+      -- Move keymaps - previous start
+      vim.keymap.set({ "n", "x", "o" }, "[f", function()
+        require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+      end, { desc = "Previous function start" })
+
+      vim.keymap.set({ "n", "x", "o" }, "[[", function()
+        require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+      end, { desc = "Previous class start" })
+
+      vim.keymap.set({ "n", "x", "o" }, "[d", function()
+        require("nvim-treesitter-textobjects.move").goto_previous_start("@conditional.outer", "textobjects")
+      end, { desc = "Previous conditional start" })
+
+      -- Move keymaps - previous end
+      vim.keymap.set({ "n", "x", "o" }, "[F", function()
+        require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+      end, { desc = "Previous function end" })
+
+      vim.keymap.set({ "n", "x", "o" }, "[]", function()
+        require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
+      end, { desc = "Previous class end" })
     end,
   }),
 }
