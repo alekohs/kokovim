@@ -32,6 +32,7 @@ in
     [
       fd
       gcc # needed for nvim-treesitter
+      tree-sitter # tree-sitter CLI required for nvim-treesitter main branch
       gh
       wordnet
       openssl

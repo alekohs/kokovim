@@ -68,22 +68,6 @@ if kokovim.is_nix then
   vim.opt.runtimepath:append(plugins_folder .. "nvim-treesitter-grammars")
 end
 
--- Enable treesitter highlighting automatically for all filetypes (except disabled ones)
--- The main branch requires manual activation via vim.treesitter.start()
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function(args)
-    if not should_disable_treesitter(args.buf) then
-      local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
-      -- Check if a parser exists for this filetype before trying to start treesitter
-      local lang = vim.treesitter.language.get_lang(filetype)
-      if lang and pcall(vim.treesitter.language.add, lang) then
-        pcall(vim.treesitter.start, args.buf)
-      end
-    end
-  end,
-})
-
 return {
   -- Main treesitter plugin
   kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter", {
@@ -99,16 +83,37 @@ return {
         },
       }),
     },
-    config = function()
+    opts = {
+      install_dir = vim.fn.stdpath("data") .. "/site",
+    },
+    config = function(_, opts)
       -- Setup nvim-treesitter with the new API
-      require("nvim-treesitter").setup({
-        install_dir = vim.fn.stdpath("data") .. "/site",
-      })
+      require("nvim-treesitter").setup(opts)
 
-      -- Install parsers (only when not running with nix)
-      if not kokovim.is_nix then
-        require("nvim-treesitter").install(parsers)
-      end
+      -- Enable treesitter highlighting automatically for all filetypes (except disabled ones)
+      -- The main branch requires manual activation via vim.treesitter.start()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "*",
+        callback = function(args)
+          if not should_disable_treesitter(args.buf) then
+            local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
+            -- Check if a parser exists for this filetype before trying to start treesitter
+            local lang = vim.treesitter.language.get_lang(filetype)
+            if lang then
+              -- Try to load the parser, if it fails, try to install it (only when not using nix)
+              local has_parser = pcall(vim.treesitter.language.add, lang)
+              if not has_parser and not kokovim.is_nix then
+                -- Parser not found, try to install it asynchronously
+                vim.notify("Installing treesitter parser for " .. lang, vim.log.levels.INFO)
+                require("nvim-treesitter").install({ lang })
+              elseif has_parser then
+                -- Parser exists, start treesitter
+                pcall(vim.treesitter.start, args.buf)
+              end
+            end
+          end
+        end,
+      })
     end,
   }),
 
