@@ -12,6 +12,11 @@ let
   nvim-treesitter-grammars = pkgs.symlinkJoin {
     name = "nvim-treesitter-grammars";
     paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+    postBuild = ''
+      # Only keep parser .so files — queries must come from the
+      # nvim-treesitter plugin (flake input) to avoid version mismatches
+      rm -rf $out/queries
+    '';
   };
 
   markview-pkg = pkgs.vimPlugins.markview-nvim.overrideAttrs {
@@ -84,6 +89,12 @@ let
     {
       src = inputs.nvim-treesitter;
       pname = "nvim-treesitter";
+      nvimSkipModule = [ "nvim-treesitter._meta.parsers" ];
+    }
+
+    {
+      src = inputs.nvim-treesitter-textobjects;
+      pname = "nvim-treesitter-textobjects";
       nvimSkipModule = [ ];
     }
 
@@ -167,10 +178,10 @@ with pkgs.vimPlugins;
   colorful-menu-nvim
 
   # Treesitter
-  # nvim-treesitter is built from master via flakePlugins
+  # nvim-treesitter is built from main via flakePlugins
+  # nvim-treesitter-textobjects is built from main via flakePlugins
   nvim-treesitter-grammars
   nvim-treesitter-context
-  nvim-treesitter-textobjects
 
   # Linting
   nvim-lint

@@ -185,6 +185,15 @@ return {
         capabilities = capabilities,
       })
 
+      -- On Nix, mason-lspconfig is disabled so we must enable servers ourselves
+      if kokovim.is_nix then
+        local all_servers = vim.list_extend(
+          vim.deepcopy(lsps),
+          { "bashls", "html", "pylsp", "ts_ls", "sourcekit", "roslyn" }
+        )
+        vim.lsp.enable(all_servers)
+      end
+
       -- Configure diaganostics
       vim.diagnostic.config({
         virtual_text = false,
