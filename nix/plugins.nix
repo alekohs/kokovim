@@ -12,6 +12,11 @@ let
   nvim-treesitter-grammars = pkgs.symlinkJoin {
     name = "nvim-treesitter-grammars";
     paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+    postBuild = ''
+      # Only keep parser .so files — queries must come from the
+      # nvim-treesitter plugin (flake input) to avoid version mismatches
+      rm -rf $out/queries
+    '';
   };
 
   markview-pkg = pkgs.vimPlugins.markview-nvim.overrideAttrs {

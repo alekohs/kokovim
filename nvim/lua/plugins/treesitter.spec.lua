@@ -111,12 +111,6 @@ local function should_enable_treesitter(bufnr, filetype)
   return vim.tbl_contains(allowed_filetypes, filetype)
 end
 
--- Set treesitter grammars to runtimepath if running with nix
-if kokovim.is_nix then
-  local plugins_folder = require("kokovim.plugin").get_plugin_folder()
-  vim.opt.runtimepath:append(plugins_folder .. "nvim-treesitter-grammars")
-end
-
 return {
   -- Main treesitter plugin
   kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter", {
@@ -136,6 +130,16 @@ return {
       install_dir = vim.fn.stdpath("data") .. "/site",
     },
     config = function(_, opts)
+      -- Set treesitter grammars and install_dir to runtimepath if running with nix
+      -- This must happen here (not at module level) because lazy.nvim resets the rtp
+      if kokovim.is_nix then
+        local plugins_folder = require("kokovim.plugin").get_plugin_folder()
+        vim.opt.runtimepath:append(plugins_folder .. "nvim-treesitter-grammars")
+        -- Main branch stores queries under runtime/ which Neovim doesn't search by default
+        vim.opt.runtimepath:append(plugins_folder .. "nvim-treesitter/runtime")
+        vim.opt.runtimepath:append(opts.install_dir)
+      end
+
       -- Setup nvim-treesitter with the new API
       require("nvim-treesitter").setup(opts)
 
