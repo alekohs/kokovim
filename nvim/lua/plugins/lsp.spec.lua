@@ -74,15 +74,18 @@ return {
       local on_attach = function(client, bufnr)
         -- Stop if buftype is empty
         local bt = vim.api.nvim_buf_get_option(bufnr, "buftype")
-        if bt ~= "" then
+        if bt ~= "" and client.name ~= "html" then
           client.stop()
           return
         end
 
         if client.server_capabilities.documentSymbolProvider then
-          vim.notify("Attach navic to buffer", vim.log.levels.DEBUG)
-          navic.attach(client, bufnr)
-          navbuddy.attach(client, bufnr)
+          local dominated = client.name == "html" and vim.bo[bufnr].filetype == "razor"
+          if not dominated then
+            vim.notify("Attach navic to buffer", vim.log.levels.DEBUG)
+            navic.attach(client, bufnr)
+            navbuddy.attach(client, bufnr)
+          end
         end
 
         vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end, { desc = "Lsp Navigation", buffer = bufnr })
@@ -132,7 +135,7 @@ return {
       vim.lsp.config("html", {
         on_attach = on_attach,
         capabilities = capabilities,
-        filetypes = { "html" },
+        filetypes = { "html", "razor" },
         init_options = {
           configurationSection = { "html", "css", "javascript" },
           embeddedLanguages = { css = true, javascript = true },
