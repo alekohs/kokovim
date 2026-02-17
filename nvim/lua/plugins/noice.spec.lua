@@ -68,6 +68,16 @@ return {
           },
           view = "mini",
         },
+        {
+          filter = {
+            event = "notify",
+            any = {
+              { find = "Initializing Roslyn" },
+              { find = "Roslyn project initialization complete" },
+            },
+          },
+          view = "mini",
+        },
       },
       presets = {
         bottom_search = true,

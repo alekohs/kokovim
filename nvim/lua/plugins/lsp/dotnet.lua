@@ -1,9 +1,21 @@
 -- Return empty if dotnet is not installed
 if vim.fn.executable("dotnet") == 0 then return {} end
 
+-- Register razor filetype early so lazy.nvim can trigger on ft = "razor"
+vim.filetype.add({
+  extension = {
+    razor = "razor",
+    cshtml = "razor",
+  },
+})
+
+local common = require("plugins.lsp.common")
+
 -- Settings must go through vim.lsp.config, not through plugin opts
 -- roslyn.setup() only handles plugin-level options (filewatching, broad_search, etc.)
 vim.lsp.config("roslyn", {
+  on_attach = common.on_attach,
+  capabilities = common.capabilities(),
   settings = {
     ["csharp|completion"] = {
       dotnet_provide_regex_completions = true,
@@ -45,7 +57,7 @@ return {
   kokovim.get_plugin_by_repo("seblyng/roslyn.nvim", {
     ft = { "cs", "razor" },
     opts = {
-      broad_search = false,
+      broad_search = true,
       silent = false,
       filewatching = "off",
     },
