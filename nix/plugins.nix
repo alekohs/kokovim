@@ -189,6 +189,7 @@ with pkgs.vimPlugins;
   # LSP
   nvim-lspconfig
   dotnet-nvim
+  lsp-progress-nvim
 
   # Colorschemes
   rose-pine
