@@ -67,49 +67,9 @@ return {
       },
     },
     config = function(_, opts)
-      local navic = require("nvim-navic")
-      local navbuddy = require("nvim-navbuddy")
-
-      -- Shared `on_attach` if you want keymaps, etc.
-      local on_attach = function(client, bufnr)
-        -- Stop if buftype is empty
-        local bt = vim.api.nvim_buf_get_option(bufnr, "buftype")
-        if bt ~= "" and client.name ~= "html" then
-          client.stop()
-          return
-        end
-
-        if client.server_capabilities.documentSymbolProvider then
-          local dominated = client.name == "html" and vim.bo[bufnr].filetype == "razor"
-          if not dominated then
-            vim.notify("Attach navic to buffer", vim.log.levels.DEBUG)
-            navic.attach(client, bufnr)
-            navbuddy.attach(client, bufnr)
-          end
-        end
-
-        vim.keymap.set("n", "<leader>ck", function() require("nvim-navbuddy").open() end, { desc = "Lsp Navigation", buffer = bufnr })
-        vim.keymap.set("n", "<leader>cP", function()
-          for _, client in ipairs(vim.lsp.get_active_clients()) do
-            print("Client:", client.name)
-            for _, bufnr in ipairs(client.buffers) do
-              print(" - Buffer:", bufnr, "File:", vim.api.nvim_buf_get_name(bufnr))
-            end
-          end
-        end, { desc = "Lsp Navigation", buffer = bufnr })
-      end
-
-      -- Shared capabilities (for blink-cmp etc.)
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
-      capabilities = vim.tbl_deep_extend("force", capabilities, {
-        textDocument = {
-          foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-          },
-        },
-      })
+      local common = require("plugins.lsp.common")
+      local on_attach = common.on_attach
+      local capabilities = common.capabilities()
 
       -- Loop all simple lsps
       for _, lsp in ipairs(lsps) do
@@ -182,18 +142,9 @@ return {
         capabilities = capabilities,
       })
 
-      -- Roslyn settings are configured in roslyn.nvim (plugins/lsp/dotnet.lua)
-      vim.lsp.config("roslyn", {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
-
       -- On Nix, mason-lspconfig is disabled so we must enable servers ourselves
       if kokovim.is_nix then
-        local all_servers = vim.list_extend(
-          vim.deepcopy(lsps),
-          { "bashls", "html", "pylsp", "ts_ls", "sourcekit", "roslyn" }
-        )
+        local all_servers = vim.list_extend(vim.deepcopy(lsps), { "bashls", "html", "pylsp", "ts_ls", "sourcekit", "roslyn" })
         vim.lsp.enable(all_servers)
       end
 

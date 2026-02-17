@@ -61,26 +61,16 @@ return {
                 hint = "󰝶 ",
               },
             },
-            {
-              "navic",
-              cond = navic_cond,
-            },
           },
           lualine_x = {
-            {
-              require("noice").api.statusline.mode.get,
-              cond = require("noice").api.statusline.mode.has,
-              color = { fg = "#f6c177" },
-            },
             {
               "searchcount",
               color = { fg = "#eb6f92" },
             },
-            "filetype",
-            { "filename", path = 1 },
           },
-          lualine_y = { "progress" },
-          lualine_z = { "location" },
+
+          lualine_y = { "location" },
+          lualine_z = { { "filename", path = 1 } }
         },
 
         winbar = {
@@ -90,7 +80,22 @@ return {
               cond = navic_cond,
             },
           },
+          lualine_x = {
+            {
+              function() return require("lsp-progress").progress() end,
+              color = { fg = "#c4a7e7" },
+            },
+          },
+          lualine_y = {
+            "filetype",
+          },
+          lualine_z = { "progress" }
         },
+      })
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LspProgressStatusUpdated",
+        callback = require("lualine").refresh,
       })
     end,
   }),
