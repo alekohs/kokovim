@@ -1,118 +1,3 @@
-local disabled_files = {
-  "Enums.hs",
-  "all-packages.nix",
-  "hackage-packages.nix",
-  "generated.nix",
-}
-
--- Allowed filetypes for treesitter auto-install
--- These will automatically install parsers when you open them
-local allowed_filetypes = {
-  "arduino",
-  "angular",
-  "asm",
-  "bash",
-  "sh",
-  "c",
-  "cmake",
-  "comment",
-  "cpp",
-  "c_sharp",
-  "cs",
-  "css",
-  "csv",
-  "cuda",
-  "dart",
-  "diff",
-  "dockerfile",
-  "dot",
-  "elixir",
-  "elm",
-  "erlang",
-  "fish",
-  "gitcommit",
-  "gitignore",
-  "git_config",
-  "git_rebase",
-  "gitattributes",
-  "glsl",
-  "go",
-  "gomod",
-  "gosum",
-  "graphql",
-  "groovy",
-  "haskell",
-  "hcl",
-  "hlsl",
-  "html",
-  "http",
-  "ini",
-  "java",
-  "javascript",
-  "jsdoc",
-  "json",
-  "json5",
-  "jsonc",
-  "kotlin",
-  "latex",
-  "lua",
-  "luadoc",
-  "make",
-  "markdown",
-  "markdown_inline",
-  "mermaid",
-  "nix",
-  "ocaml",
-  "perl",
-  "php",
-  "powershell",
-  "prisma",
-  "proto",
-  "pug",
-  "python",
-  "query",
-  "r",
-  "razor",
-  "regex",
-  "requirements",
-  "ruby",
-  "rust",
-  "scala",
-  "scheme",
-  "scss",
-  "sql",
-  "ssh_config",
-  "svelte",
-  "swift",
-  "terraform",
-  "tmux",
-  "toml",
-  "tsx",
-  "typescriptreact",
-  "typescript",
-  "javascriptreact",
-  "verilog",
-  "vhdl",
-  "vim",
-  "vimdoc",
-  "vue",
-  "wgsl",
-  "xml",
-  "yaml",
-  "zig",
-}
-
-local function should_enable_treesitter(bufnr, filetype)
-  local fname = vim.api.nvim_buf_get_name(bufnr)
-  local short_name = vim.fn.fnamemodify(fname, ":t")
-
-  -- Check if file is in disabled list
-  if vim.tbl_contains(disabled_files, short_name) then return false end
-
-  -- Check if filetype is in allowed list
-  return vim.tbl_contains(allowed_filetypes, filetype)
-end
-
 return {
   -- Main treesitter plugin
   kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter", {
@@ -152,21 +37,15 @@ return {
         callback = function(args)
           local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
 
-          if should_enable_treesitter(args.buf, filetype) then
-            local lang = vim.treesitter.language.get_lang(filetype)
-            if lang then
-              -- Try to actually inspect the parser to see if it exists
-              local has_parser = pcall(vim.treesitter.language.inspect, lang)
+          local lang = vim.treesitter.language.get_lang(filetype) or filetype
+          if require("nvim-treesitter.parsers")[lang] == nil then return end
 
-              if not has_parser and not kokovim.is_nix then
-                -- Parser not found, auto-install it
-                vim.notify("Installing treesitter parser for " .. lang, vim.log.levels.INFO)
-                require("nvim-treesitter").install({ lang })
-              elseif has_parser then
-                -- Parser exists, start treesitter
-                pcall(vim.treesitter.start, args.buf)
-              end
-            end
+          local has_parser = pcall(vim.treesitter.language.inspect, lang)
+          if not has_parser and not kokovim.is_nix then
+            require("nvim-treesitter").install({ lang }):wait(300000)
+            pcall(vim.treesitter.start, args.buf)
+          elseif has_parser then
+            pcall(vim.treesitter.start, args.buf)
           end
         end,
       })
