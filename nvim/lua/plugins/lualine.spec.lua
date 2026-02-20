@@ -14,11 +14,23 @@ return {
         return require("nvim-navic").is_available()
       end
 
+      local function lsp_clients()
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
+        if #clients == 0 then return "" end
+        local names = {}
+        for _, c in ipairs(clients) do
+          table.insert(names, c.name)
+        end
+        return " " .. table.concat(names, " ")
+      end
+
       require("lualine").setup({
         options = {
           icons_enabled = true,
           globalstatus = true,
           theme = "auto", --kokovim.get_colorscheme(),
+          section_separators = { left = "", right = "" },
+          component_separators = { left = "│", right = "│" },
           disabled_filetypes = {
             statusline = {
               "startify",
@@ -38,8 +50,24 @@ return {
               "snacks_layout_box",
             },
             winbar = {
+              "neo-tree",
+              "copilot-chat",
+              "ministarter",
+              "Avante",
+              "AvanteInput",
+              "trouble",
               "dap-repl",
+              "dapui_scopes",
+              "dapui_breakpoints",
+              "dapui_stacks",
+              "dapui_watches",
+              "dapui_console",
+              "dashboard",
+              "snacks_dashboard",
+              "snacks_layout_box",
               "neotest-summary",
+              "qf",
+              "help",
             },
           },
         },
@@ -47,33 +75,57 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = {
-            { "branch", icon = "" },
-            { "diff", symbols = { added = " ", modified = " ", removed = " " } },
+            { "branch", icon = "" },
+            { "diff", symbols = { added = kokovim.icons.git.added .. " ", modified = kokovim.icons.git.modified .. " ", removed = kokovim.icons.git.removed .. " " } },
           },
           lualine_c = {
             {
               "diagnostics",
               sources = { "nvim_lsp" },
               symbols = {
-                error = " ",
-                warn = " ",
-                info = " ",
-                hint = "󰝶 ",
+                error = kokovim.icons.diagnostics.error .. " ",
+                warn  = kokovim.icons.diagnostics.warn  .. " ",
+                hint  = kokovim.icons.diagnostics.hint  .. " ",
+                info  = kokovim.icons.diagnostics.info  .. " ",
               },
             },
           },
           lualine_x = {
             {
+              function()
+                local reg = vim.fn.reg_recording()
+                if reg ~= "" then return " @" .. reg end
+                return ""
+              end,
+              color = { fg = "#eb6f92" },
+            },
+            {
               "searchcount",
               color = { fg = "#eb6f92" },
             },
           },
-
           lualine_y = { "location" },
-          lualine_z = { { "filename", path = 1 } }
+          lualine_z = {
+            {
+              "encoding",
+              cond = function() return vim.opt.fileencoding:get() ~= "utf-8" end,
+            },
+            {
+              "fileformat",
+              cond = function() return vim.bo.fileformat ~= "unix" end,
+              symbols = { unix = "LF", dos = "CRLF", mac = "CR" },
+            },
+          },
         },
 
         winbar = {
+          lualine_b = {
+            {
+              "filename",
+              path = 1,
+              symbols = { modified = " ●", readonly = " ", unnamed = "[No Name]" },
+            },
+          },
           lualine_c = {
             {
               "navic",
@@ -85,11 +137,24 @@ return {
               function() return require("lsp-progress").progress() end,
               color = { fg = "#c4a7e7" },
             },
+            {
+              lsp_clients,
+              color = { fg = "#c4a7e7" },
+              cond = function() return #vim.lsp.get_clients({ bufnr = 0 }) > 0 end,
+            },
           },
-          lualine_y = {
-            "filetype",
+          lualine_y = { "filetype" },
+          lualine_z = { "progress" },
+        },
+
+        inactive_winbar = {
+          lualine_b = {
+            {
+              "filename",
+              path = 1,
+              symbols = { modified = " ●", readonly = " ", unnamed = "[No Name]" },
+            },
           },
-          lualine_z = { "progress" }
         },
       })
 

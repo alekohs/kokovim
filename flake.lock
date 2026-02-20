@@ -390,22 +390,6 @@
         "type": "github"
       }
     },
-    "otree-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1758181555,
-        "narHash": "sha256-ZLWtsMxy9SYp+GhNSBp4NpsbNCdsRV6+cirwLZiSu3k=",
-        "owner": "Eutrius",
-        "repo": "Otree.nvim",
-        "rev": "1540ea0a300916f1c43063fda185463b3e8f2f40",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Eutrius",
-        "repo": "Otree.nvim",
-        "type": "github"
-      }
-    },
     "pkgs-by-name-for-flake-parts": {
       "locked": {
         "lastModified": 1769286518,
@@ -452,7 +436,6 @@
         "nvim-treesitter": "nvim-treesitter",
         "nvim-treesitter-textobjects": "nvim-treesitter-textobjects",
         "oil-lsp-diagnostics-nvim": "oil-lsp-diagnostics-nvim",
-        "otree-nvim": "otree-nvim",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
         "pymobiledevice3-flake": "pymobiledevice3-flake",
         "roslyn-nvim": "roslyn-nvim",

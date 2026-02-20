@@ -50,10 +50,10 @@ return {
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = "", -- Error
-            [vim.diagnostic.severity.WARN] = "", -- Warning
-            [vim.diagnostic.severity.HINT] = "", -- Hint
-            [vim.diagnostic.severity.INFO] = "", -- Info
+            [vim.diagnostic.severity.ERROR] = kokovim.icons.diagnostics.error,
+            [vim.diagnostic.severity.WARN]  = kokovim.icons.diagnostics.warn,
+            [vim.diagnostic.severity.HINT]  = kokovim.icons.diagnostics.hint,
+            [vim.diagnostic.severity.INFO]  = kokovim.icons.diagnostics.info,
           },
         },
       },

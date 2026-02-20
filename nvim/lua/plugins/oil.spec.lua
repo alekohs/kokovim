@@ -77,11 +77,41 @@ return {
   }),
   kokovim.get_plugin_by_repo("refractalize/oil-git-status.nvim", {
     dependencies = { kokovim.get_plugin_by_repo("stevearc/oil.nvim") },
-    opts = {},
+    opts = {
+      symbols = {
+        index = {
+          ["A"] = kokovim.icons.git.added,
+          ["M"] = kokovim.icons.git.modified,
+          ["D"] = kokovim.icons.git.removed,
+          ["R"] = kokovim.icons.git.renamed,
+          ["C"] = kokovim.icons.git.added,
+          ["U"] = kokovim.icons.git.unmerged,
+          ["?"] = kokovim.icons.git.untracked,
+          ["!"] = kokovim.icons.git.ignored,
+        },
+        working_tree = {
+          ["A"] = kokovim.icons.git.added,
+          ["M"] = kokovim.icons.git.modified,
+          ["D"] = kokovim.icons.git.removed,
+          ["R"] = kokovim.icons.git.renamed,
+          ["C"] = kokovim.icons.git.added,
+          ["U"] = kokovim.icons.git.unmerged,
+          ["?"] = kokovim.icons.git.untracked,
+          ["!"] = kokovim.icons.git.ignored,
+        },
+      },
+    },
   }),
   kokovim.get_plugin("oil-lsp-diagnostics-nvim", "JezerM/oil-lsp-diagnostics.nvim", {
     dependencies = { kokovim.get_plugin_by_repo("stevearc/oil.nvim") },
-    opts = {},
+    opts = {
+      diagnostic_symbols = {
+        error = " " .. kokovim.icons.diagnostics.error,
+        warn  = " " .. kokovim.icons.diagnostics.warn,
+        hint  = " " .. kokovim.icons.diagnostics.hint,
+        info  = " " .. kokovim.icons.diagnostics.info,
+      },
+    },
   }),
   kokovim.get_plugin_by_repo("A7Lavinraj/fyler.nvim", {
     dependencies = { kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons") },
