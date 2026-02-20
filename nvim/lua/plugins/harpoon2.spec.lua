@@ -2,6 +2,7 @@ local pickers = require("kokovim.picker")
 
 return {
   kokovim.get_plugin("harpoon2", "ThePrimeagen/harpoon", {
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     branch = "harpoon2",
     config = function()

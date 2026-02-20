@@ -1,21 +1,25 @@
 return {
   kokovim.get_plugin_by_repo("zenbones-theme/zenbones.nvim", {
+    cond = not vim.g.vscode,
     dependencies = { kokovim.get_plugin_by_repo("rktjmp/lush.nvim") },
     lazy = false,
     priority = 1000,
   }),
 
   kokovim.get_plugin_by_repo("gbprod/nord.nvim", {
+    cond = not vim.g.vscode,
     lazy = false,
     priority = 1000,
   }),
   kokovim.get_plugin("catppuccin-nvim", "catppuccin/nvim", {
+    cond = not vim.g.vscode,
     name = "catppuccin",
     lazy = false,
     priority = 1000,
   }),
 
   kokovim.get_plugin("rose-pine", "rose-pine/neovim", {
+    cond = not vim.g.vscode,
     name = "rose-pine",
     lazy = false,
     opts = {
@@ -34,6 +38,7 @@ return {
     },
   }),
   kokovim.get_plugin_by_repo("wnkz/monoglow.nvim", {
+    cond = not vim.g.vscode,
     lazy = false,
     priority = 1000,
     opts = {},

@@ -23,6 +23,7 @@ return {
 
   }),
   kokovim.get_plugin_by_repo("MeanderingProgrammer/render-markdown.nvim", {
+    cond = not vim.g.vscode,
     ft = { "markdown", "quarto" },
     dependencies = {
       kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter"),

@@ -1,4 +1,5 @@
 return kokovim.get_plugin_by_repo("leoluz/nvim-dap-go", {
+  cond = not vim.g.vscode,
   config = true,
   keys = {
     {

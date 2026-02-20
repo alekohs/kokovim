@@ -15,6 +15,7 @@ return {
     },
   }),
   kokovim.get_plugin_by_repo("lewis6991/gitsigns.nvim", {
+    cond = not vim.g.vscode,
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       current_line_blame = true,

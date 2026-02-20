@@ -1,5 +1,6 @@
 return {
   kokovim.get_plugin_by_repo("stevearc/oil.nvim", {
+    cond = not vim.g.vscode,
     name = "oil.nvim",
     opts = {
       default_file_explorer = true,
@@ -76,6 +77,7 @@ return {
     lazy = false,
   }),
   kokovim.get_plugin_by_repo("refractalize/oil-git-status.nvim", {
+    cond = not vim.g.vscode,
     dependencies = { kokovim.get_plugin_by_repo("stevearc/oil.nvim") },
     opts = {
       symbols = {
@@ -103,6 +105,7 @@ return {
     },
   }),
   kokovim.get_plugin("oil-lsp-diagnostics-nvim", "JezerM/oil-lsp-diagnostics.nvim", {
+    cond = not vim.g.vscode,
     dependencies = { kokovim.get_plugin_by_repo("stevearc/oil.nvim") },
     opts = {
       diagnostic_symbols = {
@@ -114,6 +117,7 @@ return {
     },
   }),
   kokovim.get_plugin_by_repo("A7Lavinraj/fyler.nvim", {
+    cond = not vim.g.vscode,
     dependencies = { kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons") },
     opts = {
       views = {

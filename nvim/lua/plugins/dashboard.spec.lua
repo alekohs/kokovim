@@ -1,5 +1,6 @@
 return {
   kokovim.get_plugin_by_repo("nvimdev/dashboard-nvim", {
+    cond = not vim.g.vscode,
     event = "VimEnter",
     opts = {
       theme = "hyper",
