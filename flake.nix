@@ -63,16 +63,10 @@
       flake = false;
     };
 
-    otree-nvim = {
-      url = "github:Eutrius/Otree.nvim";
-      flake = false;
-    };
-
     roslyn-nvim = {
       url = "github:seblyng/roslyn.nvim";
       flake = false;
     };
-
 
     rzls-nvim = {
       url = "github:tris203/rzls.nvim";

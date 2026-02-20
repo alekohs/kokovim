@@ -68,13 +68,6 @@ let
       ];
     }
     {
-      src = inputs.otree-nvim;
-      pname = "otree-nvim";
-      nvimSkipModule = [
-        "Otree.oil"
-      ];
-    }
-    {
       src = inputs.oil-lsp-diagnostics-nvim;
       pname = "oil-lsp-diagnostics-nvim";
       nvimSkipModule = [ "oil-lsp-diagnostics" ];

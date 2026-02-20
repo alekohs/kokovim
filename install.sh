@@ -40,7 +40,7 @@ if command -v whiptail &>/dev/null; then
     "1" "nvim" \
     "2" "kokovim-dev" \
     "3" "Custom name" 3>&1 1>&2 2>&3)
-  
+
   case $CHOICE in
   1) APPNAME="nvim" ;;
   2) APPNAME="kokovim-dev" ;;
@@ -62,13 +62,13 @@ else
   echo "1) nvim"
   echo "2) kokovim-dev"
   echo "3) pick your own"
-  read -p "Enter selection (1-3): " selection
+  read -p "Enter selection (1-3): " selection -r
 
   case $selection in
   1) APPNAME="nvim" ;;
   2) APPNAME="kokovim-dev" ;;
   3)
-    read -p "Custom name: " APPNAME
+    read -p "Custom name: " APPNAME -r
     ;;
   *)
     echo "Invalid selection. Exiting."
