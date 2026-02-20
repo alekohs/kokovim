@@ -1,4 +1,5 @@
 return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
+  cond = not vim.g.vscode,
   opts = {
     files = {
       ignore = { "__virtual%.cs$" },

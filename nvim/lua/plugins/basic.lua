@@ -1,5 +1,6 @@
 return {
   kokovim.get_plugin_by_repo("folke/snacks.nvim", {
+    cond = not vim.g.vscode,
     opts = {
       image = {},
       rename = {},

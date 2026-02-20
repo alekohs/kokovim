@@ -4,6 +4,7 @@ if not kokovim.is_nix then return {} end
 local ui = require("plugins.dap.ui")
 
 return kokovim.get_plugin_by_repo("mfusnegger/nvim-dap", {
+  cond = not vim.g.vscode,
   -- lazy = true,
   keys = {
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },

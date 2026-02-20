@@ -2,6 +2,7 @@ local go = require("plugins.dap.go")
 local python = require("plugins.dap.python")
 
 return kokovim.get_plugin_by_repo("rcarriga/nvim-dap-ui", {
+  cond = not vim.g.vscode,
   opts = {},
   keys = {
     { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },

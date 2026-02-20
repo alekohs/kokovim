@@ -1,5 +1,6 @@
 return {
   kokovim.get_plugin_by_repo("folke/noice.nvim", {
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     dependencies = {
       kokovim.get_plugin_by_repo("MunifTanjim/nui.nvim"),

@@ -1,5 +1,6 @@
 return {
   kokovim.get_plugin("lualine.nvim", "nvim-lualine/lualine.nvim", {
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     dependencies = {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
