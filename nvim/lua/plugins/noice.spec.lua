@@ -33,27 +33,23 @@ return {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
         },
       },
       routes = {
+        -- Skip entirely
         {
-          filter = {
-            event = "msg_show",
-            kind = { "shell_out", "shell_err" },
-          },
+          filter = { event = "msg_show", kind = { "shell_out", "shell_err" } },
           opts = { skip = true },
         },
         {
-          filter = {
-            event = "msg_show",
-            kind = "search_count",
-          },
+          filter = { event = "msg_show", kind = "search_count" },
           opts = { skip = true },
         },
+
+        -- Mini (lower-right corner, no popup)
         {
-          view = "notify",
           filter = { event = "msg_showmode" },
+          view = "mini",
         },
         {
           filter = {
@@ -65,6 +61,12 @@ return {
               { find = "%d+ more lines" },
               { find = "%d+ fewer lines" },
               { find = "yanked" },
+              { find = "written" },           -- file saved
+              { find = "%d+ line" },          -- substitution counts
+              { find = "search hit" },         -- search wrap
+              { find = "No information" },     -- LSP hover miss
+              { find = "already at" },         -- undo/redo boundary
+              { find = "E486:" },              -- pattern not found
             },
           },
           view = "mini",

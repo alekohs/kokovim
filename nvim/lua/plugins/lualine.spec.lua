@@ -6,8 +6,10 @@ return {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
       kokovim.get_plugin_by_repo("SmiteshP/nvim-navic"),
       kokovim.get_plugin_by_repo("folke/noice.nvim"),
+      kokovim.get_plugin_by_repo("linrongbin16/lsp-progress.nvim"),
     },
     config = function()
+      require("lsp-progress").setup()
       local function navic_cond()
         local buf_size_limit = 1024 * 1024 -- 1MB
         local lines = vim.api.nvim_buf_line_count(0)
@@ -34,13 +36,8 @@ return {
           component_separators = { left = "│", right = "│" },
           disabled_filetypes = {
             statusline = {
-              "startify",
               "neo-tree",
               "copilot-chat",
-              "ministarter",
-              "Avante",
-              "AvanteInput",
-              "trouble",
               "dapui_scopes",
               "dapui_breakpoints",
               "dapui_stacks",
@@ -53,10 +50,6 @@ return {
             winbar = {
               "neo-tree",
               "copilot-chat",
-              "ministarter",
-              "Avante",
-              "AvanteInput",
-              "trouble",
               "dap-repl",
               "dapui_scopes",
               "dapui_breakpoints",
@@ -95,10 +88,10 @@ return {
             {
               function()
                 local reg = vim.fn.reg_recording()
-                if reg ~= "" then return " @" .. reg end
+                if reg ~= "" then return " rec @" .. reg end
                 return ""
               end,
-              color = { fg = "#eb6f92" },
+              color = { fg = "#9ccfd8" },
             },
             {
               "searchcount",
@@ -161,6 +154,10 @@ return {
 
       vim.api.nvim_create_autocmd("User", {
         pattern = "LspProgressStatusUpdated",
+        callback = require("lualine").refresh,
+      })
+
+      vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
         callback = require("lualine").refresh,
       })
     end,
