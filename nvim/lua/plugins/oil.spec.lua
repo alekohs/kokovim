@@ -116,13 +116,4 @@ return {
       },
     },
   }),
-  kokovim.get_plugin_by_repo("A7Lavinraj/fyler.nvim", {
-    cond = not vim.g.vscode,
-    dependencies = { kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons") },
-    opts = {
-      views = {
-        delete_to_trash = true
-      }
-    }
-  }),
 }

@@ -68,11 +68,6 @@
       flake = false;
     };
 
-    rzls-nvim = {
-      url = "github:tris203/rzls.nvim";
-      flake = false;
-    };
-
     nvim-treesitter = {
       url = "github:nvim-treesitter/nvim-treesitter/main";
       flake = false;

@@ -19,18 +19,6 @@ let
     '';
   };
 
-  markview-pkg = pkgs.vimPlugins.markview-nvim.overrideAttrs {
-    version = "2025-01-30";
-    src = pkgs.fetchFromGitHub {
-      owner = "OXY2DEV";
-      repo = "markview.nvim";
-      rev = "f933b4597738fec4014d25f11511bcbe2d1e1a32";
-      hash = "sha256-V3imWAzPtlrC89CYigDvnye12CctM7RJioigc57Rn/8=";
-      fetchSubmodules = true;
-    };
-    doCheck = false;
-  };
-
   plugins-spec = [
     {
       src = inputs.xcodebuild-nvim;
@@ -107,14 +95,12 @@ with pkgs.vimPlugins;
   # AI
   codecompanion-nvim
   copilot-lua
-  CopilotChat-nvim
 
   # code
   nvim-ts-autotag
   nvim-ts-context-commentstring
   neogen
   conform-nvim
-  trouble-nvim
 
   # dap
   nvim-dap
@@ -129,22 +115,17 @@ with pkgs.vimPlugins;
   fzf-lua
   oil-nvim
   oil-git-status-nvim
-  fyler-nvim
   neo-tree-nvim
   nui-nvim
   which-key-nvim
-  bufferline-nvim
   lualine-nvim
-  lazygit-nvim
   grug-far-nvim
   flash-nvim
   harpoon2
   noice-nvim
-  nui-nvim
   gitsigns-nvim
   render-markdown-nvim
   peek-nvim
-  markview-pkg
   yanky-nvim
   vim-wakatime
   todo-comments-nvim
@@ -153,20 +134,13 @@ with pkgs.vimPlugins;
   # UI
   nvim-navic
   nvim-navbuddy
-  dashboard-nvim
   nvim-notify
   tiny-inline-diagnostic-nvim
-  transparent-nvim
 
   # Completion
   blink-cmp
-  blink-cmp-dictionary
   blink-cmp-git
-  blink-cmp-spell
   blink-cmp-copilot
-  blink-compat
-  blink-emoji-nvim
-  blink-ripgrep-nvim
   blink-nerdfont-nvim
   colorful-menu-nvim
 
@@ -181,7 +155,6 @@ with pkgs.vimPlugins;
 
   # LSP
   nvim-lspconfig
-  dotnet-nvim
   lsp-progress-nvim
 
   # Colorschemes
