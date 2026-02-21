@@ -141,7 +141,6 @@ with pkgs.vimPlugins;
   blink-cmp
   blink-cmp-git
   blink-cmp-copilot
-  blink-nerdfont-nvim
   colorful-menu-nvim
 
   # Treesitter

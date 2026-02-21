@@ -5,7 +5,6 @@ local blink_cfg = {
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot"),
     kokovim.get_plugin_by_repo("Kaiser-Yang/blink-cmp-git"),
-    kokovim.get_plugin("blink-nerdfont-nvim", "MahanRahmati/blink-nerdfont.nvim"),
     kokovim.get_plugin("colorful-menu-nvim", "xzbdmw/colorful-menu.nvim", {
       config = function()
         require("colorful-menu").setup({
@@ -131,7 +130,6 @@ local blink_cfg = {
         "path",
         "copilot",
         "git",
-        "nerdfont",
       },
       providers = {
         lsp = {
@@ -160,12 +158,6 @@ local blink_cfg = {
           enabled = function()
             return vim.tbl_contains({ "gitcommit", "NeogitCommitMessage" }, vim.bo.filetype)
           end,
-        },
-        nerdfont = {
-          name = "Nerdfont",
-          module = "blink-nerdfont",
-          score_offset = 15,
-          opts = { insert = true },
         },
       },
     },
