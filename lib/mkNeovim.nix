@@ -23,6 +23,7 @@ with lib;
   useNix ? true,
   useSSH ? true,
   withSqlite ? false,
+  withRoslyn ? true,
   # Add a "vi" binary to the build output as an alias?
   viAlias ? appName == null || appName == "nvim",
   # Add a "vim" binary to the build output as an alias?
@@ -127,11 +128,15 @@ let
   };
 
   # Add specific paths here to be used inside the
-  packagesJson = builtins.toJSON {
-    roslyn = "${pkgs.roslyn-ls}";
-    rzls = "${pkgs.rzls}";
-    codelldb = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}";
-  };
+  packagesJson = builtins.toJSON (
+    {
+      codelldb = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}";
+    }
+    // lib.optionalAttrs withRoslyn {
+      roslyn = "${pkgs.roslyn-ls}";
+      rzls = "${pkgs.rzls}";
+    }
+  );
 
   extraMakeWrapperArgs = builtins.concatStringsSep " " (
     # Set the NVIM_APPNAME environment variable

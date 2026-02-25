@@ -1,5 +1,5 @@
 # This overlay, when applied to nixpkgs, adds the final neovim derivation to nixpkgs.
-{ inputs, appName, ... }:
+{ inputs, appName, withRoslyn ? true, ... }:
 final: prev:
 with final.pkgs.lib;
 let
@@ -10,9 +10,9 @@ let
   pkgs = final;
   pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 
-  plugins = import ./plugins.nix { inherit inputs pkgs opts; };
+  plugins = import ./plugins.nix { inherit inputs pkgs opts withRoslyn; };
   packages = import ./packages.nix {
-    inherit inputs pkgs-unstable;
+    inherit inputs pkgs-unstable withRoslyn;
     pkgs = pkgs // {
       #roslyn-ls = pkgs-unstable.roslyn-ls;
     };
@@ -39,6 +39,7 @@ in
     extraPythonPackages = packages.extraPython3Packages;
     appName = appName;
     wrapRc = true;
+    inherit withRoslyn;
   };
 
   # Use it as default with nvim command
@@ -49,6 +50,7 @@ in
     extraPythonPackages = packages.extraPython3Packages;
     appName = "nvim";
     wrapRc = true;
+    inherit withRoslyn;
   };
 
   # This is meant to be used within a devshell.
@@ -62,6 +64,7 @@ in
     appName = "${appName}-dev";
     wrapRc = false;
     useNix = false;
+    inherit withRoslyn;
   };
 
   # This can be symlinked in the devShell's shellHook

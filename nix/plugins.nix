@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   opts,
+  withRoslyn ? true,
 }:
 let
   # Function to create a vim plugin from a flake input
@@ -59,12 +60,6 @@ let
       src = inputs.oil-lsp-diagnostics-nvim;
       pname = "oil-lsp-diagnostics-nvim";
       nvimSkipModule = [ "oil-lsp-diagnostics" ];
-    }
-
-    {
-      src = inputs.roslyn-nvim;
-      pname = "roslyn.nvim";
-      nvimSkipModule = [ ];
     }
 
     {
@@ -171,3 +166,10 @@ with pkgs.vimPlugins;
 ]
 ++ flakePlugins
 ++ (pkgs.lib.optionals opts.withSQLite [ sqlite-lua ])
+++ (pkgs.lib.optionals withRoslyn [
+  (lib.mkVimPlugin {
+    src = inputs.roslyn-nvim;
+    pname = "roslyn.nvim";
+    nvimSkipModule = [ ];
+  })
+])
