@@ -5,10 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-    # TODO Update to lastest when a fix is in place
-    # Pointed to rev before breaking roslyn
-    nixpkgs-roslyn.url = "github:nixos/nixpkgs/a5425d5c2dcdcb0305e8c2658c03068763133c80";
-
     flake-utils.url = "github:numtide/flake-utils";
 
     flake-parts = {
@@ -92,6 +88,11 @@
         inherit inputs;
         appName = appName;
       };
+      neovim-overlay-no-roslyn = import ./nix/default.nix {
+        inherit inputs;
+        appName = appName;
+        withRoslyn = false;
+      };
     in
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -103,11 +104,19 @@
         pkgs = import nixpkgs {
           inherit system overlays;
         };
+        pkgs-no-roslyn = import nixpkgs {
+          inherit system;
+          overlays = [
+            neovim-overlay-no-roslyn
+            inputs.gen-luarc.overlays.default
+          ];
+        };
       in
       {
         packages = rec {
           default = pkgs.nvim-pkg;
           kokovim = pkgs.nvim-pkg;
+          kokovim-no-roslyn = pkgs-no-roslyn.nvim-pkg;
           nvim = pkgs.nvim-default;
         };
 
@@ -151,5 +160,10 @@
     // {
       # You can add this overlay to your NixOS configuration
       overlays.default = neovim-overlay;
+      # Overlay without roslyn/rzls/netcoredbg (avoids building dotnet on Darwin)
+      overlays.withoutRoslyn = neovim-overlay-no-roslyn;
+
+      nixosModules.default = import ./nix/nixos-module.nix { inherit self; };
+      homeManagerModules.default = import ./nix/hm-module.nix { inherit self; };
     };
 }

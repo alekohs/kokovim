@@ -16,6 +16,54 @@ All dependencies are automatically included in the Nix flake.
   Note: System package managers may have outdated versions. Using cargo ensures
   you get the latest version.
 
+## Usage
+
+### Run directly
+
+```bash
+nix run github:alexanderk/kokovim                    # with roslyn (default)
+nix run github:alexanderk/kokovim#kokovim-no-roslyn  # without roslyn/rzls/netcoredbg
+```
+
+### NixOS module
+
+```nix
+# flake.nix
+inputs.kokovim.url = "github:alexanderk/kokovim";
+
+# configuration.nix
+imports = [ inputs.kokovim.nixosModules.default ];
+
+programs.kokovim.enable = true;
+programs.kokovim.roslyn.enable = false; # opt-out to avoid building dotnet on Darwin
+```
+
+### Home Manager module
+
+```nix
+# flake.nix
+inputs.kokovim.url = "github:alexanderk/kokovim";
+
+# home.nix
+imports = [ inputs.kokovim.homeManagerModules.default ];
+
+programs.kokovim.enable = true;
+programs.kokovim.roslyn.enable = false; # opt-out to avoid building dotnet on Darwin
+```
+
+### Overlay
+
+```nix
+# With roslyn (default)
+nixpkgs.overlays = [ inputs.kokovim.overlays.default ];
+
+# Without roslyn
+nixpkgs.overlays = [ inputs.kokovim.overlays.withoutRoslyn ];
+```
+
+> **Note:** `overlays.withoutRoslyn` / `roslyn.enable = false` avoids building dotnet
+> from source on Darwin (macOS), which takes a long time.
+
 ## Configuration
 
 Neovim for nix [Context:

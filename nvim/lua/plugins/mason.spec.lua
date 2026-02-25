@@ -22,7 +22,7 @@ return {
         "html-lsp",
         "lua-language-server",
         "vim-language-server",
-        "marksman",
+        "markdown-oxide",
         "yaml-language-server",
         "taplo",
         "rust-analyzer",

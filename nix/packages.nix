@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   pkgs-unstable,
+  withRoslyn ? true,
 }:
 let
   lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
@@ -42,7 +43,6 @@ in
       deno
       gotools
       nixpkgs-fmt
-      nixd
       prettierd
       ruff
       stylua
@@ -55,7 +55,7 @@ in
       fish-lsp
       lua-language-server
       vscode-langservers-extracted
-      marksman
+      markdown-oxide
       markdownlint-cli2
       yaml-language-server
       taplo
@@ -68,9 +68,6 @@ in
       nodePackages.bash-language-server
       python313Packages.python-lsp-server
       sqls
-      # dotnet lsp
-      rzls
-      roslyn-ls
 
       # LINT
       #nodePackages.jsonlint
@@ -84,13 +81,18 @@ in
       shellcheck
       sqlfluff
 
-      # DAP
-      netcoredbg
-
       # For snacks image to work
       imagemagick # Images
       # tectonic # PDF
       #mermaid-cli # Mermaid diagarams
+    ]
+    ++ pkgs.lib.optionals withRoslyn [
+      # dotnet LSP — requires building dotnet on Darwin, opt-in only
+      pkgs.rzls
+      pkgs.roslyn-ls
+
+      # dotnet DAP
+      pkgs.netcoredbg
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347

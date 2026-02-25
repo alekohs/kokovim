@@ -12,7 +12,7 @@ local lsps = {
   "taplo",
   "yamlls",
   "ziggy",
-  "marksman",
+  "markdown_oxide",
   "powershell_es",
 }
 
