@@ -34,21 +34,17 @@ local inlay_hint_group = augroup("RoslynInlayHintToggle", { clear = true })
 
 aucmd("InsertEnter", {
   group = inlay_hint_group,
-  pattern = { "*.cs", "*.razor" },
-  callback = function(args)
-    vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
-  end,
+  pattern = { "*.razor" },
+  callback = function(args) vim.lsp.inlay_hint.enable(false, { bufnr = args.buf }) end,
 })
 
 aucmd("InsertLeave", {
   group = inlay_hint_group,
-  pattern = { "*.cs", "*.razor" },
+  pattern = { "*.razor" },
   callback = function(args)
     local bufnr = args.buf
     vim.defer_fn(function()
-      if vim.api.nvim_buf_is_valid(bufnr) then
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      end
+      if vim.api.nvim_buf_is_valid(bufnr) then vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end
     end, 100)
   end,
 })
