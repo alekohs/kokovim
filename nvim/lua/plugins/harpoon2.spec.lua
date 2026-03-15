@@ -8,6 +8,10 @@ return {
       harpoon:setup()
 
       vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon - Add" })
+      vim.keymap.set("n", "<leader>hc", function()
+        local list = harpoon:list()
+        list.items = vim.tbl_filter(function(i) return i and i.value and i.value ~= "" end, list.items)
+      end, { desc = "Harpoon - Clean empty entries" })
       vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon - List" })
       vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, { desc = "Harpoon - Buf 1" })
       vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, { desc = "Harpoon - Buf 2" })
