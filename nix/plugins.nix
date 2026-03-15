@@ -22,23 +22,6 @@ let
 
   plugins-spec = [
     {
-      src = inputs.xcodebuild-nvim;
-      pname = "xcodebuild.nvim";
-      nvimSkipModule = [
-        "xcodebuild.ui.pickers"
-        "xcodebuild.actions"
-        "xcodebuild.project.manager"
-        "xcodebuild.project.assets"
-        "xcodebuild.integrations.xcode-build-server"
-        "xcodebuild.integrations.dap"
-        "xcodebuild.integrations.fzf-lua"
-        "xcodebuild.integrations.telescope-nvim"
-        "xcodebuild.integrations.snacks-picker"
-        "xcodebuild.code_coverage.report"
-        "xcodebuild.dap"
-      ];
-    }
-    {
       src = inputs.mini-nvim;
       pname = "mini-nvim";
       nvimSkipModule = [ ];
@@ -106,35 +89,28 @@ with pkgs.vimPlugins;
   nvim-dap-python
 
   # Editor
-  telescope-nvim
   fzf-lua
   oil-nvim
   oil-git-status-nvim
-  neo-tree-nvim
-  nui-nvim
   which-key-nvim
   lualine-nvim
   grug-far-nvim
   flash-nvim
   harpoon2
-  noice-nvim
   gitsigns-nvim
+  diffview-nvim
   render-markdown-nvim
-  peek-nvim
-  yanky-nvim
   vim-wakatime
   todo-comments-nvim
   snacks-nvim
+  persistence-nvim
 
   # UI
   nvim-navic
-  nvim-navbuddy
-  nvim-notify
   tiny-inline-diagnostic-nvim
 
   # Completion
   blink-cmp
-  blink-cmp-git
   blink-cmp-copilot
   colorful-menu-nvim
 
@@ -149,7 +125,6 @@ with pkgs.vimPlugins;
 
   # LSP
   nvim-lspconfig
-  lsp-progress-nvim
 
   # Colorschemes
   rose-pine

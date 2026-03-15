@@ -26,11 +26,6 @@
       flake = false;
     };
 
-    xcodebuild-nvim = {
-      url = "github:wojciech-kulik/xcodebuild.nvim";
-      flake = false;
-    };
-
     blink-cmp = {
       url = "github:saghen/blink.cmp";
       inputs = {
@@ -46,11 +41,6 @@
 
     colorful-menu-nvim = {
       url = "github:xzbdmw/colorful-menu.nvim";
-      flake = false;
-    };
-
-    pymobiledevice3-flake = {
-      url = "github:doronz88/pymobiledevice3";
       flake = false;
     };
 
