@@ -1,11 +1,10 @@
 local blink_cfg = {
-  event = "InsertEnter",
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot"),
-    kokovim.get_plugin_by_repo("Kaiser-Yang/blink-cmp-git"),
-    kokovim.get_plugin("colorful-menu-nvim", "xzbdmw/colorful-menu.nvim", {
+kokovim.get_plugin("colorful-menu-nvim", "xzbdmw/colorful-menu.nvim", {
       config = function()
         require("colorful-menu").setup({
           ls = {
@@ -122,6 +121,16 @@ local blink_cfg = {
       },
     },
 
+    cmdline = {
+      sources = { "cmdline", "path", "buffer" },
+      completion = {
+        menu = {
+          draw = {
+            columns = { { "label" } },
+          },
+        },
+      },
+    },
     sources = {
       default = {
         "lsp",
@@ -129,7 +138,6 @@ local blink_cfg = {
         "snippets",
         "path",
         "copilot",
-        "git",
       },
       providers = {
         lsp = {
@@ -151,13 +159,6 @@ local blink_cfg = {
           name = "copilot",
           module = "blink-cmp-copilot",
           async = true,
-        },
-        git = {
-          name = "Git",
-          module = "blink-cmp-git",
-          enabled = function()
-            return vim.tbl_contains({ "gitcommit", "NeogitCommitMessage" }, vim.bo.filetype)
-          end,
         },
       },
     },

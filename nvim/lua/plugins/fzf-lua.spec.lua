@@ -44,13 +44,15 @@ return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
 
     { "<leader>gs", function() require("fzf-lua").git_status() end, desc = "Find git status" },
     { "<leader>gf", function() require("fzf-lua").git_files() end, desc = "Find git files" },
-    { "<leader>gb", function() require("fzf-lua").git_blame() end, desc = "Find git files" },
+    { "<leader>gb", function() require("fzf-lua").git_blame() end, desc = "Git blame" },
 
     { "<leader>sR", function() require("fzf-lua").registers() end, desc = "Search registers" },
+    { "<leader>sk", function() require("fzf-lua").keymaps() end, desc = "Search keymaps" },
     { "<leader>sh", function() require("fzf-lua").helptags() end, desc = "Search help tags" },
     { "<leader>sm", function() require("fzf-lua").marks() end, desc = "Search marks" },
     { "<leader>sM", function() require("fzf-lua").man_pages() end, desc = "Search man pages" },
-    { "<leader>sq", function() require("fzf-lua").quickfix() end, desc = "Search quickfix list" },
+    { "<leader>sq", function() require("fzf-lua").quickfix() end,  desc = "Search quickfix list" },
+    { "<leader>sQ", function() require("fzf-lua").loclist() end,   desc = "Search location list" },
 
     { "<leader>uc", function() require("fzf-lua").colorschemes() end, desc = "Find colorschemes" },
     { "<leader>uC", function() require("fzf-lua").awesome_colorschemes() end, desc = "Find awesome colorschemes" },

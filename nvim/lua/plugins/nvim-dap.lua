@@ -10,7 +10,6 @@ return kokovim.get_plugin_by_repo("mfusnegger/nvim-dap", {
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dc", function() require("dap").continue() end, desc = "Run/Continue" },
-    -- { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
     { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
@@ -41,15 +40,6 @@ return kokovim.get_plugin_by_repo("mfusnegger/nvim-dap", {
         program = function() return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file") end,
       },
     }
-
-    if not kokovim.is_darwin or not kokovim.is_nix then return end
-
-    -- Darwin specific
-    local utils = require("kokovim.utils")
-    local xcodebuild = require("xcodebuild.integrations.dap")
-    local paths = utils.get_packages_path({ "vscode-lldb" }, ":", "bin")
-    xcodebuild.setup(paths["vscode-lldb"] .. "share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb")
-
 
 
   end,

@@ -6,25 +6,6 @@
 }:
 let
   lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
-  python-packages = [
-    {
-      src = inputs.pymobiledevice3-flake;
-      pname = "pymobiledevice3";
-      # format = "pyproject";
-      pyproject = true;
-      propagatedBuildInputs = with pkgs.python3Packages; [
-        cryptography
-        construct
-        zeroconf
-        libusb1
-        packaging
-      ];
-
-      nativeBuildInputs = [ pkgs.pkg-config ];
-    }
-  ];
-
-  flakePythons = map (p: lib.mkPythonPackage p) python-packages;
 in
 {
 
@@ -118,5 +99,5 @@ in
     with pyth;
     [
     ]
-    ++ flakePythons;
+    ;
 }

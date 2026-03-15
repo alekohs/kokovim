@@ -1,6 +1,6 @@
 return kokovim.get_plugin_by_repo("folke/which-key.nvim", {
   event = "VeryLazy",
-  opts_exted = { "spec" },
+  opts_extend = { "spec" },
   opts = {
     preset = "helix",
     spec = {
@@ -13,8 +13,10 @@ return kokovim.get_plugin_by_repo("folke/which-key.nvim", {
         { "<leader>dp", group = "profiler" },
         { "<leader>f", group = "file/find" },
         { "<leader>g", group = "git" },
+        { "<leader>gd", group = "diffview" },
         { "<leader>gh", group = "hunks", icon = " " },
         { "<leader>h", group = "harpoon" },
+        { "<leader>o", group = "oil" },
         { "<leader>m", group = "markdown", icon = " " },
         { "<leader>q", group = "quit/session" },
         { "<leader>s", group = "search" },

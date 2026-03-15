@@ -30,13 +30,7 @@ return {
   kokovim.get_plugin_by_repo("neovim/nvim-lspconfig", {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      kokovim.get_plugin_by_repo("SmiteshP/nvim-navbuddy", {
-        dependencies = {
-          kokovim.get_plugin_by_repo("SmiteshP/nvim-navic"),
-          kokovim.get_plugin_by_repo("MunifTanjim/nui.nvim"),
-        },
-        opts = { lsp = { auto_attach = true } },
-      }),
+      kokovim.get_plugin_by_repo("SmiteshP/nvim-navic"),
     },
     opts = {
       diagnostics = {
@@ -185,7 +179,7 @@ return {
       -- Replace with your own file rename function or plugin if needed:
       {
         "<leader>cR",
-        function() print("Rename File: Implement your custom rename here") end,
+        function() Snacks.rename.rename_file() end,
         mode = "n",
         desc = "Rename File",
       },

@@ -66,7 +66,6 @@ return {
     dependencies = {
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     },
-    -- config = function(_, opts) require("oil").setup(opts) end,
     keys = {
       {
         "<leader>o",

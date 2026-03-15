@@ -3,7 +3,20 @@ return {
     cond = not vim.g.vscode,
     opts = {
       image = {},
+      notifier = {
+        level = vim.log.levels.WARN,
+        style = "minimal",
+        timeout = 3000,
+        top_down = false,
+      },
       rename = {},
+      terminal = {},
+      lazygit = {},
+      lsp = { enabled = true },
+    },
+    keys = {
+      { "<leader>gg", function() require("snacks").lazygit() end,                   desc = "Lazygit" },
+      { "<C-\\>",     function() require("snacks").terminal() end,                  desc = "Toggle terminal", mode = { "n", "t" } },
     },
   }),
   kokovim.get_plugin_by_repo("folke/todo-comments.nvim", {
