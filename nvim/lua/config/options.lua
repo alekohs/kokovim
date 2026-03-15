@@ -13,6 +13,7 @@ opt.cursorline = true
 opt.copyindent = true
 opt.expandtab = true
 opt.foldlevel = 99
+opt.inccommand = "nosplit"
 opt.incsearch = true
 opt.ignorecase = true
 opt.linebreak = true

@@ -49,15 +49,6 @@ function M.get_plugin(local_dir, github, config)
     combined_config[k] = v
   end
 
-  -- DEBUG
-  -- for k in pairs(combinedConfig) do
-  --   print(k .. " " .. tostring(combinedConfig[k]))
-  -- end
-  --
-  --
-  --
-  -- print(vim.inspect(combined_config))
-  --
   return combined_config
 end
 

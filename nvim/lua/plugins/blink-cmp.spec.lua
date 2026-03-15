@@ -123,6 +123,13 @@ kokovim.get_plugin("colorful-menu-nvim", "xzbdmw/colorful-menu.nvim", {
 
     cmdline = {
       sources = { "cmdline", "path", "buffer" },
+      completion = {
+        menu = {
+          draw = {
+            columns = { { "label" } },
+          },
+        },
+      },
     },
     sources = {
       default = {
