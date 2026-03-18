@@ -57,9 +57,9 @@ return {
   kokovim.get_plugin_by_repo("seblyng/roslyn.nvim", {
     ft = { "cs", "razor" },
     opts = {
-      broad_search = true,
+      broad_search = false,
       silent = false,
-      filewatching = "off",
+      filewatching = "roslyn",
     },
   }),
 }
