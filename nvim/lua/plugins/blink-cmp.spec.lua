@@ -1,10 +1,11 @@
 local blink_cfg = {
   event = { "InsertEnter", "CmdlineEnter" },
+  version = "1.*",
   dependencies = {
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot"),
-kokovim.get_plugin("colorful-menu-nvim", "xzbdmw/colorful-menu.nvim", {
+    kokovim.get_plugin("colorful-menu-nvim", "xzbdmw/colorful-menu.nvim", {
       config = function()
         require("colorful-menu").setup({
           ls = {
