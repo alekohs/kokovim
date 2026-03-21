@@ -23,15 +23,6 @@ function M.get_plugin_by_repo(github, config)
   return plugin.get_plugin(localDir, github, config)
 end
 
---- Get color scheme
----@return string (colorscheme)
-function M.get_colorscheme()
-  local color = os.getenv("KOKOVIM_COLOR")
-  if color == nil or color == "" then color = "transparent" end
-
-  return color
-end
-
 M.icons = {
   diagnostics = {
     error = "󰅖", -- nf-md-close  (small “x”)
