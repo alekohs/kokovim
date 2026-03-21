@@ -72,6 +72,7 @@ return {
               "dapui_console",
               "snacks_dashboard",
               "snacks_layout_box",
+              "snacks_explorer",
             },
             winbar = {
               "copilot-chat",
@@ -83,6 +84,7 @@ return {
               "dapui_console",
               "snacks_dashboard",
               "snacks_layout_box",
+              "snacks_explorer",
               "neotest-summary",
               "qf",
               "help",
