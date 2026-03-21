@@ -27,11 +27,6 @@ let
       nvimSkipModule = [ ];
     }
     {
-      src = inputs.monoglow;
-      pname = "monoglow.nvim";
-      nvimSkipModule = [ ];
-    }
-    {
       src = inputs.colorful-menu-nvim;
       pname = "colorful-menu-nvim";
       nvimSkipModule = [
@@ -128,10 +123,6 @@ with pkgs.vimPlugins;
 
   # Colorschemes
   rose-pine
-  catppuccin-nvim
-  nord-nvim
-  zenbones-nvim
-  lush-nvim
 
   # Other
   vim-nix

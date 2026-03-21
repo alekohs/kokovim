@@ -21,11 +21,6 @@
       flake = false;
     };
 
-    monoglow = {
-      url = "github:wnkz/monoglow.nvim";
-      flake = false;
-    };
-
     blink-cmp = {
       url = "github:saghen/blink.cmp";
       inputs = {

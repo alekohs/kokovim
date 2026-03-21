@@ -7,6 +7,40 @@ return {
       kokovim.get_plugin_by_repo("SmiteshP/nvim-navic"),
     },
     config = function()
+      local p = require("rose-pine.palette")
+      local lualine_theme = {
+        normal = {
+          a = { bg = p.rose, fg = p.base, gui = "bold" },
+          b = { bg = "NONE", fg = p.rose },
+          c = { bg = "NONE", fg = p.text },
+        },
+        insert = {
+          a = { bg = p.foam, fg = p.base, gui = "bold" },
+          b = { bg = "NONE", fg = p.foam },
+          c = { bg = "NONE", fg = p.text },
+        },
+        visual = {
+          a = { bg = p.iris, fg = p.base, gui = "bold" },
+          b = { bg = "NONE", fg = p.iris },
+          c = { bg = "NONE", fg = p.text },
+        },
+        replace = {
+          a = { bg = p.pine, fg = p.base, gui = "bold" },
+          b = { bg = "NONE", fg = p.pine },
+          c = { bg = "NONE", fg = p.text },
+        },
+        command = {
+          a = { bg = p.love, fg = p.base, gui = "bold" },
+          b = { bg = "NONE", fg = p.love },
+          c = { bg = "NONE", fg = p.text },
+        },
+        inactive = {
+          a = { bg = "NONE", fg = p.muted, gui = "bold" },
+          b = { bg = "NONE", fg = p.muted },
+          c = { bg = "NONE", fg = p.muted },
+        },
+      }
+
       local function navic_cond()
         local buf_size_limit = 1024 * 1024 -- 1MB
         local lines = vim.api.nvim_buf_line_count(0)
@@ -25,7 +59,7 @@ return {
         options = {
           icons_enabled = true,
           globalstatus = true,
-          theme = "auto", --kokovim.get_colorscheme(),
+          theme = lualine_theme,
           section_separators = { left = "", right = "" },
           component_separators = { left = "│", right = "│" },
           disabled_filetypes = {
@@ -38,6 +72,7 @@ return {
               "dapui_console",
               "snacks_dashboard",
               "snacks_layout_box",
+              "snacks_explorer",
             },
             winbar = {
               "copilot-chat",
@@ -49,6 +84,7 @@ return {
               "dapui_console",
               "snacks_dashboard",
               "snacks_layout_box",
+              "snacks_explorer",
               "neotest-summary",
               "qf",
               "help",
