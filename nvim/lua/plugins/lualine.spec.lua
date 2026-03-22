@@ -34,6 +34,11 @@ return {
           b = { bg = "NONE", fg = p.love },
           c = { bg = "NONE", fg = p.text },
         },
+        terminal = {
+          a = { bg = p.pine, fg = p.base, gui = "bold" },
+          b = { bg = "NONE", fg = p.pine },
+          c = { bg = "NONE", fg = p.text },
+        },
         inactive = {
           a = { bg = "NONE", fg = p.muted, gui = "bold" },
           b = { bg = "NONE", fg = p.muted },
