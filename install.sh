@@ -4,11 +4,15 @@ set -u
 
 VERSION=""
 APPNAME="nvim"
-
-# Parse command line arguments
 KOKOVIM_DEBUG=false
+FOLLOW_GIT=false
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
+  -n)
+    APPNAME="$2"
+    shift 2
+    ;;
   -d)
     KOKOVIM_DEBUG=true
     shift
@@ -17,81 +21,62 @@ while [[ $# -gt 0 ]]; do
     VERSION="$2"
     shift 2
     ;;
-  *)
+  -g)
+    FOLLOW_GIT=true
     shift
+    ;;
+  -h)
+    echo "Usage: install.sh [options]"
+    echo "  -n <name>    App name (default: nvim)"
+    echo "  -d           Debug mode (install from local directory)"
+    echo "  -v <version> Install specific release version"
+    echo "  -g           Follow git main branch instead of a release"
+    echo "  -h           Show this help"
+    exit 0
+    ;;
+  *)
+    echo "Unknown option: $1. Use -h for help."
+    exit 1
     ;;
   esac
 done
-
-# Fetch latest release version if not specified
-if [ -z "$VERSION" ]; then
-  echo "Fetching latest release version..."
-  VERSION=$(curl -s https://api.github.com/repos/alekohs/kokovim/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
-  if [ -z "$VERSION" ]; then
-    echo "Failed to fetch latest version. Please specify version with -v flag."
-    exit 1
-  fi
-  echo "Latest version: $VERSION"
-fi
-
-# Use whiptail for app name selection
-if command -v whiptail &>/dev/null; then
-  CHOICE=$(whiptail --title "Kokovim Installation" --menu "Select name for the nvim instance:" 15 60 4 \
-    "1" "nvim" \
-    "2" "kokovim-dev" \
-    "3" "Custom name" 3>&1 1>&2 2>&3)
-
-  case $CHOICE in
-  1) APPNAME="nvim" ;;
-  2) APPNAME="kokovim-dev" ;;
-  3)
-    APPNAME=$(whiptail --inputbox "Enter custom name:" 8 60 "kokovim" --title "Custom App Name" 3>&1 1>&2 2>&3)
-    if [ -z "$APPNAME" ]; then
-      echo "No name provided. Exiting."
-      exit 1
-    fi
-    ;;
-  *)
-    echo "No selection made. Exiting."
-    exit 1
-    ;;
-  esac
-else
-  # Fallback to simple read if whiptail is not available
-  echo "Select name for the nvim instance:"
-  echo "1) nvim"
-  echo "2) kokovim-dev"
-  echo "3) pick your own"
-  read -p "Enter selection (1-3): " selection -r
-
-  case $selection in
-  1) APPNAME="nvim" ;;
-  2) APPNAME="kokovim-dev" ;;
-  3)
-    read -p "Custom name: " APPNAME -r
-    ;;
-  *)
-    echo "Invalid selection. Exiting."
-    exit 1
-    ;;
-  esac
-fi
 
 if $KOKOVIM_DEBUG; then
   echo "Installing app to ${HOME}/.config/${APPNAME}"
   mkdir -p "${HOME}/.config/${APPNAME}"
   rsync -a ./nvim/ "${HOME}/.config/${APPNAME}/"
-  exit 1
+  exit 0
 fi
 
-rm -rf "${HOME}/Downloads/kokovim-v${VERSION}"
-mkdir -p "${HOME}/Downloads/kokovim-v${VERSION}"
+DOWNLOAD_DIR="${HOME}/Downloads/kokovim-install"
+rm -rf "${DOWNLOAD_DIR}"
+mkdir -p "${DOWNLOAD_DIR}"
 
-echo "Download files"
-wget -O "${HOME}/Downloads/kokovim-v${VERSION}.tar.gz" "https://github.com/alekohs/kokovim/archive/refs/tags/v${VERSION}.tar.gz"
-tar -xzf "${HOME}/Downloads/kokovim-v${VERSION}.tar.gz" -C "${HOME}/Downloads/kokovim-v${VERSION}" "kokovim-${VERSION}/nvim" --strip-components=1
+if $FOLLOW_GIT; then
+  echo "Cloning latest from main branch..."
+  git clone --depth 1 https://github.com/alekohs/kokovim.git "${DOWNLOAD_DIR}/repo"
+  echo "Installing app to ${HOME}/.config/${APPNAME}"
+  mkdir -p "${HOME}/.config/${APPNAME}"
+  rsync -a "${DOWNLOAD_DIR}/repo/nvim/" "${HOME}/.config/${APPNAME}/"
+else
+  if [ -z "$VERSION" ]; then
+    echo "Fetching latest release version..."
+    VERSION=$(curl -s https://api.github.com/repos/alekohs/kokovim/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+    if [ -z "$VERSION" ]; then
+      echo "Failed to fetch latest version. Please specify version with -v flag."
+      rm -rf "${DOWNLOAD_DIR}"
+      exit 1
+    fi
+    echo "Latest version: $VERSION"
+  fi
 
-echo "Installing app to ${HOME}/.config/${APPNAME}"
-mkdir -p "${HOME}/.config/${APPNAME}"
-rsync -a --remove-source-files "${HOME}/Downloads/kokovim-v${VERSION}/nvim/" "${HOME}/.config/${APPNAME}/"
-rm -rf "${HOME}/Downloads/kokovim-v${VERSION}"
+  echo "Downloading v${VERSION}..."
+  wget -O "${DOWNLOAD_DIR}/kokovim.tar.gz" "https://github.com/alekohs/kokovim/archive/refs/tags/v${VERSION}.tar.gz"
+  tar -xzf "${DOWNLOAD_DIR}/kokovim.tar.gz" -C "${DOWNLOAD_DIR}" "kokovim-${VERSION}/nvim" --strip-components=1
+
+  echo "Installing app to ${HOME}/.config/${APPNAME}"
+  mkdir -p "${HOME}/.config/${APPNAME}"
+  rsync -a "${DOWNLOAD_DIR}/nvim/" "${HOME}/.config/${APPNAME}/"
+fi
+
+rm -rf "${DOWNLOAD_DIR}"
