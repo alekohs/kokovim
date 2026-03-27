@@ -33,5 +33,20 @@ require("lazy").setup({
   },
   checker = {
     enabled = not kokovim.is_nix,
+    notify = false,
   },
 })
+
+if not kokovim.is_nix then
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LazyCheck",
+    callback = function()
+      local updates = require("lazy.status").updates()
+      if updates then
+        vim.cmd("echohl DiagnosticInfo")
+        vim.cmd("echon ' lazy: " .. updates .. "'")
+        vim.cmd("echohl None")
+      end
+    end,
+  })
+end
