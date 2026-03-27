@@ -1,6 +1,22 @@
 return kokovim.get_plugin_by_repo("ibhagwan/fzf-lua", {
   cond = not vim.g.vscode,
   opts = {
+    fzf_colors = {
+      ["fg"]      = { "fg", "Normal" },
+      ["bg"]      = { "bg", "Normal" },
+      ["hl"]      = { "fg", "Comment" },
+      ["fg+"]     = { "fg", "CursorLine" },
+      ["bg+"]     = { "bg", "CursorLine" },
+      ["hl+"]     = { "fg", "Statement" },
+      ["info"]    = { "fg", "Comment" },
+      ["border"]  = { "fg", "WinSeparator" },
+      ["prompt"]  = { "fg", "Function" },
+      ["pointer"] = { "fg", "Exception" },
+      ["marker"]  = { "fg", "Keyword" },
+      ["spinner"] = { "fg", "Label" },
+      ["header"]  = { "fg", "Comment" },
+      ["gutter"]  = { "bg", "Normal" },
+    },
     files = {
       ignore = { "__virtual%.cs$" },
     },
