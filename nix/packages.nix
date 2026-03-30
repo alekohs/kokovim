@@ -43,16 +43,17 @@ in
       rust-analyzer
       nixd
       tailwindcss-language-server
-      nodePackages.tailwindcss
-      nodePackages.typescript
-      nodePackages.typescript-language-server
-      nodePackages.bash-language-server
+      lemminx
+      nodePackages_latest.tailwindcss
+      nodePackages_latest.typescript
+      nodePackages_latest.typescript-language-server
+      nodePackages_latest.bash-language-server
       python313Packages.python-lsp-server
       sqls
 
       # LINT
-      #nodePackages.jsonlint
-      nodePackages.markdownlint-cli
+      #nodePackages_latest.jsonlint
+      nodePackages_latest.markdownlint-cli
       biome
       htmlhint
       stylelint

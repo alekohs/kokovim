@@ -8,7 +8,6 @@
   neovim-unwrapped,
   # Set by the overlay to ensure we use a compatible version of `wrapNeovimUnstable`
   wrapNeovimUnstable,
-  neovimUtils,
 }:
 with lib;
 {
@@ -111,21 +110,6 @@ let
       vim.opt.rtp:prepend('${nvimRtp}/nvim')
     '';
 
-  neovimConfig = neovimUtils.makeNeovimConfig {
-    name = appName;
-    withPython3 = false;
-    withNodeJs = false;
-    withRuby = false;
-    extraPython3Packages = extraPythonPackages;
-    extraLuaPackages = extraLuaPackages;
-
-    plugins = normalizedPlugins;
-    wrapRc = wrapRc;
-
-    viAlias = viAlias;
-    vimAlias = vimAlias;
-  };
-
   # Add specific paths here to be used inside the
   packagesJson = builtins.toJSON (
     {
@@ -158,14 +142,23 @@ let
     ++ (optional withSqlite ''--set LIBSQLITE "${sqlite.out}/lib/libsqlite3.so"'')
   );
 
-  neovim-wrapped = wrapNeovimUnstable neovim-unwrapped (
-    neovimConfig
-    // {
-      luaRcContent = initLua;
-      wrapperArgs = escapeShellArgs neovimConfig.wrapperArgs + " " + extraMakeWrapperArgs;
-      wrapRc = wrapRc;
-    }
-  );
+  neovim-wrapped = wrapNeovimUnstable neovim-unwrapped {
+    name = appName;
+    withPython3 = false;
+    withNodeJs = false;
+    withRuby = false;
+    extraPython3Packages = extraPythonPackages;
+    extraLuaPackages = extraLuaPackages;
+
+    plugins = normalizedPlugins;
+    wrapRc = wrapRc;
+
+    viAlias = viAlias;
+    vimAlias = vimAlias;
+
+    luaRcContent = initLua;
+    extraMakeWrapperArgs = extraMakeWrapperArgs;
+  };
 
   isCustomAppName = appName != null && appName != "nvim";
 in
