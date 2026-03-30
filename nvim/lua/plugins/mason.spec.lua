@@ -20,6 +20,8 @@ return {
         { "gopls", condition = function() return vim.fn.executable("go") == 1 end },
         "fish-lsp",
         "html-lsp",
+        "lemminx",
+        "json-lsp",
         "lua-language-server",
         "vim-language-server",
         "markdown-oxide",

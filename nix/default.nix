@@ -21,7 +21,7 @@ let
   # This is the helper function that builds the Neovim derivation.
   mkNeovim =
     (pkgs.callPackage ../lib/mkNeovim.nix {
-      inherit (pkgs) wrapNeovimUnstable neovimUtils;
+      inherit (pkgs) wrapNeovimUnstable;
     }).override
       {
         pkgs = pkgs // {
