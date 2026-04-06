@@ -1,5 +1,5 @@
 # This overlay, when applied to nixpkgs, adds the final neovim derivation to nixpkgs.
-{ inputs, appName, withRoslyn ? true, ... }:
+{ inputs, appName, withRoslyn ? true, withUnstable ? false, ... }:
 final: prev:
 with final.pkgs.lib;
 let
@@ -12,9 +12,10 @@ let
 
   plugins = import ./plugins.nix { inherit inputs pkgs opts withRoslyn; };
   packages = import ./packages.nix {
-    inherit inputs pkgs-unstable withRoslyn;
+    inherit inputs pkgs-unstable withRoslyn withUnstable;
     pkgs = pkgs // {
       #roslyn-ls = pkgs-unstable.roslyn-ls;
+      neovim = pkgs-unstable.neovim;
     };
   };
 
@@ -26,6 +27,7 @@ let
       {
         pkgs = pkgs // {
           #roslyn-ls = pkgs-unstable.roslyn-ls;
+        neovim = pkgs-unstable.neovim;
         };
       };
 in
