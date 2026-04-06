@@ -13,6 +13,9 @@ opt.cursorline = true
 opt.copyindent = true
 opt.expandtab = true
 opt.foldlevel = 99
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldtext = ""
 opt.inccommand = "nosplit"
 opt.incsearch = true
 opt.ignorecase = true
@@ -30,13 +33,9 @@ opt.showmode = false
 opt.sidescrolloff = 8
 opt.signcolumn = "yes"
 opt.smartcase = true
-opt.smartindent = true
 opt.splitbelow = true
 opt.splitkeep = "screen"
 opt.splitright = true
-opt.startofline = true
-opt.showmatch = true
-opt.synmaxcol = 240
 opt.swapfile = false
 opt.preserveindent = true
 opt.tabstop = 2
@@ -49,3 +48,15 @@ opt.virtualedit = "block"
 opt.writebackup = false
 opt.wildmode = { "longest:full", "full" }
 opt.wrap = false
+
+
+-- Enable treesitter highlighting for all filetypes except ones with conflicting built-in syntax
+local ts_excluded = { help = true, man = true, checkhealth = true }
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function(args)
+    if not ts_excluded[vim.bo[args.buf].filetype] then
+      pcall(vim.treesitter.start, args.buf)
+    end
+  end,
+})

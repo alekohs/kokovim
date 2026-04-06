@@ -1,21 +1,22 @@
 return {
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.nvim", {
     version = false,
-    dependencies = {
-      kokovim.get_plugin_by_repo("JoosepAlviste/nvim-ts-context-commentstring", {
-        lazy = false,
-        opts = {
-          enable_autocmd = false
-        }
-      })
-    },
     config = function()
       -- AI
       require("mini.ai").setup()
 
       require("mini.comment").setup({
         options = {
-          custom_commentstring = function() return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring end,
+          custom_commentstring = function()
+            local node = vim.treesitter.get_node({ ignore_injections = false })
+            if not node then return vim.bo.commentstring end
+            local parser = vim.treesitter.get_parser(0)
+            if not parser then return vim.bo.commentstring end
+            local lang = parser:language_for_range({ node:range() }):lang()
+            local ft = vim.treesitter.language.get_filetypes(lang)[1] or lang
+            local cs = vim.api.nvim_get_option_value("commentstring", { filetype = ft })
+            return (cs ~= "") and cs or vim.bo.commentstring
+          end,
         },
       })
 

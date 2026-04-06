@@ -25,7 +25,6 @@ return {
   kokovim.get_plugin("codecompanion.nvim", "olimorris/codecompanion.nvim", {
     dependencies = {
       kokovim.get_plugin_by_repo("nvim-lua/plenary.nvim"),
-      kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter"),
     },
     opts = {},
     keys = {

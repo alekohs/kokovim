@@ -36,14 +36,6 @@ return {
     },
     opts = {
       diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = "if_many",
-          prefix = "●",
-        },
-        severity_sort = true,
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = kokovim.icons.diagnostics.error,
@@ -53,44 +45,26 @@ return {
           },
         },
       },
-      inlay_hints = {
-        enabled = true,
-        exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints (cs/razor handled by autocmd)
-      },
-      servers = {
-        lua_ls = {},
-        ts_ls = {},
-      },
     },
     config = function(_, opts)
       local common = require("plugins.lsp.common")
       local on_attach = common.on_attach
       local capabilities = common.capabilities()
 
-      -- Loop all simple lsps
-      for _, lsp in ipairs(lsps) do
-        vim.lsp.config(lsp, {
-          on_attach = on_attach,
-          capabilities = capabilities,
-        })
-      end
-
-      ---
-      --- Bash
-      ---
-      vim.lsp.config("bashls", {
-        filetypes = { "sh", "bash" },
-        cmd = { "bash-language-server", "start" },
+      -- Global defaults for all servers
+      vim.lsp.config("*", {
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
-      ---
-      --- HTML
-      ---
+      -- Bash
+      vim.lsp.config("bashls", {
+        filetypes = { "sh", "bash" },
+        cmd = { "bash-language-server", "start" },
+      })
+
+      -- HTML
       vim.lsp.config("html", {
-        on_attach = on_attach,
-        capabilities = capabilities,
         filetypes = { "html", "razor" },
         init_options = {
           configurationSection = { "html", "css", "javascript" },
@@ -99,43 +73,30 @@ return {
         },
       })
 
-      ---
-      --- Python
-      ---
+      -- Python
       vim.lsp.config("pylsp", {
         filetypes = { "python" },
         cmd = { "pylsp" },
-        on_attach = on_attach,
-        capabilities = capabilities,
       })
 
-      --
       -- Javascript/Typescript
-      --
       vim.lsp.config("ts_ls", {
         on_attach = function(client, bufnr)
-          -- Disable ts_ls formatting if using prettier/eslint
           client.server_capabilities.documentFormattingProvider = false
           on_attach(client, bufnr)
         end,
-        capabilities = capabilities,
         filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
       })
 
-      --
       -- Swift / Xcode
-      --
       vim.lsp.config("sourcekit", {
         cmd = { "xcrun", "sourcekit-lsp" },
         root = function(filename)
-          local util = require("lspconfig.util")
-          return util.root_pattern("buildServer.json")(filename)
-            or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
-            or util.find_git_ancestor(filename)
-            or util.root_pattern("Package.swift")
+          return vim.fs.root(filename, { "buildServer.json", "Package.swift", ".git" })
+            or vim.fs.root(filename, function(name)
+              return name:match("%.xcodeproj$") or name:match("%.xcworkspace$")
+            end)
         end,
-        on_attach = on_attach,
-        capabilities = capabilities,
       })
 
       -- On Nix, mason-lspconfig is disabled so we must enable servers ourselves
@@ -144,7 +105,6 @@ return {
         vim.lsp.enable(all_servers)
       end
 
-      -- Configure diaganostics
       vim.diagnostic.config({
         virtual_text = false,
         virtual_lines = false,
@@ -173,7 +133,7 @@ return {
       { "<leader>cC", function() vim.lsp.codelens.refresh() end, mode = "n", desc = "Refresh Codelens" },
       { "<leader>cF", function() vim.lsp.buf.format() end, mode = "n", desc = "Format code with LSP" },
 
-      { "K", function() return vim.lsp.buf.hover({ border = "rounded" }) end, mode = "n", desc = "Hover" },
+      { "K", function() vim.lsp.buf.hover({ border = "rounded", max_width = math.floor(vim.o.columns * 0.8) }) end, mode = "n", desc = "Hover" },
       { "<leader>gK", function() return vim.lsp.buf.signature_help() end, mode = "n", desc = "Signature help" },
       { "<C-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature help" },
       { "<leader>cr", vim.lsp.buf.rename, mode = "n", desc = "Rename" },
