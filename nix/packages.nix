@@ -3,14 +3,16 @@
   pkgs,
   pkgs-unstable,
   withRoslyn ? true,
+  withUnstable ? false,
 }:
 let
   lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
+  p = if withUnstable then pkgs-unstable else pkgs;
 in
 {
 
   extraPackages =
-    with pkgs;
+    with p;
     [
       fd
       gcc # needed for nvim-treesitter
@@ -68,19 +70,19 @@ in
       # tectonic # PDF
       #mermaid-cli # Mermaid diagarams
     ]
-    ++ pkgs.lib.optionals withRoslyn [
+    ++ p.lib.optionals withRoslyn [
       # dotnet LSP — requires building dotnet on Darwin, opt-in only
-      pkgs.rzls
-      pkgs.roslyn-ls
+      p.rzls
+      p.roslyn-ls
 
       # dotnet DAP
-      pkgs.netcoredbg
+      p.netcoredbg
     ]
-    ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+    ++ p.lib.optionals p.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
     ]
-    ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-      (pkgs.ruby.withPackages (ps: [ ps.xcodeproj ]))
+    ++ p.lib.optionals p.stdenv.isDarwin [
+      (p.ruby.withPackages (ps: [ ps.xcodeproj ]))
       sourcekit-lsp
       swiftlint
       swiftformat

@@ -78,6 +78,11 @@
         appName = appName;
         withRoslyn = false;
       };
+      neovim-overlay-unstable = import ./nix/default.nix {
+        inherit inputs;
+        appName = appName;
+        withUnstable = true;
+      };
     in
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -96,12 +101,20 @@
             inputs.gen-luarc.overlays.default
           ];
         };
+        pkgs-unstable-overlay = import nixpkgs {
+          inherit system;
+          overlays = [
+            neovim-overlay-unstable
+            inputs.gen-luarc.overlays.default
+          ];
+        };
       in
       {
         packages = rec {
           default = pkgs.nvim-pkg;
           kokovim = pkgs.nvim-pkg;
           kokovim-no-roslyn = pkgs-no-roslyn.nvim-pkg;
+          kokovim-unstable = pkgs-unstable-overlay.nvim-pkg;
           nvim = pkgs.nvim-default;
         };
 
@@ -147,6 +160,7 @@
       overlays.default = neovim-overlay;
       # Overlay without roslyn/rzls/netcoredbg (avoids building dotnet on Darwin)
       overlays.withoutRoslyn = neovim-overlay-no-roslyn;
+      overlays.withUnstable = neovim-overlay-unstable;
 
       nixosModules.default = import ./nix/nixos-module.nix { inherit self; };
       homeManagerModules.default = import ./nix/hm-module.nix { inherit self; };
