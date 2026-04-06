@@ -72,9 +72,6 @@ local blink_cfg = {
         auto_show = true,
         auto_show_delay_ms = 500,
         treesitter_highlighting = true,
-        window = {
-          -- border = "rounded",
-        },
       },
       list = { selection = { preselect = false, auto_insert = false } },
       menu = {

@@ -308,23 +308,6 @@
         "type": "github"
       }
     },
-    "nvim-treesitter": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775221900,
-        "narHash": "sha256-PQR6tFt4lCrAZNQG7BLMD1IiCKja9wDS1S4laGJf/HE=",
-        "owner": "nvim-treesitter",
-        "repo": "nvim-treesitter",
-        "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-treesitter",
-        "ref": "main",
-        "repo": "nvim-treesitter",
-        "type": "github"
-      }
-    },
     "nvim-treesitter-textobjects": {
       "flake": false,
       "locked": {
@@ -383,7 +366,6 @@
         "mini-nvim": "mini-nvim",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "nvim-treesitter": "nvim-treesitter",
         "nvim-treesitter-textobjects": "nvim-treesitter-textobjects",
         "oil-lsp-diagnostics-nvim": "oil-lsp-diagnostics-nvim",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",

@@ -10,15 +10,6 @@ let
   # pkgs.neovimUtils.buildNeovimPlugin
 
   lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
-  nvim-treesitter-grammars = pkgs.symlinkJoin {
-    name = "nvim-treesitter-grammars";
-    paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
-    postBuild = ''
-      # Only keep parser .so files — queries must come from the
-      # nvim-treesitter plugin (flake input) to avoid version mismatches
-      rm -rf $out/queries
-    '';
-  };
 
   plugins-spec = [
     {
@@ -38,12 +29,6 @@ let
       src = inputs.oil-lsp-diagnostics-nvim;
       pname = "oil-lsp-diagnostics-nvim";
       nvimSkipModule = [ "oil-lsp-diagnostics" ];
-    }
-
-    {
-      src = inputs.nvim-treesitter;
-      pname = "nvim-treesitter";
-      nvimSkipModule = [ "nvim-treesitter._meta.parsers" ];
     }
 
     {
@@ -71,7 +56,6 @@ with pkgs.vimPlugins;
 
   # code
   nvim-ts-autotag
-  nvim-ts-context-commentstring
   neogen
   conform-nvim
 
@@ -110,9 +94,7 @@ with pkgs.vimPlugins;
   colorful-menu-nvim
 
   # Treesitter
-  # nvim-treesitter is built from main via flakePlugins
   # nvim-treesitter-textobjects is built from main via flakePlugins
-  nvim-treesitter-grammars
   nvim-treesitter-context
 
   # Linting
@@ -124,8 +106,6 @@ with pkgs.vimPlugins;
   # Colorschemes
   rose-pine
 
-  # Other
-  vim-nix
 
   # Plugins outside of nixpkgs
 

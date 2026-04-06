@@ -3,11 +3,17 @@ return {
     cond = not vim.g.vscode,
     ft = { "markdown", "quarto" },
     dependencies = {
-      kokovim.get_plugin_by_repo("nvim-treesitter/nvim-treesitter"),
       kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     },
     opts = {
       enabled = true,
+      overrides = {
+        buftype = {
+          nofile = {
+            enabled = false,
+          },
+        },
+      },
       bullet = {
         icons = { "◆ ", "• ", "• " },
         right_pad = 1,
