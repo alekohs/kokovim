@@ -78,11 +78,9 @@ with pkgs.vimPlugins;
   harpoon2
   gitsigns-nvim
   diffview-nvim
-  render-markdown-nvim
   vim-wakatime
   todo-comments-nvim
   snacks-nvim
-  persistence-nvim
 
   # UI
   nvim-navic

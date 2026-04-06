@@ -17,7 +17,6 @@ return kokovim.get_plugin_by_repo("folke/which-key.nvim", {
         { "<leader>gh", group = "hunks", icon = " " },
         { "<leader>h", group = "harpoon" },
         { "<leader>o", group = "oil" },
-        { "<leader>m", group = "markdown", icon = " " },
         { "<leader>q", group = "quit/session" },
         { "<leader>s", group = "search" },
         { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
