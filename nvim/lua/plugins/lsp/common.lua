@@ -7,13 +7,7 @@ M.capabilities = function()
 end
 
 M.on_attach = function(client, bufnr)
-  local bt = vim.bo[bufnr].buftype
-  if bt ~= "" and client.name ~= "html" then
-    client.stop()
-    return
-  end
-
-  if client.server_capabilities.documentSymbolProvider then
+if client.server_capabilities.documentSymbolProvider then
     local dominated = client.name == "html" and vim.bo[bufnr].filetype == "razor"
     if not dominated then
       require("nvim-navic").attach(client, bufnr)
@@ -22,6 +16,11 @@ M.on_attach = function(client, bufnr)
 
   if client:supports_method("textDocument/inlayHint") and vim.bo[bufnr].filetype ~= "vue" then
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
+
+  -- TODO: remove this when Neovim/Roslyn document_color lifecycle race is fixed upstream.
+  if vim.bo[bufnr].filetype == "razor" and (client.name == "roslyn" or client.name == "roslyn-ls") then
+    pcall(vim.lsp.document_color.enable, false, { bufnr = bufnr })
   end
 end
 
