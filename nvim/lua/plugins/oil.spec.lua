@@ -78,6 +78,15 @@ return {
   kokovim.get_plugin_by_repo("refractalize/oil-git-status.nvim", {
     cond = not vim.g.vscode,
     dependencies = { kokovim.get_plugin_by_repo("stevearc/oil.nvim") },
+    config = function(_, opts)
+      require("oil-git-status").setup(opts)
+      vim.api.nvim_set_hl(0, "OilGitStatusIndexIgnored", { link = "DiagnosticError" })
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = function()
+          vim.api.nvim_set_hl(0, "OilGitStatusIndexIgnored", { link = "DiagnosticError" })
+        end,
+      })
+    end,
     opts = {
       symbols = {
         index = {
@@ -98,7 +107,7 @@ return {
           ["C"] = kokovim.icons.git.added,
           ["U"] = kokovim.icons.git.unmerged,
           ["?"] = kokovim.icons.git.untracked,
-          ["!"] = kokovim.icons.git.ignored,
+          ["!"] = "",
         },
       },
     },

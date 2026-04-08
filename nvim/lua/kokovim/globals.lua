@@ -35,9 +35,9 @@ M.icons = {
     modified  = "",
     removed   = "",
     renamed   = "",
-    untracked = "",
-    ignored   = "",
-    unmerged  = "",
+    untracked = "",
+    ignored   = "",
+    unmerged  = "󰕚",
   },
 }
 
