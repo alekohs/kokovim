@@ -69,6 +69,17 @@ nixpkgs.overlays = [ inputs.kokovim.overlays.withoutRoslyn ];
 Neovim for nix [Context:
 https://github.com/NixOS/nixpkgs/blob/f71ccdc1bc17dffc83a8c49d0aa9ae92644572ab/doc/languages-frameworks/neovim.section.md?plain=1#L3]
 
+## LSP Commands
+
+On Neovim 0.11+ nvim-lspconfig defers to the native `:lsp` command.
+
+| Command | Description |
+|---|---|
+| `:checkhealth vim.lsp` | LSP status (replaces `:LspInfo`) |
+| `:lsp enable roslyn` | Start roslyn (always specify server — `:lsp enable` alone picks `csharp_ls`) |
+| `:lsp stop roslyn` | Stop roslyn |
+| `:lsp restart roslyn` | Restart roslyn |
+
 ## Debug
 
 Check some of the paths
