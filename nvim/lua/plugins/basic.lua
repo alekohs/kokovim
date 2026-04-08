@@ -53,7 +53,6 @@ return {
     },
   }),
 
-  kokovim.get_plugin_by_repo("wakatime/vim-wakatime", { lazy = false }),
   kokovim.get_plugin("grug-far.nvim", "MagicDuck/grug-far.nvim", {
     opts = { headerMaxWidth = 80 },
     cmd = "GrugFar",

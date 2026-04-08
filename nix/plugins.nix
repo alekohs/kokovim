@@ -59,14 +59,6 @@ with pkgs.vimPlugins;
   neogen
   conform-nvim
 
-  # dap
-  nvim-dap
-  nvim-dap-ui
-  nvim-nio
-  nvim-dap-virtual-text
-  nvim-dap-go
-  nvim-dap-python
-
   # Editor
   fzf-lua
   oil-nvim
@@ -78,7 +70,6 @@ with pkgs.vimPlugins;
   harpoon2
   gitsigns-nvim
   diffview-nvim
-  vim-wakatime
   todo-comments-nvim
   snacks-nvim
 
