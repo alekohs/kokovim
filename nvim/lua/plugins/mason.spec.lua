@@ -3,6 +3,9 @@ if kokovim.is_nix then return {} end
 return {
   kokovim.get_plugin_by_repo("mason-org/mason.nvim", {
     opts = {
+      ui = {
+        border = "rounded",
+      },
       registries = {
         "github:mason-org/mason-registry",
         "github:Crashdummyy/mason-registry",

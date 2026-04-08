@@ -20,10 +20,14 @@ end
 require("config.options")
 require("config.commands")
 require("config.keymaps")
+require("config.ui2")
 
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+  },
+  ui = {
+    border = "rounded",
   },
   install = {
     missing = not kokovim.is_nix,

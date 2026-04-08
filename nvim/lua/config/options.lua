@@ -48,7 +48,7 @@ opt.virtualedit = "block"
 opt.writebackup = false
 opt.wildmode = { "longest:full", "full" }
 opt.wrap = false
-
+opt.cmdheight = 0
 
 -- Enable treesitter highlighting for all filetypes except ones with conflicting built-in syntax
 local ts_excluded = { help = true, man = true, checkhealth = true }
