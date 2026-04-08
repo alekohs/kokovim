@@ -26,6 +26,9 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
+  ui = {
+    border = "rounded",
+  },
   install = {
     missing = not kokovim.is_nix,
   },
