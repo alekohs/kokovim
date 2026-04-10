@@ -66,6 +66,41 @@ vim.lsp.config("roslyn", {
   },
 })
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local bufnr = args.buf
+
+    if not client or (client.name ~= "roslyn" and client.name ~= "roslyn_ls") then return end
+
+    vim.api.nvim_create_autocmd("InsertCharPre", {
+      desc = "Roslyn: Trigger auto insert on '/'",
+      buffer = bufnr,
+      callback = function()
+        if vim.v.char ~= "/" then return end
+
+        local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+        local params = {
+          _vs_textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+          _vs_position = { line = row - 1, character = col + 1 },
+          _vs_ch = "/",
+          _vs_options = {
+            tabSize = vim.bo[bufnr].tabstop,
+            insertSpaces = vim.bo[bufnr].expandtab,
+          },
+        }
+
+        vim.defer_fn(function()
+          client:request("textDocument/_vs_onAutoInsert", params, function(err, result)
+            if err or not result then return end
+            vim.snippet.expand(result._vs_textEdit.newText)
+          end, bufnr)
+        end, 1)
+      end,
+    })
+  end,
+})
+
 return {
   kokovim.get_plugin_by_repo("seblyng/roslyn.nvim", {
     ft = { "cs", "razor" },
