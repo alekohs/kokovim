@@ -50,13 +50,8 @@ opt.wildmode = { "longest:full", "full" }
 opt.wrap = false
 opt.cmdheight = 0
 
--- Enable treesitter highlighting for all filetypes except ones with conflicting built-in syntax
-local ts_excluded = { help = true, man = true, checkhealth = true }
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function(args)
-    if not ts_excluded[vim.bo[args.buf].filetype] then
-      pcall(vim.treesitter.start, args.buf)
-    end
-  end,
+vim.filetype.add({
+  pattern = {
+    [".*%.props"] = "xml",
+  },
 })

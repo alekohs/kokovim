@@ -54,3 +54,25 @@ autocmd("TextYankPost", {
   callback = function() vim.hl.on_yank() end,
 })
 
+-- Enable treesitter highlighting for all filetypes except ones with conflicting built-in syntax
+local ts_excluded = { help = true, man = true, checkhealth = true }
+autocmd("FileType", {
+  pattern = "*",
+  callback = function(args)
+    local ft = vim.bo[args.buf].filetype
+    if ts_excluded[ft] then return end
+
+    local lang = vim.treesitter.language.get_lang(ft) or ft
+    local has_parser = pcall(vim.treesitter.language.inspect, lang)
+
+    if has_parser then
+      pcall(vim.treesitter.start, args.buf)
+    elseif not kokovim.is_nix then
+      local ok, nts = pcall(require, "nvim-treesitter")
+      if ok and nts.install and require("nvim-treesitter.parsers")[lang] then
+        nts.install({ lang }):wait(30000)
+        pcall(vim.treesitter.start, args.buf)
+      end
+    end
+  end,
+})

@@ -11,6 +11,11 @@ let
 
   lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
 
+  nvim-treesitter-grammars = pkgs.symlinkJoin {
+    name = "nvim-treesitter-grammars";
+    paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+  };
+
   plugins-spec = [
     {
       src = inputs.mini-nvim;
@@ -84,6 +89,7 @@ with pkgs.vimPlugins;
 
   # Treesitter
   # nvim-treesitter-textobjects is built from main via flakePlugins
+  nvim-treesitter-grammars
   nvim-treesitter-context
 
   # Linting
