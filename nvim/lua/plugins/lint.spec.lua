@@ -15,7 +15,7 @@ return {
         javascript = { "biomejs" },
         typescript = { "biomejs" },
 
-        json = { "jsonlint" },
+        json = { "biomejs" },
         markdown = { "markdownlint" },
         (kokovim.is_nix and { nix = { "deadnix" } }),
         sql = { "sqlfluff" },
