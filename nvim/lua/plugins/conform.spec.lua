@@ -5,6 +5,14 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
     default_format_opts = {
       lsp_format = "fallback",
     },
+    formatters = kokovim.is_nix and {
+      powershell_es = {
+        command = "pwsh",
+        args = { "-NoLogo", "-NoProfile", "-NonInteractive", "-Command",
+          "Invoke-Formatter -ScriptDefinition ($input | Out-String)" },
+        stdin = true,
+      },
+    } or {},
     formatters_by_ft = {
       bash = { "shellcheck", "shellharden", "shfmt" },
       sh = { "shellcheck", "shellharden", "shfmt" },

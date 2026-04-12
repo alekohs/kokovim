@@ -30,6 +30,7 @@ in
       shellharden
       stylua
       shfmt
+      powershell
       xmlformat
       yamlfmt
 
