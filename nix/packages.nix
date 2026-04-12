@@ -6,7 +6,6 @@
   withUnstable ? false,
 }:
 let
-  lib = import ../lib/mkFlakeBuild.nix { pkgs = pkgs; };
   p = if withUnstable then pkgs-unstable else pkgs;
 in
 {
@@ -22,10 +21,13 @@ in
       # Formatters
       codespell
       deno
+      go
       gotools
-      nixpkgs-fmt
+      nixfmt
       prettierd
+      prettier
       ruff
+      shellharden
       stylua
       shfmt
       xmlformat
@@ -44,16 +46,16 @@ in
       nixd
       tailwindcss-language-server
       lemminx
-      nodePackages_latest.tailwindcss
-      nodePackages_latest.typescript
-      nodePackages_latest.typescript-language-server
-      nodePackages_latest.bash-language-server
+      tailwindcss
+      typescript
+      typescript-language-server
+      bash-language-server
       python313Packages.python-lsp-server
       sqls
+      powershell-editor-services
 
       # LINT
-      #nodePackages_latest.jsonlint
-      nodePackages_latest.markdownlint-cli
+      markdownlint-cli
       biome
       htmlhint
       stylelint
@@ -62,6 +64,9 @@ in
       editorconfig-checker
       shellcheck
       sqlfluff
+
+      # For nvim-treesitter parser compilation
+      tree-sitter
 
       # For snacks image to work
       imagemagick # Images
@@ -76,6 +81,8 @@ in
       # dotnet DAP
       p.netcoredbg
     ]
+    # ++ p.lib.optionals p.stdenv.hostPlatform.isx86_64 [
+    #       ]
     ++ p.lib.optionals p.stdenv.isLinux [
       pkgs.fswatch # https://github.com/neovim/neovim/pull/27347
     ]

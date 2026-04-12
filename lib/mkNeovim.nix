@@ -94,7 +94,15 @@ let
   # and prepends the nvim and after directory to the RTP
   # It also adds logic for bootstrapping dev plugins (for plugin developers)
   initLua =
-    ''
+    (lib.optionalString useNix ''
+      -- Set by Nix wrapper to signal nix mode
+      vim.env.NVIM_NIX = "1"
+    '')
+    + (lib.optionalString (externalPackages != []) ''
+      -- Prepend Nix external packages to PATH (extraMakeWrapperArgs broken since nvim 0.12)
+      vim.env.PATH = "${makeBinPath externalPackages}:" .. vim.env.PATH
+    '')
+    + ''
       -- prepend lua and plugins directory
       vim.opt.rtp:prepend('${nvimRtp}/lua')
     ''
