@@ -107,7 +107,9 @@ return {
     opts = {
       broad_search = false,
       silent = false,
-      filewatching = "roslyn",
+      -- Currently not doable on linux, inotify is reaching the limit all the time.
+      -- Does not matter how much increasement we've done
+      filewatching = "off",
     },
   }),
 }
