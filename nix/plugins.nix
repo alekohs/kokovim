@@ -63,6 +63,7 @@ with pkgs.vimPlugins;
   nvim-ts-autotag
   neogen
   conform-nvim
+  csvview-nvim
 
   # Editor
   fzf-lua
