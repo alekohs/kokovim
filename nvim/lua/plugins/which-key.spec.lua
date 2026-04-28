@@ -14,6 +14,7 @@ return kokovim.get_plugin_by_repo("folke/which-key.nvim", {
         { "<leader>f", group = "file/find" },
         { "<leader>g", group = "git" },
         { "<leader>gd", group = "diffview" },
+        { "<leader>gm", group = "merge" },
         { "<leader>gh", group = "hunks", icon = " " },
         { "<leader>h", group = "harpoon" },
         { "<leader>o", group = "oil" },

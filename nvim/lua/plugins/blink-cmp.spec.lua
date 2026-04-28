@@ -5,56 +5,6 @@ local blink_cfg = {
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
     kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot"),
-    kokovim.get_plugin("colorful-menu-nvim", "xzbdmw/colorful-menu.nvim", {
-      config = function()
-        require("colorful-menu").setup({
-          ls = {
-            lua_ls = {
-              arguments_hl = "@comment",
-            },
-            gopls = {
-              align_type_to_right = true,
-              add_colon_before_type = false,
-              preserve_type_when_truncate = true,
-            },
-            ts_ls = {
-              extra_info_hl = "@comment",
-            },
-            ["rust-analyzer"] = {
-              extra_info_hl = "@comment",
-              align_type_to_right = true,
-              preserve_type_when_truncate = true,
-            },
-            clangd = {
-              extra_info_hl = "@comment",
-              align_type_to_right = true,
-              import_dot_hl = "@comment",
-              preserve_type_when_truncate = true,
-            },
-            zls = {
-              align_type_to_right = true,
-            },
-            roslyn = {
-              extra_info_hl = "@comment",
-            },
-            dartls = {
-              extra_info_hl = "@comment",
-            },
-            basedpyright = {
-              extra_info_hl = "@comment",
-            },
-            pylsp = {
-              extra_info_hl = "@comment",
-              arguments_hl = "@comment",
-            },
-            -- If true, try to highlight "not supported" languages.
-            fallback = true,
-            fallback_extra_info_hl = "@comment",
-          },
-          fallback_highlight = "@variable",
-        })
-      end,
-    }),
   },
   opts = {
     appearance = {
@@ -88,10 +38,6 @@ local blink_cfg = {
                 local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
                 return hl
               end,
-            },
-            label = {
-              text = function(ctx) return require("colorful-menu").blink_components_text(ctx) end,
-              highlight = function(ctx) return require("colorful-menu").blink_components_highlight(ctx) end,
             },
           },
           treesitter = { "lsp", "copilot" },

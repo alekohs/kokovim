@@ -20,7 +20,6 @@ in
 
       # Formatters
       codespell
-      deno
       go
       gotools
       nixfmt

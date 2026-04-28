@@ -34,11 +34,6 @@
       flake = false;
     };
 
-    colorful-menu-nvim = {
-      url = "github:xzbdmw/colorful-menu.nvim";
-      flake = false;
-    };
-
     oil-lsp-diagnostics-nvim = {
       url = "github:JezerM/oil-lsp-diagnostics.nvim";
       flake = false;

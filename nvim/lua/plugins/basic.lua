@@ -2,42 +2,14 @@ return {
   kokovim.get_plugin_by_repo("folke/snacks.nvim", {
     cond = not vim.g.vscode,
     opts = {
-      image = {},
-      notifier = {
-        level = vim.log.levels.WARN,
-        style = "minimal",
-        timeout = 3000,
-        top_down = false,
-      },
-      explorer = {
-        git_status_icons = {
-          staged    = kokovim.icons.git.added,
-          modified  = kokovim.icons.git.modified,
-          deleted   = kokovim.icons.git.removed,
-          renamed   = kokovim.icons.git.renamed,
-          untracked = kokovim.icons.git.untracked,
-          ignored   = kokovim.icons.git.ignored,
-          unmerged  = kokovim.icons.git.unmerged,
-        },
-      },
       rename = {},
       terminal = {},
       lazygit = {},
       lsp = { enabled = true },
     },
     keys = {
-      { "<leader>e",  function() require("snacks").explorer() end,                  desc = "Explorer" },
       { "<leader>gg", function() require("snacks").lazygit() end,                   desc = "Lazygit" },
       { "<C-\\>",     function() require("snacks").terminal() end,                  desc = "Toggle terminal", mode = { "n", "t" } },
-    },
-  }),
-  kokovim.get_plugin_by_repo("folke/todo-comments.nvim", {
-    cmd = { "TodoFzfLua" },
-    event = "VeryLazy",
-    dependencies = { kokovim.get_plugin_by_repo("nvim-lua/plenary.nvim") },
-    config = function(_, opts) require("todo-comments").setup(opts) end,
-    keys = {
-      { "<leader>st", "<CMD>TodoFzfLua<CR>", desc = "Search todo comments" },
     },
   }),
   kokovim.get_plugin_by_repo("folke/flash.nvim", {
