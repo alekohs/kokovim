@@ -42,7 +42,6 @@ return {
         -- Formatters
         "stylua",
         "codespell",
-        "deno",
         "prettierd",
         "ruff",
         "stylua",

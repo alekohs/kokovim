@@ -23,14 +23,6 @@ let
       nvimSkipModule = [ ];
     }
     {
-      src = inputs.colorful-menu-nvim;
-      pname = "colorful-menu-nvim";
-      nvimSkipModule = [
-        "repro_blink"
-        "repro_cmp"
-      ];
-    }
-    {
       src = inputs.oil-lsp-diagnostics-nvim;
       pname = "oil-lsp-diagnostics-nvim";
       nvimSkipModule = [ "oil-lsp-diagnostics" ];
@@ -76,7 +68,6 @@ with pkgs.vimPlugins;
   harpoon2
   gitsigns-nvim
   diffview-nvim
-  todo-comments-nvim
   snacks-nvim
 
   # UI
@@ -86,7 +77,6 @@ with pkgs.vimPlugins;
   # Completion
   blink-cmp
   blink-cmp-copilot
-  colorful-menu-nvim
 
   # Treesitter
   # nvim-treesitter-textobjects is built from main via flakePlugins

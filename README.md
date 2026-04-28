@@ -10,9 +10,11 @@ All dependencies are automatically included in the Nix flake.
 
 - **tree-sitter-cli** (version 0.26.1 or later) - Required for nvim-treesitter
   main branch
+
   ```bash
   cargo install tree-sitter-cli
   ```
+
   Note: System package managers may have outdated versions. Using cargo ensures
   you get the latest version.
 
@@ -73,12 +75,12 @@ https://github.com/NixOS/nixpkgs/blob/f71ccdc1bc17dffc83a8c49d0aa9ae92644572ab/d
 
 On Neovim 0.11+ nvim-lspconfig defers to the native `:lsp` command.
 
-| Command | Description |
-|---|---|
-| `:checkhealth vim.lsp` | LSP status (replaces `:LspInfo`) |
-| `:lsp enable roslyn` | Start roslyn (always specify server — `:lsp enable` alone picks `csharp_ls`) |
-| `:lsp stop roslyn` | Stop roslyn |
-| `:lsp restart roslyn` | Restart roslyn |
+| Command                | Description                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| `:checkhealth vim.lsp` | LSP status (replaces `:LspInfo`)                                             |
+| `:lsp enable roslyn`   | Start roslyn (always specify server — `:lsp enable` alone picks `csharp_ls`) |
+| `:lsp stop roslyn`     | Stop roslyn                                                                  |
+| `:lsp restart roslyn`  | Restart roslyn                                                               |
 
 ## Debug
 

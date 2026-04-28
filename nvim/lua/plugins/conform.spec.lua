@@ -35,7 +35,7 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       jsonc = { "biome-check", "jq", stop_after_first = true },
       yaml = { "yamlfmt" },
       lua = { "stylua" },
-      markdown = { "deno_fmt" },
+      markdown = { "prettierd", "prettier", stop_after_first = true },
       nix = { "nixfmt" },
       fish = { "fish_indent" },
       ps1 = { "powershell_es" },
