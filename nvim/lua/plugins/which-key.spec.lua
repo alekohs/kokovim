@@ -7,7 +7,6 @@ return kokovim.get_plugin_by_repo("folke/which-key.nvim", {
       {
         mode = { "n", "v" },
         { "<leader><tab>", group = "tabs", icon = "" },
-        { "<leader>a", group = "ai" },
         { "<leader>c", group = "code" },
         { "<leader>d", group = "debug" },
         { "<leader>dp", group = "profiler" },

@@ -4,14 +4,10 @@ local blink_cfg = {
   dependencies = {
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.snippets"),
     kokovim.get_plugin("mini-nvim", "echasnovski/mini.icons"),
-    kokovim.get_plugin_by_repo("giuxtaposition/blink-cmp-copilot"),
   },
   opts = {
     appearance = {
       use_nvim_cmp_as_default = false,
-      kind_icons = {
-        Copilot = "",
-      },
     },
     completion = {
       accept = {
@@ -40,7 +36,7 @@ local blink_cfg = {
               end,
             },
           },
-          treesitter = { "lsp", "copilot" },
+          treesitter = { "lsp" },
         },
       },
     },
@@ -81,7 +77,6 @@ local blink_cfg = {
         "buffer",
         "snippets",
         "path",
-        "copilot",
       },
       providers = {
         lsp = {
@@ -97,12 +92,6 @@ local blink_cfg = {
         buffer = {
           min_keyword_length = 2,
           max_items = 5,
-        },
-        copilot = {
-          min_keyword_length = 3,
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          async = true,
         },
       },
     },
