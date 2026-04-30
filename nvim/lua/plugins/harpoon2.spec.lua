@@ -3,6 +3,9 @@ return {
     cond = not vim.g.vscode,
     event = "VeryLazy",
     branch = "harpoon2",
+    dependencies = {
+      kokovim.get_plugin_by_repo("nvim-lua/plenary.nvim")
+    },
     config = function()
       local harpoon = require("harpoon")
       harpoon:setup()
