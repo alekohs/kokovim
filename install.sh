@@ -4,7 +4,6 @@ set -u
 
 VERSION=""
 APPNAME="nvim"
-KOKOVIM_DEBUG=false
 FOLLOW_GIT=false
 
 while [[ $# -gt 0 ]]; do
@@ -12,10 +11,6 @@ while [[ $# -gt 0 ]]; do
   -n)
     APPNAME="$2"
     shift 2
-    ;;
-  -d)
-    KOKOVIM_DEBUG=true
-    shift
     ;;
   -v)
     VERSION="$2"
@@ -28,10 +23,11 @@ while [[ $# -gt 0 ]]; do
   -h)
     echo "Usage: install.sh [options]"
     echo "  -n <name>    App name (default: nvim)"
-    echo "  -d           Debug mode (install from local directory)"
     echo "  -v <version> Install specific release version"
     echo "  -g           Follow git main branch instead of a release"
     echo "  -h           Show this help"
+    echo ""
+    echo "For local-dev install from a cloned repo, use 'make nvim' instead."
     exit 0
     ;;
   *)
@@ -40,13 +36,6 @@ while [[ $# -gt 0 ]]; do
     ;;
   esac
 done
-
-if $KOKOVIM_DEBUG; then
-  echo "Installing app to ${HOME}/.config/${APPNAME}"
-  mkdir -p "${HOME}/.config/${APPNAME}"
-  rsync -a ./nvim/ "${HOME}/.config/${APPNAME}/"
-  exit 0
-fi
 
 DOWNLOAD_DIR="${HOME}/Downloads/kokovim-install"
 rm -rf "${DOWNLOAD_DIR}"

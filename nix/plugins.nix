@@ -47,10 +47,6 @@ with pkgs.vimPlugins;
   # Dependencies
   plenary-nvim
 
-  # AI
-  codecompanion-nvim
-  copilot-lua
-
   # code
   nvim-ts-autotag
   neogen
@@ -76,7 +72,6 @@ with pkgs.vimPlugins;
 
   # Completion
   blink-cmp
-  blink-cmp-copilot
 
   # Treesitter
   # nvim-treesitter-textobjects is built from main via flakePlugins
@@ -91,7 +86,6 @@ with pkgs.vimPlugins;
 
   # Colorschemes
   rose-pine
-
 
   # Plugins outside of nixpkgs
 
