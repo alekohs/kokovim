@@ -40,7 +40,7 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       fish = { "fish_indent" },
       ps1 = { "powershell_es" },
       -- ["*"] = { "codespell" },
-      ["_"] = { "squeeze_blanks", "trim_whitespace", "trim_newlines" },
+      ["_"] = { "squeeze_blanks", "trim_whitespace", "trim_newlines", lsp_format = "last" },
     },
   },
   config = function(_, opts)
@@ -76,11 +76,7 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
     { "<leader>cg", ":FormatGlob<CR>", mode = "n", silent = true, desc = "Format files by glob" },
     {
       "<leader>cf",
-      function()
-        require("conform").format({
-          lsp_fallback = true,
-        })
-      end,
+      function() require("conform").format() end,
       mode = "n",
       desc = "Format injected language",
     },
@@ -88,7 +84,6 @@ return kokovim.get_plugin_by_repo("stevearc/conform.nvim", {
       "<leader>cF",
       function()
         require("conform").format({
-          lsp_fallback = true,
           range = {
             ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
             ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
