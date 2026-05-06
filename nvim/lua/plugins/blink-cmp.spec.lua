@@ -82,6 +82,7 @@ local blink_cfg = {
         lsp = {
           max_items = 10,
           score_offset = 100,
+          min_keyword_length = 1,
         },
         path = {
           min_keyword_length = 2,
