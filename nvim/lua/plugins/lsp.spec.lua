@@ -88,6 +88,19 @@ return {
         filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
       })
 
+      -- Rust
+      vim.lsp.config("rust_analyzer", {
+        settings = {
+          ["rust-analyzer"] = {
+            completion = {
+              limit = 25,
+              fullFunctionSignatures = { enable = false },
+              callable = { snippets = "none" },
+            },
+          },
+        },
+      })
+
       -- Swift / Xcode
       vim.lsp.config("sourcekit", {
         cmd = { "xcrun", "sourcekit-lsp" },
