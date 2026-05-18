@@ -110,6 +110,11 @@ return {
       -- Currently not doable on linux, inotify is reaching the limit all the time.
       -- Does not matter how much increasement we've done
       filewatching = "off",
+      -- Roslyn 5.8.0+ bundles razor and rejects the plugin's razor extension args.
+      -- See https://github.com/seblyng/roslyn.nvim/issues/360
+      extensions = {
+        razor = { enabled = false },
+      },
     },
   }),
 }
