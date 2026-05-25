@@ -29,11 +29,6 @@
       };
     };
 
-    snacks-nvim = {
-      url = "github:folke/snacks.nvim";
-      flake = false;
-    };
-
     oil-lsp-diagnostics-nvim = {
       url = "github:JezerM/oil-lsp-diagnostics.nvim";
       flake = false;

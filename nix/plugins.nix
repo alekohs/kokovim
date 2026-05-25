@@ -60,11 +60,9 @@ with pkgs.vimPlugins;
   which-key-nvim
   lualine-nvim
   grug-far-nvim
-  flash-nvim
   harpoon2
   gitsigns-nvim
   diffview-nvim
-  snacks-nvim
 
   # UI
   nvim-navic
