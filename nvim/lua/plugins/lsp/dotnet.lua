@@ -16,6 +16,17 @@ local common = require("plugins.lsp.common")
 vim.lsp.config("roslyn", {
   on_attach = common.on_attach,
   capabilities = common.capabilities(),
+  -- Build the cmd ourselves so we don't pass any razor extension args (the deprecated
+  -- `extensions` opt). Roslyn 5.8.0+ bundles razor; passing the extension explicitly
+  -- doesn't resolve usings/razor and adds noise, so we just run --stdio.
+  cmd = function(dispatchers, config)
+    local exe = require("roslyn.utils").get_roslyn_lsp_path() or "Microsoft.CodeAnalysis.LanguageServer"
+    return vim.lsp.rpc.start({ exe, "--stdio" }, dispatchers, {
+      cwd = config.cmd_cwd,
+      env = config.cmd_env,
+      detached = config.detached,
+    })
+  end,
   settings = {
     ["csharp|completion"] = {
       dotnet_provide_regex_completions = false,
@@ -110,11 +121,6 @@ return {
       -- Currently not doable on linux, inotify is reaching the limit all the time.
       -- Does not matter how much increasement we've done
       filewatching = "off",
-      -- Roslyn 5.8.0+ bundles razor and rejects the plugin's razor extension args.
-      -- See https://github.com/seblyng/roslyn.nvim/issues/360
-      extensions = {
-        razor = { enabled = false },
-      },
     },
   }),
 }
