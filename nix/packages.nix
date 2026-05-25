@@ -42,6 +42,7 @@ in
       markdownlint-cli2
       yaml-language-server
       taplo
+      qt6.qtdeclarative
       rust-analyzer
       nixd
       tailwindcss-language-server
@@ -68,7 +69,6 @@ in
       # For nvim-treesitter parser compilation
       tree-sitter
 
-      # For snacks image to work
       imagemagick # Images
       # tectonic # PDF
       #mermaid-cli # Mermaid diagarams

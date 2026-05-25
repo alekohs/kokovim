@@ -18,6 +18,52 @@ local lsps = {
   "powershell_es",
 }
 
+local function rename_file()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local old_name = vim.api.nvim_buf_get_name(bufnr)
+
+  if old_name == "" then
+    vim.notify("Current buffer has no file name", vim.log.levels.WARN)
+    return
+  end
+
+  old_name = vim.fs.normalize(old_name)
+
+  vim.ui.input({ prompt = "New path: ", default = old_name, completion = "file" }, function(input)
+    if not input or input == "" then return end
+
+    local new_name = vim.fs.normalize(vim.fn.fnamemodify(input, ":p"))
+    if new_name == old_name then return end
+
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+    local params = {
+      files = {
+        {
+          oldUri = vim.uri_from_fname(old_name),
+          newUri = vim.uri_from_fname(new_name),
+        },
+      },
+    }
+
+    for _, client in ipairs(clients) do
+      if client:supports_method("workspace/willRenameFiles") then
+        local response = client:request_sync("workspace/willRenameFiles", params, 1000, bufnr)
+        if response and response.result then
+          vim.lsp.util.apply_workspace_edit(response.result, client.offset_encoding)
+        end
+      end
+    end
+
+    vim.lsp.util.rename(old_name, new_name)
+
+    for _, client in ipairs(clients) do
+      if client:supports_method("workspace/didRenameFiles") then
+        client:notify("workspace/didRenameFiles", params)
+      end
+    end
+  end)
+end
+
 return {
   require("plugins.lsp.dotnet"),
   kokovim.get_plugin_by_repo("rachartier/tiny-inline-diagnostic.nvim", {
@@ -79,6 +125,11 @@ return {
         cmd = { "pylsp" },
       })
 
+      vim.lsp.config("qmlls", {
+        filetypes = { "qml" },
+        root_markers = { "qmldir", ".qmlproject", "CMakeLists.txt", ".git" },
+      })
+
       -- Javascript/Typescript
       vim.lsp.config("ts_ls", {
         on_attach = function(client, bufnr)
@@ -114,7 +165,7 @@ return {
 
       -- On Nix, mason-lspconfig is disabled so we must enable servers ourselves
       if kokovim.is_nix then
-        local all_servers = vim.list_extend(vim.deepcopy(lsps), { "bashls", "html", "pylsp", "ts_ls", "sourcekit", "roslyn" })
+        local all_servers = vim.list_extend(vim.deepcopy(lsps), { "bashls", "html", "pylsp", "qmlls", "ts_ls", "sourcekit", "roslyn" })
         vim.lsp.enable(all_servers)
       end
 
@@ -150,11 +201,9 @@ return {
       { "<leader>gK", function() return vim.lsp.buf.signature_help() end, mode = "n", desc = "Signature help" },
       { "<C-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature help" },
       { "<leader>cr", vim.lsp.buf.rename, mode = "n", desc = "Rename" },
-      -- Note: fzf-lua does not have rename_file by default, so this is left as a no-op or custom function:
-      -- Replace with your own file rename function or plugin if needed:
       {
         "<leader>cR",
-        function() Snacks.rename.rename_file() end,
+        rename_file,
         mode = "n",
         desc = "Rename File",
       },

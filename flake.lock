@@ -355,8 +355,7 @@
         "nvim-treesitter-textobjects": "nvim-treesitter-textobjects",
         "oil-lsp-diagnostics-nvim": "oil-lsp-diagnostics-nvim",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
-        "roslyn-nvim": "roslyn-nvim",
-        "snacks-nvim": "snacks-nvim"
+        "roslyn-nvim": "roslyn-nvim"
       }
     },
     "roslyn-nvim": {
@@ -372,22 +371,6 @@
       "original": {
         "owner": "seblyng",
         "repo": "roslyn.nvim",
-        "type": "github"
-      }
-    },
-    "snacks-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1774083139,
-        "narHash": "sha256-7lDH1JlTM+H/LWjMlAQPNY6A+xmS/cp+wChy4buGYIU=",
-        "owner": "folke",
-        "repo": "snacks.nvim",
-        "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "snacks.nvim",
         "type": "github"
       }
     },
