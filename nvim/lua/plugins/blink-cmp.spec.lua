@@ -43,7 +43,7 @@ local blink_cfg = {
     fuzzy = { implementation = "prefer_rust_with_warning" },
     keymap = {
       preset = "enter",
-      ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-b>"] = { "scroll_documentation_up", "fallback" },
       ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
@@ -80,9 +80,10 @@ local blink_cfg = {
       },
       providers = {
         lsp = {
-          max_items = 10,
           score_offset = 100,
-          min_keyword_length = 1,
+          min_keyword_length = function(ctx)
+            return ctx.trigger.initial_kind == "manual" and 0 or 1
+          end,
         },
         path = {
           min_keyword_length = 2,
